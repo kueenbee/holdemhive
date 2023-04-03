@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<!--
+  The Tournament Director
+  Copyright (c) 2004 - 2020 Corey Cooper
+-->
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>Tournament Director Player Statistics</title>
+  </head>
+
+  <style type="text/css">
+html {
+  font-family: Segoe UI;
+  font-size: 10pt;
+}
+
+body {
+  background-color: #fff;
+}
+
+.infoTable {
+  border: 2px solid #000;
+  border-radius: 6px;
+  font-size: 1.0rem;
+  background-color: #000;
+  color: #fdf03ff6;
+  text-align: center;
+  display: inline-block;
+}
+
+.tableHeader {
+  padding: 8px;
+  background-color: #000;
+  color: #fdf03ff6;
+  text-align: center;
+}
+
+.eventname {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.description {
+  font-weight: bold;
+}
+
+.statsTable {
+  padding: 8px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 6px;
+}
+
+.statsColumnHeader {
+  font-weight: bold;
+  background-color:#fdf03ff6;
+}
+
+.statsColumn {
+  padding: 5px 5px;
+  white-space: nowrap;
+}
+
+.odd {
+  background-color: #fdf03ff6;
+}
+
+.even {
+}
+
+.playerImageContainer {
+  border: 1px solid #000;
+  border-radius: 50%;
+  background-color: #fff;
+  width: 50px;
+  height: 50px;
+}
+
+.playerImageWidthWise {
+  width: 48px;
+}
+
+.playerImageHeightWise {
+  height: 48px;
+}
+
+  </style>
+
+  <script>
+
+
+var TDSort = (function() {
+  // the column index on which we are sorting
+  var sortIndex = -1;
+  // was the last sort a reverse sort?
+  var reverseSort = false;
+  // not going to try too hard for browser compatibility - just check for IE or non-IE
+  var mTextKey = document.all ? "innerText" : "textContent";
+  var mTableID = "";
+  var mHeaderRowID = "";
+  var mData = [{Index: 0, Columns: [{Text: "1", HTML: "1", SortValue: "1", Align: "right"}, {Text: "Kay Doe", HTML: "Kay Doe", SortValue: "kay doe", Align: "left"}, {Text: "77.8482", HTML: "77.8482", SortValue: 77.8482, Align: "right"}, {Text: "44.6540", HTML: "44.6540", SortValue: 44.654, Align: "right"}, {Text: "108.1403", HTML: "108.1403", SortValue: 108.1403, Align: "right"}, {Text: "42.8398", HTML: "42.8398", SortValue: 42.8398, Align: "right"}, {Text: "28.9494", HTML: "28.9494", SortValue: 28.9494, Align: "right"}, {Text: "76.4667", HTML: "76.4667", SortValue: 76.4667, Align: "right"}, {Text: "56.5680", HTML: "56.5680", SortValue: 56.568, Align: "right"}, {Text: "38.9147", HTML: "38.9147", SortValue: 38.9147, Align: "right"}, {Text: "26.1491", HTML: "26.1491", SortValue: 26.1491, Align: "right"}, {Text: "102.2615", HTML: "102.2615", SortValue: 102.2615, Align: "right"}, {Text: "602.7917", HTML: "602.7917", SortValue: 602.7917, Align: "right"}, {Text: "60.2792", HTML: "60.2792", SortValue: 60.27917, Align: "right"}]}, {Index: 1, Columns: [{Text: "2", HTML: "2", SortValue: "2", Align: "right"}, {Text: "Dan B", HTML: "Dan B", SortValue: "dan b", Align: "left"}, {Text: "43.2262", HTML: "43.2262", SortValue: 43.2262, Align: "right"}, {Text: "24.7124", HTML: "24.7124", SortValue: 24.7124, Align: "right"}, {Text: "48.3618", HTML: "48.3618", SortValue: 48.3618, Align: "right"}, {Text: "60.5846", HTML: "60.5846", SortValue: 60.5846, Align: "right"}, {Text: "39.1977", HTML: "39.1977", SortValue: 39.1977, Align: "right"}, {Text: "62.4348", HTML: "62.4348", SortValue: 62.4348, Align: "right"}, {Text: "27.6485", HTML: "27.6485", SortValue: 27.6485, Align: "right"}, {Text: "29.4167", HTML: "29.4167", SortValue: 29.4167, Align: "right"}, {Text: "110.9414", HTML: "110.9414", SortValue: 110.9414, Align: "right"}, {Text: "26.4038", HTML: "26.4038", SortValue: 26.4038, Align: "right"}, {Text: "472.9279", HTML: "472.9279", SortValue: 472.9279, Align: "right"}, {Text: "47.2928", HTML: "47.2928", SortValue: 47.292790000000004, Align: "right"}]}, {Index: 2, Columns: [{Text: "3", HTML: "3", SortValue: "3", Align: "right"}, {Text: "Jim E", HTML: "Jim E", SortValue: "jim e", Align: "left"}, {Text: "39.4600", HTML: "39.4600", SortValue: 39.46, Align: "right"}, {Text: "70.6042", HTML: "70.6042", SortValue: 70.6042, Align: "right"}, {Text: "36.0468", HTML: "36.0468", SortValue: 36.0468, Align: "right"}, {Text: "32.0048", HTML: "32.0048", SortValue: 32.0048, Align: "right"}, {Text: "36.2900", HTML: "36.2900", SortValue: 36.29, Align: "right"}, {Text: "54.0702", HTML: "54.0702", SortValue: 54.0702, Align: "right"}, {Text: "32.6595", HTML: "32.6595", SortValue: 32.6595, Align: "right"}, {Text: "77.8293", HTML: "77.8293", SortValue: 77.8293, Align: "right"}, {Text: "45.2916", HTML: "45.2916", SortValue: 45.2916, Align: "right"}, {Text: "30.8330", HTML: "30.8330", SortValue: 30.833, Align: "right"}, {Text: "455.0894", HTML: "455.0894", SortValue: 455.0894, Align: "right"}, {Text: "45.5089", HTML: "45.5089", SortValue: 45.50894, Align: "right"}]}, {Index: 3, Columns: [{Text: "4", HTML: "4", SortValue: "4", Align: "right"}, {Text: "Buda", HTML: "Buda", SortValue: "buda", Align: "left"}, {Text: "29.1431", HTML: "29.1431", SortValue: 29.1431, Align: "right"}, {Text: "30.1057", HTML: "30.1057", SortValue: 30.1057, Align: "right"}, {Text: "26.2279", HTML: "26.2279", SortValue: 26.2279, Align: "right"}, {Text: "96.0144", HTML: "96.0144", SortValue: 96.0144, Align: "right"}, {Text: "96.0144", HTML: "96.0144", SortValue: 96.0144, Align: "right"}, {Text: "27.0351", HTML: "27.0351", SortValue: 27.0351, Align: "right"}, {Text: "36.7792", HTML: "36.7792", SortValue: 36.7792, Align: "right"}, {Text: "31.7737", HTML: "31.7737", SortValue: 31.7737, Align: "right"}, {Text: "35.0828", HTML: "35.0828", SortValue: 35.0828, Align: "right"}, {Text: "29.5203", HTML: "29.5203", SortValue: 29.5203, Align: "right"}, {Text: "437.6966", HTML: "437.6966", SortValue: 437.6966, Align: "right"}, {Text: "43.7697", HTML: "43.7697", SortValue: 43.76966, Align: "right"}]}, {Index: 4, Columns: [{Text: "5", HTML: "5", SortValue: "5", Align: "right"}, {Text: "Garett", HTML: "Garett", SortValue: "garett", Align: "left"}, {Text: "27.9024", HTML: "27.9024", SortValue: 27.9024, Align: "right"}, {Text: "99.8495", HTML: "99.8495", SortValue: 99.8495, Align: "right"}, {Text: "34.1970", HTML: "34.1970", SortValue: 34.197, Align: "right"}, {Text: "26.6296", HTML: "26.6296", SortValue: 26.6296, Align: "right"}, {Text: "48.0072", HTML: "48.0072", SortValue: 48.0072, Align: "right"}, {Text: "44.1481", HTML: "44.1481", SortValue: 44.1481, Align: "right"}, {Text: "29.5417", HTML: "29.5417", SortValue: 29.5417, Align: "right"}, {Text: "36.6891", HTML: "36.6891", SortValue: 36.6891, Align: "right"}, {Text: "29.6503", HTML: "29.6503", SortValue: 29.6503, Align: "right"}, {Text: "41.7481", HTML: "41.7481", SortValue: 41.7481, Align: "right"}, {Text: "418.3630", HTML: "418.3630", SortValue: 418.363, Align: "right"}, {Text: "41.8363", HTML: "41.8363", SortValue: 41.8363, Align: "right"}]}, {Index: 5, Columns: [{Text: "6", HTML: "6", SortValue: "6", Align: "right"}, {Text: "Beth", HTML: "Beth", SortValue: "beth", Align: "left"}, {Text: "48.3284", HTML: "48.3284", SortValue: 48.3284, Align: "right"}, {Text: "33.2832", HTML: "33.2832", SortValue: 33.2832, Align: "right"}, {Text: "31.2174", HTML: "31.2174", SortValue: 31.2174, Align: "right"}, {Text: "39.1977", HTML: "39.1977", SortValue: 39.1977, Align: "right"}, {Text: "23.7632", HTML: "23.7632", SortValue: 23.7632, Align: "right"}, {Text: "28.9017", HTML: "28.9017", SortValue: 28.9017, Align: "right"}, {Text: "48.9893", HTML: "48.9893", SortValue: 48.9893, Align: "right"}, {Text: "41.6015", HTML: "41.6015", SortValue: 41.6015, Align: "right"}, {Text: "41.9319", HTML: "41.9319", SortValue: 41.9319, Align: "right"}, {Text: "32.3379", HTML: "32.3379", SortValue: 32.3379, Align: "right"}, {Text: "369.5522", HTML: "369.5522", SortValue: 369.5522, Align: "right"}, {Text: "36.9552", HTML: "36.9552", SortValue: 36.955220000000004, Align: "right"}]}, {Index: 6, Columns: [{Text: "7", HTML: "7", SortValue: "7", Align: "right"}, {Text: "Brenda B", HTML: "Brenda B", SortValue: "brenda b", Align: "left"}, {Text: "32.6005", HTML: "32.6005", SortValue: 32.6005, Align: "right"}, {Text: "40.7634", HTML: "40.7634", SortValue: 40.7634, Align: "right"}, {Text: "40.8732", HTML: "40.8732", SortValue: 40.8732, Align: "right"}, {Text: "30.3624", HTML: "30.3624", SortValue: 30.3624, Align: "right"}, {Text: "67.8924", HTML: "67.8924", SortValue: 67.8924, Align: "right"}, {Text: "29.9927", HTML: "29.9927", SortValue: 29.9927, Align: "right"}, {Text: "25.2395", HTML: "25.2395", SortValue: 25.2395, Align: "right"}, {Text: "33.1865", HTML: "33.1865", SortValue: 33.1865, Align: "right"}, {Text: "25.4517", HTML: "25.4517", SortValue: 25.4517, Align: "right"}, {Text: "40.8101", HTML: "40.8101", SortValue: 40.8101, Align: "right"}, {Text: "367.1724", HTML: "367.1724", SortValue: 367.1724, Align: "right"}, {Text: "36.7172", HTML: "36.7172", SortValue: 36.71724, Align: "right"}]}, {Index: 7, Columns: [{Text: "8", HTML: "8", SortValue: "8", Align: "right"}, {Text: "Sue G", HTML: "Sue G", SortValue: "sue g", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "49.9247", HTML: "49.9247", SortValue: 49.9247, Align: "right"}, {Text: "27.9217", HTML: "27.9217", SortValue: 27.9217, Align: "right"}, {Text: "27.7170", HTML: "27.7170", SortValue: 27.717, Align: "right"}, {Text: "42.9390", HTML: "42.9390", SortValue: 42.939, Align: "right"}, {Text: "36.0468", HTML: "36.0468", SortValue: 36.0468, Align: "right"}, {Text: "37.0324", HTML: "37.0324", SortValue: 37.0324, Align: "right"}, {Text: "27.5168", HTML: "27.5168", SortValue: 27.5168, Align: "right"}, {Text: "36.9805", HTML: "36.9805", SortValue: 36.9805, Align: "right"}, {Text: "59.0407", HTML: "59.0407", SortValue: 59.0407, Align: "right"}, {Text: "345.1196", HTML: "345.1196", SortValue: 345.1196, Align: "right"}, {Text: "38.3466", HTML: "38.3466", SortValue: 38.34662222222222, Align: "right"}]}, {Index: 8, Columns: [{Text: "9", HTML: "9", SortValue: "9", Align: "right"}, {Text: "Tammy", HTML: "Tammy", SortValue: "tammy", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "55.4340", HTML: "55.4340", SortValue: 55.434, Align: "right"}, {Text: "55.4340", HTML: "55.4340", SortValue: 55.434, Align: "right"}, {Text: "27.9217", HTML: "27.9217", SortValue: 27.9217, Align: "right"}, {Text: "97.9786", HTML: "97.9786", SortValue: 97.9786, Align: "right"}, {Text: "30.5272", HTML: "30.5272", SortValue: 30.5272, Align: "right"}, {Text: "39.2237", HTML: "39.2237", SortValue: 39.2237, Align: "right"}, {Text: "28.3622", HTML: "28.3622", SortValue: 28.3622, Align: "right"}, {Text: "334.8814", HTML: "334.8814", SortValue: 334.8814, Align: "right"}, {Text: "47.8402", HTML: "47.8402", SortValue: 47.840199999999996, Align: "right"}]}, {Index: 9, Columns: [{Text: "10", HTML: "10", SortValue: "10", Align: "right"}, {Text: "Sean C", HTML: "Sean C", SortValue: "sean c", Align: "left"}, {Text: "34.1733", HTML: "34.1733", SortValue: 34.1733, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "36.2900", HTML: "36.2900", SortValue: 36.29, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "36.4736", HTML: "36.4736", SortValue: 36.4736, Align: "right"}, {Text: "39.9996", HTML: "39.9996", SortValue: 39.9996, Align: "right"}, {Text: "110.0673", HTML: "110.0673", SortValue: 110.0673, Align: "right"}, {Text: "32.0260", HTML: "32.0260", SortValue: 32.026, Align: "right"}, {Text: "32.2632", HTML: "32.2632", SortValue: 32.2632, Align: "right"}, {Text: "321.2930", HTML: "321.2930", SortValue: 321.293, Align: "right"}, {Text: "45.8990", HTML: "45.8990", SortValue: 45.899, Align: "right"}]}, {Index: 10, Columns: [{Text: "11", HTML: "11", SortValue: "11", Align: "right"}, {Text: "Andy S", HTML: "Andy S", SortValue: "andy s", Align: "left"}, {Text: "68.3467", HTML: "68.3467", SortValue: 68.3467, Align: "right"}, {Text: "57.6481", HTML: "57.6481", SortValue: 57.6481, Align: "right"}, {Text: "38.2334", HTML: "38.2334", SortValue: 38.2334, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "48.3618", HTML: "48.3618", SortValue: 48.3618, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "55.4707", HTML: "55.4707", SortValue: 55.4707, Align: "right"}, {Text: "38.6512", HTML: "38.6512", SortValue: 38.6512, Align: "right"}, {Text: "306.7119", HTML: "306.7119", SortValue: 306.7119, Align: "right"}, {Text: "51.1187", HTML: "51.1187", SortValue: 51.11865, Align: "right"}]}, {Index: 11, Columns: [{Text: "12", HTML: "12", SortValue: "12", Align: "right"}, {Text: "Gino A", HTML: "Gino A", SortValue: "gino a", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "54.0702", HTML: "54.0702", SortValue: 54.0702, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "108.1403", HTML: "108.1403", SortValue: 108.1403, Align: "right"}, {Text: "34.6407", HTML: "34.6407", SortValue: 34.6407, Align: "right"}, {Text: "49.2236", HTML: "49.2236", SortValue: 49.2236, Align: "right"}, {Text: "49.6145", HTML: "49.6145", SortValue: 49.6145, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "295.6893", HTML: "295.6893", SortValue: 295.6893, Align: "right"}, {Text: "59.1379", HTML: "59.1379", SortValue: 59.13786, Align: "right"}]}, {Index: 12, Columns: [{Text: "13", HTML: "13", SortValue: "13", Align: "right"}, {Text: "Glenn M", HTML: "Glenn M", SortValue: "glenn m", Align: "left"}, {Text: "55.8048", HTML: "55.8048", SortValue: 55.8048, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "27.0351", HTML: "27.0351", SortValue: 27.0351, Align: "right"}, {Text: "42.9390", HTML: "42.9390", SortValue: 42.939, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "26.2279", HTML: "26.2279", SortValue: 26.2279, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "34.8063", HTML: "34.8063", SortValue: 34.8063, Align: "right"}, {Text: "26.9072", HTML: "26.9072", SortValue: 26.9072, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "213.7203", HTML: "213.7203", SortValue: 213.7203, Align: "right"}, {Text: "35.6200", HTML: "35.6200", SortValue: 35.62005, Align: "right"}]}, {Index: 13, Columns: [{Text: "14", HTML: "14", SortValue: "14", Align: "right"}, {Text: "Monica F", HTML: "Monica F", SortValue: "monica f", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "26.5034", HTML: "26.5034", SortValue: 26.5034, Align: "right"}, {Text: "76.4667", HTML: "76.4667", SortValue: 76.4667, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "25.9431", HTML: "25.9431", SortValue: 25.9431, Align: "right"}, {Text: "78.4474", HTML: "78.4474", SortValue: 78.4474, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "207.3606", HTML: "207.3606", SortValue: 207.3606, Align: "right"}, {Text: "51.8402", HTML: "51.8402", SortValue: 51.84015, Align: "right"}]}, {Index: 14, Columns: [{Text: "15", HTML: "15", SortValue: "15", Align: "right"}, {Text: "Mike", HTML: "Mike", SortValue: "mike", Align: "left"}, {Text: "30.5656", HTML: "30.5656", SortValue: 30.5656, Align: "right"}, {Text: "35.3021", HTML: "35.3021", SortValue: 35.3021, Align: "right"}, {Text: "29.9927", HTML: "29.9927", SortValue: 29.9927, Align: "right"}, {Text: "30.2923", HTML: "30.2923", SortValue: 30.2923, Align: "right"}, {Text: "27.0942", HTML: "27.0942", SortValue: 27.0942, Align: "right"}, {Text: "38.2334", HTML: "38.2334", SortValue: 38.2334, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "191.4803", HTML: "191.4803", SortValue: 191.4803, Align: "right"}, {Text: "31.9134", HTML: "31.9134", SortValue: 31.913383333333332, Align: "right"}]}, {Index: 15, Columns: [{Text: "16", HTML: "16", SortValue: "16", Align: "right"}, {Text: "The Fireman", HTML: "The Fireman", SortValue: "the fireman", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "33.6773", HTML: "33.6773", SortValue: 33.6773, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "28.9494", HTML: "28.9494", SortValue: 28.9494, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "30.5160", HTML: "30.5160", SortValue: 30.516, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "40.0980", HTML: "40.0980", SortValue: 40.098, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "133.2407", HTML: "133.2407", SortValue: 133.2407, Align: "right"}, {Text: "33.3102", HTML: "33.3102", SortValue: 33.310175, Align: "right"}]}, {Index: 16, Columns: [{Text: "17", HTML: "17", SortValue: "17", Align: "right"}, {Text: "Karill S", HTML: "Karill S", SortValue: "karill s", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "62.4348", HTML: "62.4348", SortValue: 62.4348, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "31.2174", HTML: "31.2174", SortValue: 31.2174, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "27.7354", HTML: "27.7354", SortValue: 27.7354, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "121.3876", HTML: "121.3876", SortValue: 121.3876, Align: "right"}, {Text: "40.4625", HTML: "40.4625", SortValue: 40.46253333333333, Align: "right"}]}, {Index: 17, Columns: [{Text: "18", HTML: "18", SortValue: "18", Align: "right"}, {Text: "Alana", HTML: "Alana", SortValue: "alana", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "27.1744", HTML: "27.1744", SortValue: 27.1744, Align: "right"}, {Text: "26.6952", HTML: "26.6952", SortValue: 26.6952, Align: "right"}, {Text: "64.0521", HTML: "64.0521", SortValue: 64.0521, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "117.9217", HTML: "117.9217", SortValue: 117.9217, Align: "right"}, {Text: "39.3072", HTML: "39.3072", SortValue: 39.307233333333336, Align: "right"}]}, {Index: 18, Columns: [{Text: "19", HTML: "19", SortValue: "19", Align: "right"}, {Text: "Carl V", HTML: "Carl V", SortValue: "carl v", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "25.7215", HTML: "25.7215", SortValue: 25.7215, Align: "right"}, {Text: "39.3960", HTML: "39.3960", SortValue: 39.396, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "34.0872", HTML: "34.0872", SortValue: 34.0872, Align: "right"}, {Text: "99.2047", HTML: "99.2047", SortValue: 99.2047, Align: "right"}, {Text: "33.0682", HTML: "33.0682", SortValue: 33.06823333333333, Align: "right"}]}, {Index: 19, Columns: [{Text: "20", HTML: "20", SortValue: "20", Align: "right"}, {Text: "Turk", HTML: "Turk", SortValue: "turk", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "55.0336", HTML: "55.0336", SortValue: 55.0336, Align: "right"}, {Text: "33.4501", HTML: "33.4501", SortValue: 33.4501, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "88.4837", HTML: "88.4837", SortValue: 88.4837, Align: "right"}, {Text: "44.2418", HTML: "44.2418", SortValue: 44.24185, Align: "right"}]}, {Index: 20, Columns: [{Text: "21", HTML: "21", SortValue: "21", Align: "right"}, {Text: "Adam F", HTML: "Adam F", SortValue: "adam f", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "69.2814", HTML: "69.2814", SortValue: 69.2814, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "69.2814", HTML: "69.2814", SortValue: 69.2814, Align: "right"}, {Text: "69.2814", HTML: "69.2814", SortValue: 69.2814, Align: "right"}]}, {Index: 21, Columns: [{Text: "22", HTML: "22", SortValue: "22", Align: "right"}, {Text: "Barb", HTML: "Barb", SortValue: "barb", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "32.6055", HTML: "32.6055", SortValue: 32.6055, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "33.9462", HTML: "33.9462", SortValue: 33.9462, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "66.5517", HTML: "66.5517", SortValue: 66.5517, Align: "right"}, {Text: "33.2758", HTML: "33.2758", SortValue: 33.27585, Align: "right"}]}, {Index: 22, Columns: [{Text: "23", HTML: "23", SortValue: "23", Align: "right"}, {Text: "Gino", HTML: "Gino", SortValue: "gino", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "64.5264", HTML: "64.5264", SortValue: 64.5264, Align: "right"}, {Text: "64.5264", HTML: "64.5264", SortValue: 64.5264, Align: "right"}, {Text: "64.5264", HTML: "64.5264", SortValue: 64.5264, Align: "right"}]}, {Index: 23, Columns: [{Text: "24", HTML: "24", SortValue: "24", Align: "right"}, {Text: "Jwaces22", HTML: "Jwaces22", SortValue: "jwaces22", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "63.5474", HTML: "63.5474", SortValue: 63.5474, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "63.5474", HTML: "63.5474", SortValue: 63.5474, Align: "right"}, {Text: "63.5474", HTML: "63.5474", SortValue: 63.5474, Align: "right"}]}, {Index: 24, Columns: [{Text: "25", HTML: "25", SortValue: "25", Align: "right"}, {Text: "Datrat22", HTML: "Datrat22", SortValue: "datrat22", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "28.4192", HTML: "28.4192", SortValue: 28.4192, Align: "right"}, {Text: "30.7696", HTML: "30.7696", SortValue: 30.7696, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "59.1888", HTML: "59.1888", SortValue: 59.1888, Align: "right"}, {Text: "29.5944", HTML: "29.5944", SortValue: 29.5944, Align: "right"}]}, {Index: 25, Columns: [{Text: "26", HTML: "26", SortValue: "26", Align: "right"}, {Text: "Monica", HTML: "Monica", SortValue: "monica", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "51.1307", HTML: "51.1307", SortValue: 51.1307, Align: "right"}, {Text: "51.1307", HTML: "51.1307", SortValue: 51.1307, Align: "right"}, {Text: "51.1307", HTML: "51.1307", SortValue: 51.1307, Align: "right"}]}, {Index: 26, Columns: [{Text: "27", HTML: "27", SortValue: "27", Align: "right"}, {Text: "Ray P", HTML: "Ray P", SortValue: "ray p", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "24.2593", HTML: "24.2593", SortValue: 24.2593, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "24.8073", HTML: "24.8073", SortValue: 24.8073, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "49.0666", HTML: "49.0666", SortValue: 49.0666, Align: "right"}, {Text: "24.5333", HTML: "24.5333", SortValue: 24.5333, Align: "right"}]}, {Index: 27, Columns: [{Text: "28", HTML: "28", SortValue: "28", Align: "right"}, {Text: "Ob", HTML: "Ob", SortValue: "ob", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "32.0048", HTML: "32.0048", SortValue: 32.0048, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "32.0048", HTML: "32.0048", SortValue: 32.0048, Align: "right"}, {Text: "32.0048", HTML: "32.0048", SortValue: 32.0048, Align: "right"}]}, {Index: 28, Columns: [{Text: "29", HTML: "29", SortValue: "29", Align: "right"}, {Text: "Tony D", HTML: "Tony D", SortValue: "tony d", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "29.0959", HTML: "29.0959", SortValue: 29.0959, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "29.0959", HTML: "29.0959", SortValue: 29.0959, Align: "right"}, {Text: "29.0959", HTML: "29.0959", SortValue: 29.0959, Align: "right"}]}, {Index: 29, Columns: [{Text: "30", HTML: "30", SortValue: "30", Align: "right"}, {Text: "Rio", HTML: "Rio", SortValue: "rio", Align: "left"}, {Text: "28.7509", HTML: "28.7509", SortValue: 28.7509, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "28.7509", HTML: "28.7509", SortValue: 28.7509, Align: "right"}, {Text: "28.7509", HTML: "28.7509", SortValue: 28.7509, Align: "right"}]}, {Index: 30, Columns: [{Text: "31", HTML: "31", SortValue: "31", Align: "right"}, {Text: "Dale R", HTML: "Dale R", SortValue: "dale r", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "27.7170", HTML: "27.7170", SortValue: 27.717, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "27.7170", HTML: "27.7170", SortValue: 27.717, Align: "right"}, {Text: "27.7170", HTML: "27.7170", SortValue: 27.717, Align: "right"}]}, {Index: 31, Columns: [{Text: "32", HTML: "32", SortValue: "32", Align: "right"}, {Text: "Fireman", HTML: "Fireman", SortValue: "fireman", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "27.3305", HTML: "27.3305", SortValue: 27.3305, Align: "right"}, {Text: "27.3305", HTML: "27.3305", SortValue: 27.3305, Align: "right"}, {Text: "27.3305", HTML: "27.3305", SortValue: 27.3305, Align: "right"}]}, {Index: 32, Columns: [{Text: "33", HTML: "33", SortValue: "33", Align: "right"}, {Text: "Rob M", HTML: "Rob M", SortValue: "rob m", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "25.2512", HTML: "25.2512", SortValue: 25.2512, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "25.2512", HTML: "25.2512", SortValue: 25.2512, Align: "right"}, {Text: "25.2512", HTML: "25.2512", SortValue: 25.2512, Align: "right"}]}];
+  var mColumns = [{Key: "_Index", Name: "#"}, {Key: "Name", Name: "Name"}, {Key: "0", Name: "Game 1 of 10"}, {Key: "1", Name: "Game 2 of 10"}, {Key: "2", Name: "Game 3 of 10"}, {Key: "3", Name: "Game 4 of 10"}, {Key: "4", Name: "Game 5 of 10"}, {Key: "5", Name: "Game 6 of 10"}, {Key: "6", Name: "Game 7 of 10"}, {Key: "7", Name: "Game 8 of 10"}, {Key: "8", Name: "Game 9 of 10"}, {Key: "9", Name: "Game 10 of 10"}, {Key: "_Sum", Name: "Sum"}, {Key: "_Average", Name: "Average"}];
+  var mIndexCol = 0;
+
+
+
+  // initialize the page
+  function init(inTableID, inHeaderRowID) {
+    mTableID = inTableID;
+    mHeaderRowID = inHeaderRowID;
+
+    // install an onClick handler for each column header
+    var theRow = document.getElementById(mHeaderRowID);
+    var getSortFn = function(inIndex) { return function() { sortByColumn(inIndex); }; }
+
+    if(theRow) {
+      for(var i=0, iLen = theRow.cells.length; i < iLen; i++) {
+        if((i != mIndexCol) && (mColumns[i].Key != "_PlayerImage") && (mColumns[i].Key != "_HitmanImage")) {
+          theRow.cells[i].onclick = getSortFn(i);
+          theRow.cells[i].style.cursor = "pointer";
+        }
+      }
+    }
+
+    // put a reference to each row in the data, if we haven't already
+    var theRows = document.getElementById(mTableID).rows;
+
+    for(var i=0, iLen = mData.length; i < iLen; i++)
+      mData[i].Row = theRows[i + 1];
+  }
+
+
+
+  // sort fn
+  function sortRow(a, b) {
+    var aVal = a.Columns[sortIndex].SortValue;
+    var bVal = b.Columns[sortIndex].SortValue;
+
+    if((aVal === null) || (bVal === null)) {
+      // for equal values, fall back on the row index
+      if(aVal === bVal)
+        return a.Index - b.Index;
+
+      return aVal === null ? -1 : 1;
+    }
+
+    if(aVal < bVal)
+      return -1;
+    else if(aVal > bVal)
+      return 1;
+
+    // for equal values, fall back on the row index
+    return a.Index - b.Index;
+  }
+
+
+
+  function sortByColumn(inIndex) {
+    if(mData.length == 0)
+      return;
+
+    if(inIndex == sortIndex)
+      reverseSort = !reverseSort; // sorting the same column, again, so reverse the current sort
+    else
+      reverseSort = false; // if sorting on a new column, always reset to forward sort
+
+    sortIndex = inIndex;
+
+    var theTable = document.getElementById(mTableID);
+    var theParent = theTable.rows[0].parentNode;
+
+    // remove all rows, in current sort order (appears to be the fastest way)
+    for(var i=0, iLen = mData.length; i < iLen; i++)
+      theParent.removeChild(mData[i].Row);
+
+    // sort the rows
+    mData.sort(sortRow);
+
+    if(reverseSort)
+      mData.reverse();
+
+    // put the rows back in the new sorted order
+    // there may or may not be an empty row followed by a sum and average rows, so for an easy solution insert the
+    // rows before the header row, then pop the header row off and put it back in front of the first row
+    var theHeader = theParent.rows[0];
+
+    for(var i=0, iLen = mData.length; i < iLen; i++) {
+      // set the row's class to maintain even/odd row shading
+      mData[i].Row.className = (i % 2) ? "odd" : "even";
+      theParent.insertBefore(mData[i].Row, theHeader);
+    }
+
+    theParent.removeChild(theHeader);
+    theParent.insertBefore(theHeader, mData[0].Row);
+
+    // update the index column
+    if(mIndexCol >= 0) {
+      for(var i=0, iLen = mData.length; i < iLen; i++)
+        mData[i].Row.cells[mIndexCol][mTextKey] = "" + (i+1);
+    }
+  }
+
+
+
+  return {
+    init: init
+  };
+
+}());
+
+  </script>
+
+  <body onLoad="if(TDSort) { TDSort.init('pTable', 'pColumns') }">
+
+    <div style="text-align: center">
+      <div class="infoTable">
+        <div class="tableHeader">
+          <div class="eventname" align="center">Player Statistics (click column header to sort)</div>
+          <div class="description" align="center">Score</div>
+        </div>
+
+        <table id="pTable" border="0" cellspacing="0" class="statsTable">
+            <tr id="pColumns">
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">#</td>
+    <td valign="middle" align="left" class="statsColumn statsColumnHeader">Name</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Game 1 of 10</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Game 2 of 10</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Game 3 of 10</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Game 4 of 10</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Game 5 of 10</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Game 6 of 10</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Game 7 of 10</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Game 8 of 10</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Game 9 of 10</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Game 10 of 10</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Sum</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Average</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">1</td>
+    <td align="left" class="statsColumn">Kay Doe</td>
+    <td align="right" class="statsColumn">77.8482</td>
+    <td align="right" class="statsColumn">44.6540</td>
+    <td align="right" class="statsColumn">108.1403</td>
+    <td align="right" class="statsColumn">42.8398</td>
+    <td align="right" class="statsColumn">28.9494</td>
+    <td align="right" class="statsColumn">76.4667</td>
+    <td align="right" class="statsColumn">56.5680</td>
+    <td align="right" class="statsColumn">38.9147</td>
+    <td align="right" class="statsColumn">26.1491</td>
+    <td align="right" class="statsColumn">102.2615</td>
+    <td align="right" class="statsColumn">602.7917</td>
+    <td align="right" class="statsColumn">60.2792</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">2</td>
+    <td align="left" class="statsColumn">Dan B</td>
+    <td align="right" class="statsColumn">43.2262</td>
+    <td align="right" class="statsColumn">24.7124</td>
+    <td align="right" class="statsColumn">48.3618</td>
+    <td align="right" class="statsColumn">60.5846</td>
+    <td align="right" class="statsColumn">39.1977</td>
+    <td align="right" class="statsColumn">62.4348</td>
+    <td align="right" class="statsColumn">27.6485</td>
+    <td align="right" class="statsColumn">29.4167</td>
+    <td align="right" class="statsColumn">110.9414</td>
+    <td align="right" class="statsColumn">26.4038</td>
+    <td align="right" class="statsColumn">472.9279</td>
+    <td align="right" class="statsColumn">47.2928</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">3</td>
+    <td align="left" class="statsColumn">Jim E</td>
+    <td align="right" class="statsColumn">39.4600</td>
+    <td align="right" class="statsColumn">70.6042</td>
+    <td align="right" class="statsColumn">36.0468</td>
+    <td align="right" class="statsColumn">32.0048</td>
+    <td align="right" class="statsColumn">36.2900</td>
+    <td align="right" class="statsColumn">54.0702</td>
+    <td align="right" class="statsColumn">32.6595</td>
+    <td align="right" class="statsColumn">77.8293</td>
+    <td align="right" class="statsColumn">45.2916</td>
+    <td align="right" class="statsColumn">30.8330</td>
+    <td align="right" class="statsColumn">455.0894</td>
+    <td align="right" class="statsColumn">45.5089</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">4</td>
+    <td align="left" class="statsColumn">Buda</td>
+    <td align="right" class="statsColumn">29.1431</td>
+    <td align="right" class="statsColumn">30.1057</td>
+    <td align="right" class="statsColumn">26.2279</td>
+    <td align="right" class="statsColumn">96.0144</td>
+    <td align="right" class="statsColumn">96.0144</td>
+    <td align="right" class="statsColumn">27.0351</td>
+    <td align="right" class="statsColumn">36.7792</td>
+    <td align="right" class="statsColumn">31.7737</td>
+    <td align="right" class="statsColumn">35.0828</td>
+    <td align="right" class="statsColumn">29.5203</td>
+    <td align="right" class="statsColumn">437.6966</td>
+    <td align="right" class="statsColumn">43.7697</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">5</td>
+    <td align="left" class="statsColumn">Garett</td>
+    <td align="right" class="statsColumn">27.9024</td>
+    <td align="right" class="statsColumn">99.8495</td>
+    <td align="right" class="statsColumn">34.1970</td>
+    <td align="right" class="statsColumn">26.6296</td>
+    <td align="right" class="statsColumn">48.0072</td>
+    <td align="right" class="statsColumn">44.1481</td>
+    <td align="right" class="statsColumn">29.5417</td>
+    <td align="right" class="statsColumn">36.6891</td>
+    <td align="right" class="statsColumn">29.6503</td>
+    <td align="right" class="statsColumn">41.7481</td>
+    <td align="right" class="statsColumn">418.3630</td>
+    <td align="right" class="statsColumn">41.8363</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">6</td>
+    <td align="left" class="statsColumn">Beth</td>
+    <td align="right" class="statsColumn">48.3284</td>
+    <td align="right" class="statsColumn">33.2832</td>
+    <td align="right" class="statsColumn">31.2174</td>
+    <td align="right" class="statsColumn">39.1977</td>
+    <td align="right" class="statsColumn">23.7632</td>
+    <td align="right" class="statsColumn">28.9017</td>
+    <td align="right" class="statsColumn">48.9893</td>
+    <td align="right" class="statsColumn">41.6015</td>
+    <td align="right" class="statsColumn">41.9319</td>
+    <td align="right" class="statsColumn">32.3379</td>
+    <td align="right" class="statsColumn">369.5522</td>
+    <td align="right" class="statsColumn">36.9552</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">7</td>
+    <td align="left" class="statsColumn">Brenda B</td>
+    <td align="right" class="statsColumn">32.6005</td>
+    <td align="right" class="statsColumn">40.7634</td>
+    <td align="right" class="statsColumn">40.8732</td>
+    <td align="right" class="statsColumn">30.3624</td>
+    <td align="right" class="statsColumn">67.8924</td>
+    <td align="right" class="statsColumn">29.9927</td>
+    <td align="right" class="statsColumn">25.2395</td>
+    <td align="right" class="statsColumn">33.1865</td>
+    <td align="right" class="statsColumn">25.4517</td>
+    <td align="right" class="statsColumn">40.8101</td>
+    <td align="right" class="statsColumn">367.1724</td>
+    <td align="right" class="statsColumn">36.7172</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">8</td>
+    <td align="left" class="statsColumn">Sue G</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">49.9247</td>
+    <td align="right" class="statsColumn">27.9217</td>
+    <td align="right" class="statsColumn">27.7170</td>
+    <td align="right" class="statsColumn">42.9390</td>
+    <td align="right" class="statsColumn">36.0468</td>
+    <td align="right" class="statsColumn">37.0324</td>
+    <td align="right" class="statsColumn">27.5168</td>
+    <td align="right" class="statsColumn">36.9805</td>
+    <td align="right" class="statsColumn">59.0407</td>
+    <td align="right" class="statsColumn">345.1196</td>
+    <td align="right" class="statsColumn">38.3466</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">9</td>
+    <td align="left" class="statsColumn">Tammy</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">55.4340</td>
+    <td align="right" class="statsColumn">55.4340</td>
+    <td align="right" class="statsColumn">27.9217</td>
+    <td align="right" class="statsColumn">97.9786</td>
+    <td align="right" class="statsColumn">30.5272</td>
+    <td align="right" class="statsColumn">39.2237</td>
+    <td align="right" class="statsColumn">28.3622</td>
+    <td align="right" class="statsColumn">334.8814</td>
+    <td align="right" class="statsColumn">47.8402</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">10</td>
+    <td align="left" class="statsColumn">Sean C</td>
+    <td align="right" class="statsColumn">34.1733</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">36.2900</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">36.4736</td>
+    <td align="right" class="statsColumn">39.9996</td>
+    <td align="right" class="statsColumn">110.0673</td>
+    <td align="right" class="statsColumn">32.0260</td>
+    <td align="right" class="statsColumn">32.2632</td>
+    <td align="right" class="statsColumn">321.2930</td>
+    <td align="right" class="statsColumn">45.8990</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">11</td>
+    <td align="left" class="statsColumn">Andy S</td>
+    <td align="right" class="statsColumn">68.3467</td>
+    <td align="right" class="statsColumn">57.6481</td>
+    <td align="right" class="statsColumn">38.2334</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">48.3618</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">55.4707</td>
+    <td align="right" class="statsColumn">38.6512</td>
+    <td align="right" class="statsColumn">306.7119</td>
+    <td align="right" class="statsColumn">51.1187</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">12</td>
+    <td align="left" class="statsColumn">Gino A</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">54.0702</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">108.1403</td>
+    <td align="right" class="statsColumn">34.6407</td>
+    <td align="right" class="statsColumn">49.2236</td>
+    <td align="right" class="statsColumn">49.6145</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">295.6893</td>
+    <td align="right" class="statsColumn">59.1379</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">13</td>
+    <td align="left" class="statsColumn">Glenn M</td>
+    <td align="right" class="statsColumn">55.8048</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">27.0351</td>
+    <td align="right" class="statsColumn">42.9390</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">26.2279</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">34.8063</td>
+    <td align="right" class="statsColumn">26.9072</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">213.7203</td>
+    <td align="right" class="statsColumn">35.6200</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">14</td>
+    <td align="left" class="statsColumn">Monica F</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">26.5034</td>
+    <td align="right" class="statsColumn">76.4667</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">25.9431</td>
+    <td align="right" class="statsColumn">78.4474</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">207.3606</td>
+    <td align="right" class="statsColumn">51.8402</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">15</td>
+    <td align="left" class="statsColumn">Mike</td>
+    <td align="right" class="statsColumn">30.5656</td>
+    <td align="right" class="statsColumn">35.3021</td>
+    <td align="right" class="statsColumn">29.9927</td>
+    <td align="right" class="statsColumn">30.2923</td>
+    <td align="right" class="statsColumn">27.0942</td>
+    <td align="right" class="statsColumn">38.2334</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">191.4803</td>
+    <td align="right" class="statsColumn">31.9134</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">16</td>
+    <td align="left" class="statsColumn">The Fireman</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">33.6773</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">28.9494</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">30.5160</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">40.0980</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">133.2407</td>
+    <td align="right" class="statsColumn">33.3102</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">17</td>
+    <td align="left" class="statsColumn">Karill S</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">62.4348</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">31.2174</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">27.7354</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">121.3876</td>
+    <td align="right" class="statsColumn">40.4625</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">18</td>
+    <td align="left" class="statsColumn">Alana</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">27.1744</td>
+    <td align="right" class="statsColumn">26.6952</td>
+    <td align="right" class="statsColumn">64.0521</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">117.9217</td>
+    <td align="right" class="statsColumn">39.3072</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">19</td>
+    <td align="left" class="statsColumn">Carl V</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">25.7215</td>
+    <td align="right" class="statsColumn">39.3960</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">34.0872</td>
+    <td align="right" class="statsColumn">99.2047</td>
+    <td align="right" class="statsColumn">33.0682</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">20</td>
+    <td align="left" class="statsColumn">Turk</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">55.0336</td>
+    <td align="right" class="statsColumn">33.4501</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">88.4837</td>
+    <td align="right" class="statsColumn">44.2418</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">21</td>
+    <td align="left" class="statsColumn">Adam F</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">69.2814</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">69.2814</td>
+    <td align="right" class="statsColumn">69.2814</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">22</td>
+    <td align="left" class="statsColumn">Barb</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">32.6055</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">33.9462</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">66.5517</td>
+    <td align="right" class="statsColumn">33.2758</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">23</td>
+    <td align="left" class="statsColumn">Gino</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">64.5264</td>
+    <td align="right" class="statsColumn">64.5264</td>
+    <td align="right" class="statsColumn">64.5264</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">24</td>
+    <td align="left" class="statsColumn">Jwaces22</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">63.5474</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">63.5474</td>
+    <td align="right" class="statsColumn">63.5474</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">25</td>
+    <td align="left" class="statsColumn">Datrat22</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">28.4192</td>
+    <td align="right" class="statsColumn">30.7696</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">59.1888</td>
+    <td align="right" class="statsColumn">29.5944</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">26</td>
+    <td align="left" class="statsColumn">Monica</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">51.1307</td>
+    <td align="right" class="statsColumn">51.1307</td>
+    <td align="right" class="statsColumn">51.1307</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">27</td>
+    <td align="left" class="statsColumn">Ray P</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">24.2593</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">24.8073</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">49.0666</td>
+    <td align="right" class="statsColumn">24.5333</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">28</td>
+    <td align="left" class="statsColumn">Ob</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">32.0048</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">32.0048</td>
+    <td align="right" class="statsColumn">32.0048</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">29</td>
+    <td align="left" class="statsColumn">Tony D</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">29.0959</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">29.0959</td>
+    <td align="right" class="statsColumn">29.0959</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">30</td>
+    <td align="left" class="statsColumn">Rio</td>
+    <td align="right" class="statsColumn">28.7509</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">28.7509</td>
+    <td align="right" class="statsColumn">28.7509</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">31</td>
+    <td align="left" class="statsColumn">Dale R</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">27.7170</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">27.7170</td>
+    <td align="right" class="statsColumn">27.7170</td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">32</td>
+    <td align="left" class="statsColumn">Fireman</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">27.3305</td>
+    <td align="right" class="statsColumn">27.3305</td>
+    <td align="right" class="statsColumn">27.3305</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">33</td>
+    <td align="left" class="statsColumn">Rob M</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">25.2512</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">25.2512</td>
+    <td align="right" class="statsColumn">25.2512</td>
+  </tr>
+  <tr class="odd">
+    <td colspan=100>&nbsp;</td>
+  </tr>
+  <tr class="even">
+    <td align="right" class="statsColumn">Sum:</td>
+    <td align="left" class="statsColumn"></td>
+    <td align="right" class="statsColumn">516.1501</td>
+    <td align="right" class="statsColumn">572.7495</td>
+    <td align="right" class="statsColumn">737.4798</td>
+    <td align="right" class="statsColumn">549.2550</td>
+    <td align="right" class="statsColumn">559.2495</td>
+    <td align="right" class="statsColumn">735.2841</td>
+    <td align="right" class="statsColumn">563.5328</td>
+    <td align="right" class="statsColumn">806.5404</td>
+    <td align="right" class="statsColumn">813.9833</td>
+    <td align="right" class="statsColumn">639.3068</td>
+    <td align="right" class="statsColumn">6,493.5313</td>
+    <td align="right" class="statsColumn"></td>
+  </tr>
+  <tr class="odd">
+    <td align="right" class="statsColumn">Avg:</td>
+    <td align="left" class="statsColumn"></td>
+    <td align="right" class="statsColumn">43.0125</td>
+    <td align="right" class="statsColumn">44.0577</td>
+    <td align="right" class="statsColumn">43.3812</td>
+    <td align="right" class="statsColumn">42.2504</td>
+    <td align="right" class="statsColumn">43.0192</td>
+    <td align="right" class="statsColumn">43.2520</td>
+    <td align="right" class="statsColumn">43.3487</td>
+    <td align="right" class="statsColumn">42.4495</td>
+    <td align="right" class="statsColumn">40.6992</td>
+    <td align="right" class="statsColumn">42.6205</td>
+    <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
+  </tr>
+
+        </table>
+      </div>
+    </div>
+
+  </body>
+</html>
