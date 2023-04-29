@@ -99,8 +99,8 @@ var TDSort = (function() {
   var mTextKey = document.all ? "innerText" : "textContent";
   var mTableID = "";
   var mHeaderRowID = "";
-  var mData = [{Index: 0, Columns: [{Text: "1", HTML: "1", SortValue: "1", Align: "right"}, {Text: "Kay Doe", HTML: "Kay Doe", SortValue: "kay doe", Align: "left"}, {Text: "46.8036", HTML: "46.8036", SortValue: 46.8036, Align: "right"}, {Text: "75.7124", HTML: "75.7124", SortValue: 75.7124, Align: "right"}, {Text: "64.9096", HTML: "64.9096", SortValue: 64.9096, Align: "right"}, {Text: "187.4256", HTML: "187.4256", SortValue: 187.4256, Align: "right"}, {Text: "62.4752", HTML: "62.4752", SortValue: 62.4752, Align: "right"}]}, {Index: 1, Columns: [{Text: "2", HTML: "2", SortValue: "2", Align: "right"}, {Text: "Beth W", HTML: "Beth W", SortValue: "beth w", Align: "left"}, {Text: "81.0662", HTML: "81.0662", SortValue: 81.0662, Align: "right"}, {Text: "37.8562", HTML: "37.8562", SortValue: 37.8562, Align: "right"}, {Text: "28.9614", HTML: "28.9614", SortValue: 28.9614, Align: "right"}, {Text: "147.8838", HTML: "147.8838", SortValue: 147.8838, Align: "right"}, {Text: "49.2946", HTML: "49.2946", SortValue: 49.2946, Align: "right"}]}, {Index: 2, Columns: [{Text: "3", HTML: "3", SortValue: "3", Align: "right"}, {Text: "Harry H", HTML: "Harry H", SortValue: "harry h", Align: "left"}, {Text: "36.2539", HTML: "36.2539", SortValue: 36.2539, Align: "right"}, {Text: "30.9095", HTML: "30.9095", SortValue: 30.9095, Align: "right"}, {Text: "40.9576", HTML: "40.9576", SortValue: 40.9576, Align: "right"}, {Text: "108.1210", HTML: "108.1210", SortValue: 108.121, Align: "right"}, {Text: "36.0403", HTML: "36.0403", SortValue: 36.04033333333333, Align: "right"}]}, {Index: 3, Columns: [{Text: "4", HTML: "4", SortValue: "4", Align: "right"}, {Text: "Buda", HTML: "Buda", SortValue: "buda", Align: "left"}, {Text: "25.6354", HTML: "25.6354", SortValue: 25.6354, Align: "right"}, {Text: "43.7126", HTML: "43.7126", SortValue: 43.7126, Align: "right"}, {Text: "29.0284", HTML: "29.0284", SortValue: 29.0284, Align: "right"}, {Text: "98.3764", HTML: "98.3764", SortValue: 98.3764, Align: "right"}, {Text: "32.7921", HTML: "32.7921", SortValue: 32.79213333333333, Align: "right"}]}, {Index: 4, Columns: [{Text: "5", HTML: "5", SortValue: "5", Align: "right"}, {Text: "Fred P", HTML: "Fred P", SortValue: "fred p", Align: "left"}, {Text: "57.3224", HTML: "57.3224", SortValue: 57.3224, Align: "right"}, {Text: "33.8596", HTML: "33.8596", SortValue: 33.8596, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "91.1820", HTML: "91.1820", SortValue: 91.182, Align: "right"}, {Text: "45.5910", HTML: "45.5910", SortValue: 45.591, Align: "right"}]}, {Index: 5, Columns: [{Text: "6", HTML: "6", SortValue: "6", Align: "right"}, {Text: "Tammy D", HTML: "Tammy D", SortValue: "tammy d", Align: "left"}, {Text: "40.5331", HTML: "40.5331", SortValue: 40.5331, Align: "right"}, {Text: "28.6166", HTML: "28.6166", SortValue: 28.6166, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "69.1497", HTML: "69.1497", SortValue: 69.1497, Align: "right"}, {Text: "34.5748", HTML: "34.5748", SortValue: 34.57485, Align: "right"}]}, {Index: 6, Columns: [{Text: "7", HTML: "7", SortValue: "7", Align: "right"}, {Text: "Brenda B", HTML: "Brenda B", SortValue: "brenda b", Align: "left"}, {Text: "27.3421", HTML: "27.3421", SortValue: 27.3421, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "33.4417", HTML: "33.4417", SortValue: 33.4417, Align: "right"}, {Text: "60.7838", HTML: "60.7838", SortValue: 60.7838, Align: "right"}, {Text: "30.3919", HTML: "30.3919", SortValue: 30.3919, Align: "right"}]}, {Index: 7, Columns: [{Text: "8", HTML: "8", SortValue: "8", Align: "right"}, {Text: "Sue G", HTML: "Sue G", SortValue: "sue g", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "47.7741", HTML: "47.7741", SortValue: 47.7741, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "47.7741", HTML: "47.7741", SortValue: 47.7741, Align: "right"}, {Text: "47.7741", HTML: "47.7741", SortValue: 47.7741, Align: "right"}]}, {Index: 8, Columns: [{Text: "9", HTML: "9", SortValue: "9", Align: "right"}, {Text: "Lori P", HTML: "Lori P", SortValue: "lori p", Align: "left"}, {Text: "33.0951", HTML: "33.0951", SortValue: 33.0951, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "33.0951", HTML: "33.0951", SortValue: 33.0951, Align: "right"}, {Text: "33.0951", HTML: "33.0951", SortValue: 33.0951, Align: "right"}]}, {Index: 9, Columns: [{Text: "10", HTML: "10", SortValue: "10", Align: "right"}, {Text: "Tim E", HTML: "Tim E", SortValue: "tim e", Align: "left"}, {Text: "28.6612", HTML: "28.6612", SortValue: 28.6612, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "28.6612", HTML: "28.6612", SortValue: 28.6612, Align: "right"}, {Text: "28.6612", HTML: "28.6612", SortValue: 28.6612, Align: "right"}]}, {Index: 10, Columns: [{Text: "11", HTML: "11", SortValue: "11", Align: "right"}, {Text: "Jennine E", HTML: "Jennine E", SortValue: "jennine e", Align: "left"}, {Text: "27.0221", HTML: "27.0221", SortValue: 27.0221, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "27.0221", HTML: "27.0221", SortValue: 27.0221, Align: "right"}, {Text: "27.0221", HTML: "27.0221", SortValue: 27.0221, Align: "right"}]}, {Index: 11, Columns: [{Text: "12", HTML: "12", SortValue: "12", Align: "right"}, {Text: "Sean C", HTML: "Sean C", SortValue: "sean c", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "23.8871", HTML: "23.8871", SortValue: 23.8871, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "23.8871", HTML: "23.8871", SortValue: 23.8871, Align: "right"}, {Text: "23.8871", HTML: "23.8871", SortValue: 23.8871, Align: "right"}]}];
-  var mColumns = [{Key: "_Index", Name: "#"}, {Key: "Name", Name: "Name"}, {Key: "0", Name: "S1 G1"}, {Key: "1", Name: "S1 G2"}, {Key: "2", Name: "S1 G3"}, {Key: "_Sum", Name: "Sum"}, {Key: "_Average", Name: "Average"}];
+  var mData = [{Index: 0, Columns: [{Text: "1", HTML: "1", SortValue: "1", Align: "right"}, {Text: "Kay Doe", HTML: "Kay Doe", SortValue: "kay doe", Align: "left"}, {Text: "46.8036", HTML: "46.8036", SortValue: 46.8036, Align: "right"}, {Text: "75.7124", HTML: "75.7124", SortValue: 75.7124, Align: "right"}, {Text: "64.9096", HTML: "64.9096", SortValue: 64.9096, Align: "right"}, {Text: "187.4256", HTML: "187.4256", SortValue: 187.4256, Align: "right"}]}, {Index: 1, Columns: [{Text: "2", HTML: "2", SortValue: "2", Align: "right"}, {Text: "Beth W", HTML: "Beth W", SortValue: "beth w", Align: "left"}, {Text: "81.0662", HTML: "81.0662", SortValue: 81.0662, Align: "right"}, {Text: "37.8562", HTML: "37.8562", SortValue: 37.8562, Align: "right"}, {Text: "28.9614", HTML: "28.9614", SortValue: 28.9614, Align: "right"}, {Text: "147.8838", HTML: "147.8838", SortValue: 147.8838, Align: "right"}]}, {Index: 2, Columns: [{Text: "3", HTML: "3", SortValue: "3", Align: "right"}, {Text: "Harry H", HTML: "Harry H", SortValue: "harry h", Align: "left"}, {Text: "36.2539", HTML: "36.2539", SortValue: 36.2539, Align: "right"}, {Text: "30.9095", HTML: "30.9095", SortValue: 30.9095, Align: "right"}, {Text: "40.9576", HTML: "40.9576", SortValue: 40.9576, Align: "right"}, {Text: "108.1210", HTML: "108.1210", SortValue: 108.121, Align: "right"}]}, {Index: 3, Columns: [{Text: "4", HTML: "4", SortValue: "4", Align: "right"}, {Text: "Buda", HTML: "Buda", SortValue: "buda", Align: "left"}, {Text: "25.6354", HTML: "25.6354", SortValue: 25.6354, Align: "right"}, {Text: "43.7126", HTML: "43.7126", SortValue: 43.7126, Align: "right"}, {Text: "29.0284", HTML: "29.0284", SortValue: 29.0284, Align: "right"}, {Text: "98.3764", HTML: "98.3764", SortValue: 98.3764, Align: "right"}]}, {Index: 4, Columns: [{Text: "5", HTML: "5", SortValue: "5", Align: "right"}, {Text: "Fred P", HTML: "Fred P", SortValue: "fred p", Align: "left"}, {Text: "57.3224", HTML: "57.3224", SortValue: 57.3224, Align: "right"}, {Text: "33.8596", HTML: "33.8596", SortValue: 33.8596, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "91.1820", HTML: "91.1820", SortValue: 91.182, Align: "right"}]}, {Index: 5, Columns: [{Text: "6", HTML: "6", SortValue: "6", Align: "right"}, {Text: "Tammy D", HTML: "Tammy D", SortValue: "tammy d", Align: "left"}, {Text: "40.5331", HTML: "40.5331", SortValue: 40.5331, Align: "right"}, {Text: "28.6166", HTML: "28.6166", SortValue: 28.6166, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "69.1497", HTML: "69.1497", SortValue: 69.1497, Align: "right"}]}, {Index: 6, Columns: [{Text: "7", HTML: "7", SortValue: "7", Align: "right"}, {Text: "Brenda B", HTML: "Brenda B", SortValue: "brenda b", Align: "left"}, {Text: "27.3421", HTML: "27.3421", SortValue: 27.3421, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "33.4417", HTML: "33.4417", SortValue: 33.4417, Align: "right"}, {Text: "60.7838", HTML: "60.7838", SortValue: 60.7838, Align: "right"}]}, {Index: 7, Columns: [{Text: "8", HTML: "8", SortValue: "8", Align: "right"}, {Text: "Sue G", HTML: "Sue G", SortValue: "sue g", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "47.7741", HTML: "47.7741", SortValue: 47.7741, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "47.7741", HTML: "47.7741", SortValue: 47.7741, Align: "right"}]}, {Index: 8, Columns: [{Text: "9", HTML: "9", SortValue: "9", Align: "right"}, {Text: "Lori P", HTML: "Lori P", SortValue: "lori p", Align: "left"}, {Text: "33.0951", HTML: "33.0951", SortValue: 33.0951, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "33.0951", HTML: "33.0951", SortValue: 33.0951, Align: "right"}]}, {Index: 9, Columns: [{Text: "10", HTML: "10", SortValue: "10", Align: "right"}, {Text: "Tim E", HTML: "Tim E", SortValue: "tim e", Align: "left"}, {Text: "28.6612", HTML: "28.6612", SortValue: 28.6612, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "28.6612", HTML: "28.6612", SortValue: 28.6612, Align: "right"}]}, {Index: 10, Columns: [{Text: "11", HTML: "11", SortValue: "11", Align: "right"}, {Text: "Jennine E", HTML: "Jennine E", SortValue: "jennine e", Align: "left"}, {Text: "27.0221", HTML: "27.0221", SortValue: 27.0221, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "27.0221", HTML: "27.0221", SortValue: 27.0221, Align: "right"}]}, {Index: 11, Columns: [{Text: "12", HTML: "12", SortValue: "12", Align: "right"}, {Text: "Sean C", HTML: "Sean C", SortValue: "sean c", Align: "left"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "23.8871", HTML: "23.8871", SortValue: 23.8871, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "23.8871", HTML: "23.8871", SortValue: 23.8871, Align: "right"}]}];
+  var mColumns = [{Key: "_Index", Name: "#"}, {Key: "Name", Name: "Name"}, {Key: "0", Name: "S1 G1"}, {Key: "1", Name: "S1 G2"}, {Key: "2", Name: "S1 G3"}, {Key: "_Sum", Name: "Sum"}];
   var mIndexCol = 0;
 
 
@@ -228,7 +228,6 @@ var TDSort = (function() {
     <td valign="middle" align="right" class="statsColumn statsColumnHeader">S1 G2</td>
     <td valign="middle" align="right" class="statsColumn statsColumnHeader">S1 G3</td>
     <td valign="middle" align="right" class="statsColumn statsColumnHeader">Sum</td>
-    <td valign="middle" align="right" class="statsColumn statsColumnHeader">Average</td>
   </tr>
   <tr class="even">
     <td align="right" class="statsColumn">1</td>
@@ -237,7 +236,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">75.7124</td>
     <td align="right" class="statsColumn">64.9096</td>
     <td align="right" class="statsColumn">187.4256</td>
-    <td align="right" class="statsColumn">62.4752</td>
   </tr>
   <tr class="odd">
     <td align="right" class="statsColumn">2</td>
@@ -246,7 +244,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">37.8562</td>
     <td align="right" class="statsColumn">28.9614</td>
     <td align="right" class="statsColumn">147.8838</td>
-    <td align="right" class="statsColumn">49.2946</td>
   </tr>
   <tr class="even">
     <td align="right" class="statsColumn">3</td>
@@ -255,7 +252,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">30.9095</td>
     <td align="right" class="statsColumn">40.9576</td>
     <td align="right" class="statsColumn">108.1210</td>
-    <td align="right" class="statsColumn">36.0403</td>
   </tr>
   <tr class="odd">
     <td align="right" class="statsColumn">4</td>
@@ -264,7 +260,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">43.7126</td>
     <td align="right" class="statsColumn">29.0284</td>
     <td align="right" class="statsColumn">98.3764</td>
-    <td align="right" class="statsColumn">32.7921</td>
   </tr>
   <tr class="even">
     <td align="right" class="statsColumn">5</td>
@@ -273,7 +268,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">33.8596</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">91.1820</td>
-    <td align="right" class="statsColumn">45.5910</td>
   </tr>
   <tr class="odd">
     <td align="right" class="statsColumn">6</td>
@@ -282,7 +276,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">28.6166</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">69.1497</td>
-    <td align="right" class="statsColumn">34.5748</td>
   </tr>
   <tr class="even">
     <td align="right" class="statsColumn">7</td>
@@ -291,7 +284,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">33.4417</td>
     <td align="right" class="statsColumn">60.7838</td>
-    <td align="right" class="statsColumn">30.3919</td>
   </tr>
   <tr class="odd">
     <td align="right" class="statsColumn">8</td>
@@ -299,7 +291,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">47.7741</td>
     <td align="right" class="statsColumn"></td>
-    <td align="right" class="statsColumn">47.7741</td>
     <td align="right" class="statsColumn">47.7741</td>
   </tr>
   <tr class="even">
@@ -309,7 +300,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">33.0951</td>
-    <td align="right" class="statsColumn">33.0951</td>
   </tr>
   <tr class="odd">
     <td align="right" class="statsColumn">10</td>
@@ -317,7 +307,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">28.6612</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
-    <td align="right" class="statsColumn">28.6612</td>
     <td align="right" class="statsColumn">28.6612</td>
   </tr>
   <tr class="even">
@@ -327,7 +316,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">27.0221</td>
-    <td align="right" class="statsColumn">27.0221</td>
   </tr>
   <tr class="odd">
     <td align="right" class="statsColumn">12</td>
@@ -335,7 +323,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">23.8871</td>
     <td align="right" class="statsColumn"></td>
-    <td align="right" class="statsColumn">23.8871</td>
     <td align="right" class="statsColumn">23.8871</td>
   </tr>
 
