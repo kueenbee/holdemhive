@@ -33,7 +33,12 @@
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://holdemhive.com/ChampionshipStandings.txt</loc>
+  <loc>http://holdemhive.com/ChampionshipStandings.html</loc>
+  <lastmod>2023-05-10T22:44:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://holdemhive.com/HEHBlindStructure.html</loc>
   <lastmod>2023-05-10T22:44:48+00:00</lastmod>
   <priority>0.80</priority>
 </url>
