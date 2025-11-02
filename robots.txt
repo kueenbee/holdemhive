@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://holdemhive.com/sitemap.xml
+
+# Best practices
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /junk/
+
+# Allow JS and CSS for Google to fully render your pages
+Allow: /*.js$
+Allow: /*.css$
+
+# If you have login/admin pages in future, block them here
+# Disallow: /admin/
