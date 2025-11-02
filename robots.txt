@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://holdemhive.com/sitemap.xml
+Sitemap: https://holdemhive.com/holdemhive_sitemap.xml
 
 # Best practices
 Disallow: /cgi-bin/
