@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main site -->
+  <url><loc>https://holdemhive.com/</loc><priority>1.0</priority></url>
+
+  <!-- Core pages -->
+  <url><loc>https://holdemhive.com/LeagueDetails.html</loc><priority>0.8</priority></url>
+  <url><loc>https://holdemhive.com/RegisteredPlayers.html</loc><priority>0.8</priority></url>
+  <url><loc>https://holdemhive.com/Standings.html</loc><priority>0.9</priority></url>
+  <url><loc>https://holdemhive.com/ChampionshipStandings.html</loc><priority>0.8</priority></url>
+  <url><loc>https://holdemhive.com/PastSeasons-Standings.html</loc><priority>0.7</priority></url>
+
+  <!-- Tournament & Pictures -->
+  <url><loc>https://holdemhive.com/TOCQualifiers.html</loc><priority>0.6</priority></url>
+  <url><loc>https://holdemhive.com/TOC1Pictures.html</loc><priority>0.5</priority></url>
+  <url><loc>https://holdemhive.com/HEHBlindStructure.html</loc><priority>0.5</priority></url>
+
+  <!-- PPG Season Result Pages -->
+  <url><loc>https://holdemhive.com/PPG.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S11.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S10.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S9.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S8.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S7.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S6.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S5.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S4.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S3.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S2.html</loc><priority>0.7</priority></url>
+  <url><loc>https://holdemhive.com/PPG-S1.html</loc><priority>0.7</priority></url>
+</urlset>
