@@ -166,6 +166,7 @@ const srcUrl = getPPGUrl(state);
   const gamesCol = state.columns?.games_col ?? 3; // common in TD exports: #Games column
   const pointsSlots = state.points_slots ?? listSize;
   const autoMinGames = state.auto_qualify_rule?.min_live_games ?? 4;
+  const totalLiveGames = state.total_live_games ?? null; // required for Seat 9 rule
   const winners = (state.auto_qualify_rule?.winners ?? []).map(x => String(x).trim()).filter(Boolean);
 
   let doc;
@@ -222,6 +223,27 @@ const srcUrl = getPPGUrl(state);
       fieldMap.set(key, { ...p, qual: "Auto" });
     }
   }
+// SEAT 9 SPECIAL RULE (season complete only):
+// If a player attended ALL games but isn't otherwise in the field,
+// they get Seat 9. If multiple, highest points wins Seat 9.
+if (seasonComplete) {
+  if (typeof totalLiveGames !== "number") {
+    // If you forget to set total_live_games in season_state.json, we can't apply this rule.
+    // We will simply skip it.
+  } else {
+    // Candidates: attended all games AND not already qualified
+    const candidates = players
+      .filter(p => p.games >= totalLiveGames)
+      .filter(p => !fieldMap.has(p.baseName.toLowerCase()))
+      .sort((a, b) => (b.points - a.points) || a.baseName.localeCompare(b.baseName));
+
+    if (candidates.length > 0) {
+      const seat9 = candidates[0];
+      fieldMap.set(seat9.baseName.toLowerCase(), { ...seat9, qual: "Seat 9 (All Games)" });
+    }
+  }
+}
+
 
   // Render list:
   // - If season complete: show union in points order (full), but keep it readable.

@@ -4,7 +4,8 @@
   "game_number": 8,
   "season_complete": true,
   "championship_spots": 9,
-  "points_slots": 9,
+  "points_slots": 8,
+  "total_live_games": 8,
   "auto_qualify_rule": {
     "min_live_games": 4,
     "winners": []
