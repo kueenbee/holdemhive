@@ -142,7 +142,25 @@
   // - points qualifiers (top N by points)
   // - auto qualifiers (winner + min games played)
   // - field = union(points, auto)
-  const srcUrl = (state.sources && state.sources.ppg_url) ? state.sources.ppg_url : "PPG.html";
+
+function getPPGUrl(state) {
+  // While the season is in progress, always use the live file
+  if (!state.season_complete) {
+    return "PPG.html";
+  }
+
+  // Once season is complete, build the archived filename
+  if (typeof state.season_number === "number") {
+    return `PPG-${state.season_number}.html`;
+  }
+
+  // Safety fallback
+  return "PPG.html";
+}
+
+const srcUrl = getPPGUrl(state);
+
+
   const nameCol = state.columns?.name_col ?? 0;
   const pointsCol = state.columns?.points_col ?? 1;
   const gamesCol = state.columns?.games_col ?? 3; // common in TD exports: #Games column

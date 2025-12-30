@@ -1,5 +1,6 @@
 {
   "season": "S12",
+  "season_number":12,
   "game_number": 8,
   "season_complete": true,
   "championship_spots": 9,
@@ -7,9 +8,6 @@
   "auto_qualify_rule": {
     "min_live_games": 4,
     "winners": []
-  },
-  "sources": {
-    "ppg_url": "PPG.html"
   },
   "columns": {
     "name_col": 0,
