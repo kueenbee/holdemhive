@@ -189,7 +189,6 @@ const perGameStartCol = state.per_game?.start_col ?? (nameCol + 1); // e.g., 1
 const pointsSlots = state.points_slots ?? listSize;
 const autoMinGames = state.auto_qualify_rule?.min_live_games ?? 4;
 const winners = (state.auto_qualify_rule?.winners ?? []).map(x => String(x).trim()).filter(Boolean);
-String(x).trim()).filter(Boolean);
 
   let doc;
   try {
@@ -227,7 +226,7 @@ const players = rows.map(r => Array.from(r.querySelectorAll("td")).map(td => td.
   .filter(p => p.baseName.length > 0);
 
   // Points qualifiers
-  const byPoints = [...players].sort((a,b) => (b.points - a.points) || (b.games - a.games) || a.baseName.localeCompare(b.baseName));
+const byPoints = [...players].sort((a,b) => (b.points - a.points) || (b.attendedGames - a.attendedGames) || a.baseName.localeCompare(b.baseName));
   const pointsQual = byPoints.slice(0, pointsSlots);
 
   const pointsSet = new Set(pointsQual.map(p => p.baseName.toLowerCase()));
