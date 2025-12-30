@@ -6,6 +6,7 @@
   "championship_spots": 9,
   "points_slots": 8,
   "total_live_games": 8,
+  "per_game": { "start_col": 2}
   "auto_qualify_rule": {
     "min_live_games": 4,
     "winners": []

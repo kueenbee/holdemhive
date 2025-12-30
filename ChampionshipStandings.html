@@ -96,6 +96,24 @@
     return parseFloat(String(s).replace(/[^0-9.\-]/g, "")) || 0;
   }
 
+function isBlankCell(s) {
+  const t = String(s ?? "").trim();
+  return t === "" || t === "-" || t.toLowerCase() === "na";
+}
+
+// Count attendance by non-blank entries in the per-game columns
+function countAttendedGames(cells, startCol, totalGames) {
+  let attended = 0;
+  for (let i = 0; i < totalGames; i++) {
+    const idx = startCol + i;
+    if (idx >= 0 && idx < cells.length && !isBlankCell(cells[idx])) {
+      attended++;
+    }
+  }
+  return attended;
+}
+
+
   function renderEmptyList(n) {
     const ol = document.getElementById("champList");
     if (!ol) return;
@@ -161,13 +179,17 @@ function getPPGUrl(state) {
 const srcUrl = getPPGUrl(state);
 
 
-  const nameCol = state.columns?.name_col ?? 0;
-  const pointsCol = state.columns?.points_col ?? 1;
-  const gamesCol = state.columns?.games_col ?? 3; // common in TD exports: #Games column
-  const pointsSlots = state.points_slots ?? listSize;
-  const autoMinGames = state.auto_qualify_rule?.min_live_games ?? 4;
-  const totalLiveGames = state.total_live_games ?? null; // required for Seat 9 rule
-  const winners = (state.auto_qualify_rule?.winners ?? []).map(x => String(x).trim()).filter(Boolean);
+const nameCol = state.columns?.name_col ?? 0;
+const pointsCol = state.columns?.points_col ?? 1;
+
+// Attendance is derived from per-game columns (PPG has no Games Played column)
+const totalLiveGames = state.total_live_games ?? null;          // e.g., 8
+const perGameStartCol = state.per_game?.start_col ?? (nameCol + 1); // e.g., 1
+
+const pointsSlots = state.points_slots ?? listSize;
+const autoMinGames = state.auto_qualify_rule?.min_live_games ?? 4;
+const winners = (state.auto_qualify_rule?.winners ?? []).map(x => String(x).trim()).filter(Boolean);
+String(x).trim()).filter(Boolean);
 
   let doc;
   try {
@@ -188,15 +210,21 @@ const srcUrl = getPPGUrl(state);
   }
 
   const rows = Array.from(table.querySelectorAll("tr")).filter(r => r.id !== "pColumns");
-  const players = rows.map(r => Array.from(r.querySelectorAll("td")).map(td => td.textContent.trim()))
-    .filter(cells => cells.length > Math.max(nameCol, pointsCol, gamesCol))
-    .map(cells => ({
+const players = rows.map(r => Array.from(r.querySelectorAll("td")).map(td => td.textContent.trim()))
+  .filter(cells => cells.length > Math.max(nameCol, pointsCol))
+  .map(cells => {
+    const attended = (typeof totalLiveGames === "number")
+      ? countAttendedGames(cells, perGameStartCol, totalLiveGames)
+      : 0;
+
+    return {
       rawName: cells[nameCol],
       baseName: cells[nameCol].replace(/~+/g, "").trim(),
       points: parseNumber(cells[pointsCol]),
-      games: parseNumber(cells[gamesCol])
-    }))
-    .filter(p => p.baseName.length > 0);
+      attendedGames: attended
+    };
+  })
+  .filter(p => p.baseName.length > 0);
 
   // Points qualifiers
   const byPoints = [...players].sort((a,b) => (b.points - a.points) || (b.games - a.games) || a.baseName.localeCompare(b.baseName));
@@ -207,7 +235,7 @@ const srcUrl = getPPGUrl(state);
   // Auto qualifiers
   const winnersSet = new Set(winners.map(w => w.toLowerCase()));
   const autoQual = players.filter(p =>
-    winnersSet.has(p.baseName.toLowerCase()) && (p.games >= autoMinGames)
+      winnersSet.has(p.baseName.toLowerCase()) && (p.attendedGames >= autoMinGames)
   );
 
   const autoSet = new Set(autoQual.map(p => p.baseName.toLowerCase()));
@@ -233,7 +261,7 @@ if (seasonComplete) {
   } else {
     // Candidates: attended all games AND not already qualified
     const candidates = players
-      .filter(p => p.games >= totalLiveGames)
+.filter(p => p.attendedGames === totalLiveGames)
       .filter(p => !fieldMap.has(p.baseName.toLowerCase()))
       .sort((a, b) => (b.points - a.points) || a.baseName.localeCompare(b.baseName));
 
