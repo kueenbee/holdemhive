@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!--
+  Hold 'Em Hive - Championship Standings (auto-generated at runtime)
+  Data source: season_state.json + TD-exported PPG/Standings HTML
+-->
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>Season Championship Standings – Hold ’Em Hive Tournament League Rochester</title>
+  <style type="text/css">
+    html { font-family: Segoe UI, Arial, sans-serif; font-size: 11pt; }
+    body { background-color: #fff; color: #000; margin: 0; padding: 0; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .logo { display:block; margin: 10px auto 0 auto; max-width: 360px; height: auto; }
+    .scroll { display:block; margin: 10px auto 0 auto; width:400px; height:40px; }
+    h2 { margin: 14px 0 10px 0; }
+    p { margin: 10px 0; }
+    ol { margin: 10px 0 0 24px; }
+    li { padding: 4px 0; }
+    .note { font-size: 10.5pt; color: #333; }
+    .legend { font-size: 10.5pt; color: #333; margin-top: 12px; }
+    .toc-crown { font-size: 0.7em; vertical-align: super; margin-left: 2px; }
+    .qualTag { font-size: 0.85em; color: #444; margin-left: 8px; }
+    .nav { text-align:center; margin-top: 18px; }
+    .nav a { display:inline-block; margin: 0 10px; }
+    .warn { background:#fff6d8; border:1px solid #e7d28a; padding:10px 12px; border-radius:6px; }
+    code { font-family: Consolas, "Courier New", monospace; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- Use your existing logo asset if you have one; update src as needed -->
+    <img class="logo" src="images/holdemhive_logo.png" alt="K$B Hold Em Hive">
+
+    <!-- Optional: keep your season champ scroll image if desired; update path as needed -->
+    <img class="scroll" src="images/season-champion_scroll.gif"
+         alt="Season Champion scroll">
+
+    <!-- Headings + informational text (always shown) -->
+    <h2 id="pageTitle">Season Championship Standings</h2>
+
+    <p>Championship qualification will be based on points only through the 4th LIVE game of the season.</p>
+
+    <p>Prior to the 4th live game, view the <a href="PPG.html">Points Per Game page</a>
+      (sorted on the Points column) to see the Championship standings.</p>
+
+    <p>League Rule: win+4 live games locks in a seat in the Season Championship!</p>
+
+    <!-- The list: per your request, before Game 4 this will be 9 empty spots -->
+    <ol id="champList"></ol>
+
+    <div id="details" class="legend"></div>
+
+    <div class="nav">
+      <a href="https://www.holdemhive.com">Home</a>
+      <a href="PPG.html">Points/Game</a>
+      <a href="Standings.html">Standings</a>
+    </div>
+  </div>
+
+<script>
+/*
+  ChampionshipStandings.html automation
+  - Reads season_state.json for season metadata & winners list
+  - Reads a TD-exported HTML page (PPG or Standings) for Name / Points / GamesPlayed
+  - Applies crown display for TD ASCII markers: ~, ~~  (no Unicode in TD required)
+
+  You can tune behavior in season_state.json without editing this file.
+*/
+(async function () {
+  const STATE_URL = "season_state.json";
+  const DEFAULT_LIST_SIZE = 9;
+
+  // Queen crown as HTML entity (encoding-independent)
+  const CROWN = "&#9813;"; // ♕
+  function crownify(nameText) {
+    const m = nameText.match(/~+/g);
+    const count = m ? m.join("").length : 0;
+    const clean = nameText.replace(/~+/g, "").trim();
+    if (!count) return escapeHtml(clean);
+    return escapeHtml(clean) + '<span class="toc-crown">' + CROWN.repeat(count) + '</span>';
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+  }
+
+  function parseNumber(s) {
+    // Handles commas, currency, etc.
+    return parseFloat(String(s).replace(/[^0-9.\-]/g, "")) || 0;
+  }
+
+  function renderEmptyList(n) {
+    const ol = document.getElementById("champList");
+    if (!ol) return;
+    ol.innerHTML = Array.from({ length: n }, () => "<li>&nbsp;</li>").join("");
+  }
+
+  function setTitle(text) {
+    const el = document.getElementById("pageTitle");
+    if (el) el.textContent = text;
+  }
+
+  function setDetails(html) {
+    const el = document.getElementById("details");
+    if (el) el.innerHTML = html || "";
+  }
+
+  // Default: empty list (safe, matches your pre-Game4 requirement even if fetch fails)
+  renderEmptyList(DEFAULT_LIST_SIZE);
+
+  let state;
+  try {
+    const resp = await fetch(STATE_URL, { cache: "no-store" });
+    state = await resp.json();
+  } catch (e) {
+    setDetails('<div class="warn"><b>Note:</b> season_state.json could not be loaded. Showing empty list.</div>');
+    return;
+  }
+
+  const listSize = state.championship_spots ?? DEFAULT_LIST_SIZE;
+  const gameNumber = state.game_number ?? 0;
+  const seasonLabel = state.season ?? "";
+  const seasonComplete = !!state.season_complete;
+
+  setTitle((seasonLabel ? (seasonLabel + " ") : "") + "Championship Standings" + (seasonComplete ? " - FINAL" : ""));
+
+  // PRE–GAME 4: show headings/info + empty 9 spots (your request)
+  if (gameNumber < 4) {
+    renderEmptyList(listSize);
+    setDetails('<span class="note">Championship standings will populate after Game 4 (current: Game ' + gameNumber + ').</span>');
+    return;
+  }
+
+  // After Game 4, we need to compute:
+  // - points qualifiers (top N by points)
+  // - auto qualifiers (winner + min games played)
+  // - field = union(points, auto)
+  const srcUrl = (state.sources && state.sources.ppg_url) ? state.sources.ppg_url : "PPG.html";
+  const nameCol = state.columns?.name_col ?? 0;
+  const pointsCol = state.columns?.points_col ?? 1;
+  const gamesCol = state.columns?.games_col ?? 3; // common in TD exports: #Games column
+  const pointsSlots = state.points_slots ?? listSize;
+  const autoMinGames = state.auto_qualify_rule?.min_live_games ?? 4;
+  const winners = (state.auto_qualify_rule?.winners ?? []).map(x => String(x).trim()).filter(Boolean);
+
+  let doc;
+  try {
+    const resp = await fetch(srcUrl, { cache: "no-store" });
+    const html = await resp.text();
+    doc = new DOMParser().parseFromString(html, "text/html");
+  } catch (e) {
+    renderEmptyList(listSize);
+    setDetails('<div class="warn"><b>Note:</b> Could not load <code>' + escapeHtml(srcUrl) + '</code>. Showing empty list.</div>');
+    return;
+  }
+
+  const table = doc.querySelector("#pTable");
+  if (!table) {
+    renderEmptyList(listSize);
+    setDetails('<div class="warn"><b>Note:</b> No <code>#pTable</code> found in <code>' + escapeHtml(srcUrl) + '</code>. Showing empty list.</div>');
+    return;
+  }
+
+  const rows = Array.from(table.querySelectorAll("tr")).filter(r => r.id !== "pColumns");
+  const players = rows.map(r => Array.from(r.querySelectorAll("td")).map(td => td.textContent.trim()))
+    .filter(cells => cells.length > Math.max(nameCol, pointsCol, gamesCol))
+    .map(cells => ({
+      rawName: cells[nameCol],
+      baseName: cells[nameCol].replace(/~+/g, "").trim(),
+      points: parseNumber(cells[pointsCol]),
+      games: parseNumber(cells[gamesCol])
+    }))
+    .filter(p => p.baseName.length > 0);
+
+  // Points qualifiers
+  const byPoints = [...players].sort((a,b) => (b.points - a.points) || (b.games - a.games) || a.baseName.localeCompare(b.baseName));
+  const pointsQual = byPoints.slice(0, pointsSlots);
+
+  const pointsSet = new Set(pointsQual.map(p => p.baseName.toLowerCase()));
+
+  // Auto qualifiers
+  const winnersSet = new Set(winners.map(w => w.toLowerCase()));
+  const autoQual = players.filter(p =>
+    winnersSet.has(p.baseName.toLowerCase()) && (p.games >= autoMinGames)
+  );
+
+  const autoSet = new Set(autoQual.map(p => p.baseName.toLowerCase()));
+
+  // Union field
+  const fieldMap = new Map();
+  for (const p of pointsQual) fieldMap.set(p.baseName.toLowerCase(), { ...p, qual: "Points" });
+  for (const p of autoQual) {
+    const key = p.baseName.toLowerCase();
+    if (fieldMap.has(key)) {
+      fieldMap.get(key).qual = "Points + Auto";
+    } else {
+      fieldMap.set(key, { ...p, qual: "Auto" });
+    }
+  }
+
+  // Render list:
+  // - If season complete: show union in points order (full), but keep it readable.
+  // - If season in progress: show union in points order, top 'listSize' as "current field",
+  //   and show overflow below (if any).
+  const field = [...fieldMap.values()].sort((a,b) => (b.points - a.points) || a.baseName.localeCompare(b.baseName));
+
+  const ol = document.getElementById("champList");
+  if (!ol) return;
+
+  const top = field.slice(0, listSize);
+  const overflow = field.slice(listSize);
+
+  function renderEntry(p) {
+    const nameHtml = crownify(p.rawName);
+    const pts = (isFinite(p.points) ? p.points.toFixed(3) : "");
+    const tag = p.qual ? ('<span class="qualTag">[' + escapeHtml(p.qual) + ']</span>') : "";
+    return '<li>' + nameHtml + ' (' + pts + ')' + tag + '</li>';
+  }
+
+  if (top.length === 0) {
+    renderEmptyList(listSize);
+  } else {
+    ol.innerHTML = top.map(renderEntry).join("");
+    // If fewer than listSize qualifiers, pad with blanks (keeps your 9-slot look)
+    if (top.length < listSize) {
+      ol.innerHTML += Array.from({ length: (listSize - top.length) }, () => "<li>&nbsp;</li>").join("");
+    }
+  }
+
+  let detailsHtml = '';
+  detailsHtml += '<div class="note">Computed from <code>' + escapeHtml(srcUrl) + '</code>. Game ' + gameNumber + (seasonComplete ? ' (season complete).' : ' (season in progress).') + '</div>';
+  detailsHtml += '<div class="note">Points qualifiers: top ' + pointsSlots + ' by points. Auto-qualify: winner + ' + autoMinGames + '+ live games.</div>';
+
+  if (overflow.length > 0) {
+    detailsHtml += '<div class="warn"><b>More than ' + listSize + ' players currently qualify.</b> Showing first ' + listSize + ' above; additional qualifiers listed here:</div>';
+    detailsHtml += '<ol>' + overflow.map(renderEntry).join('') + '</ol>';
+  }
+
+  setDetails(detailsHtml);
+
+})();
+</script>
+
+</body>
+</html>

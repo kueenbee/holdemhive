@@ -1,0 +1,19 @@
+{
+  "season": "S12",
+  "game_number": 8,
+  "season_complete": true,
+  "championship_spots": 9,
+  "points_slots": 9,
+  "auto_qualify_rule": {
+    "min_live_games": 4,
+    "winners": []
+  },
+  "sources": {
+    "ppg_url": "PPG.html"
+  },
+  "columns": {
+    "name_col": 0,
+    "points_col": 1,
+    "games_col": 3
+  }
+}
