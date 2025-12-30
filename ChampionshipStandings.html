@@ -291,15 +291,13 @@ if (seasonComplete) {
     return '<li>' + nameHtml + ' (' + pts + ')' + tag + '</li>';
   }
 
-  if (top.length === 0) {
-    renderEmptyList(listSize);
-  } else {
-    ol.innerHTML = top.map(renderEntry).join("");
-    // If fewer than listSize qualifiers, pad with blanks (keeps your 9-slot look)
-    if (top.length < listSize) {
-      ol.innerHTML += Array.from({ length: (listSize - top.length) }, () => "<li>&nbsp;</li>").join("");
-    }
-  }
+if (top.length === 0) {
+  // No qualifiers yet → show nothing (or keep whatever static placeholders you prefer)
+  ol.innerHTML = "";
+} else {
+  // Show only actual qualifiers
+  ol.innerHTML = top.map(renderEntry).join("");
+}
 
   let detailsHtml = '';
   detailsHtml += '<div class="note">Computed from <code>' + escapeHtml(srcUrl) + '</code>. Game ' + gameNumber + (seasonComplete ? ' (season complete).' : ' (season in progress).') + '</div>';
