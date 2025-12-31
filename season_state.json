@@ -4,7 +4,7 @@
   "season": "S12",
   "season_number":12,
   "game_number": 8,
-  "season_complete": true,
+  "season_complete": false,
   "championship_spots": 9,
   "points_slots": 8,
   "total_games": 8,
