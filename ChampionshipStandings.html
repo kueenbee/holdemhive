@@ -92,51 +92,40 @@
   }
 
   function parseNumber(s) {
-    // Handles commas, currency, etc.
-    return parseFloat(String(s).replace(/[^0-9.\-]/g, "")) || 0;
-  }
+  // Handles commas, currency, etc.
+  return parseFloat(String(s).replace(/[^0-9.\-]/g, "")) || 0;
+}
 
 function isBlankCell(s) {
   const t = String(s ?? "").trim();
   return t === "" || t === "-" || t.toLowerCase() === "na";
 }
 
-// Count attendance by non-blank entries in the per-game columns
+// Count attendance by non-blank entries in the per-game columns (ALL games: LIVE + ONLINE)
 function countAttendedGames(cells, startCol, totalGames) {
-  // All games attendance (LIVE + ONLINE): count non-blank entries in the per-game columns.
   let attended = 0;
   for (let i = 0; i < totalGames; i++) {
     const idx = startCol + i;
-    if (idx >= 0 && idx < cells.length && !isBlankCell(cells[idx])) {
-      attended++;
-    }
+    if (idx >= 0 && idx < cells.length && !isBlankCell(cells[idx])) attended++;
   }
   return attended;
 }
 
 // Build a boolean mask for each per-game column: true = LIVE, false = ONLINE.
-// Rule: If the game header contains "L" => LIVE; if it contains "O" => ONLINE. No exceptions.
+// Rule (no exceptions): if header contains "L" => LIVE; if it contains "O" => ONLINE.
+// If it contains neither, treat as ONLINE to avoid accidentally granting LIVE credit.
 function computeLiveMaskFromHeaders(doc, startCol, totalGames) {
   const headerRow = doc.querySelector("#pColumns");
-  if (!headerRow) {
-    // If headers cannot be read, fail safe by treating all games as ONLINE (prevents false LIVE counts)
-    return Array(totalGames).fill(false);
-  }
+  if (!headerRow) return Array(totalGames).fill(false);
+
   const headerCells = Array.from(headerRow.querySelectorAll("td,th"));
   const mask = [];
   for (let i = 0; i < totalGames; i++) {
     const idx = startCol + i;
     const h = (headerCells[idx]?.textContent ?? "").trim();
-
-    if (h.includes("O")) {
-      mask.push(false);
-    } else if (h.includes("L")) {
-      mask.push(true);
-    } else {
-      // Per your "no exceptions" rule, absence of both is invalid; treat as ONLINE to avoid
-      // accidentally granting LIVE credit.
-      mask.push(false);
-    }
+    if (h.includes("O")) mask.push(false);
+    else if (h.includes("L")) mask.push(true);
+    else mask.push(false);
   }
   return mask;
 }
@@ -150,12 +139,8 @@ function countAttendedLiveGames(cells, startCol, totalGames, liveMask) {
   }
   return attendedLive;
 }
-  }
-  return attended;
-}
 
-
-  function renderEmptyList(n) {
+function renderEmptyList(n) {(n) {
     const ol = document.getElementById("champList");
     if (!ol) return;
     ol.innerHTML = Array.from({ length: n }, () => "<li>&nbsp;</li>").join("");
@@ -251,7 +236,7 @@ const winners = (state.auto_qualify_rule?.winners ?? []).map(x => String(x).trim
 
   const rows = Array.from(table.querySelectorAll("tr")).filter(r => r.id !== "pColumns");
     // Determine LIVE vs ONLINE per-game columns from PPG headers using the L/O rule
-    const liveMask = (typeof totalGames === \"number\")
+    const liveMask = (typeof totalGames === "number")
       ? computeLiveMaskFromHeaders(doc, perGameStartCol, totalGames)
       : [];
 const players = rows.map(r => Array.from(r.querySelectorAll("td")).map(td => td.textContent.trim()))
@@ -356,7 +341,7 @@ if (seasonComplete) {
 
   let detailsHtml = '';
   detailsHtml += '<div class="note">Computed from <code>' + escapeHtml(srcUrl) + '</code>. Game ' + gameNumber + (seasonComplete ? ' (season complete).' : ' (season in progress).') + '</div>';
-  detailsHtml += '<div class="note">Points qualifiers: top ' + pointsSlots + ' by points. Auto-qualify: winner + ' + autoMinGames + '+ live games.</div>';
+  detailsHtml += '<div class="note">Points qualifiers: top ' + pointsSlots + ' by points. Auto-qualify: winner + ' + autoMinGames + '+ LIVE games.</div>';
 
   if (overflow.length > 0) {
     detailsHtml += '<div class="warn"><b>More than ' + listSize + ' players currently qualify.</b> Showing first ' + listSize + ' above; additional qualifiers listed here:</div>';
