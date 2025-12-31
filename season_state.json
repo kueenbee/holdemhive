@@ -1,4 +1,6 @@
 {
+  "_comment": "update this file so the smart page ChampionshipStandings.html will work properly",
+
   "season": "S12",
   "season_number":12,
   "game_number": 8,
