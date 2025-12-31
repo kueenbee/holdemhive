@@ -10,15 +10,10 @@
   <style type="text/css">
     html { font-family: Segoe UI, Arial, sans-serif; font-size: 11pt; }
     body { background-color: #fff; color: #000; margin: 0; padding: 0; }
-    .wrap {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 6px 16px 16px 16px;
-}
-
-    .logo { display:block; margin: 4px auto 2px auto; max-width: 220px; height: auto; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .logo { display:block; margin: 10px auto 0 auto; max-width: 360px; height: auto; }
     .scroll { display:block; margin: 10px auto 0 auto; width:400px; height:40px; }
-    h2 { margin: 6px 0 10px 0; }
+    h2 { margin: 14px 0 10px 0; }
     p { margin: 10px 0; }
     ol { margin: 10px 0 0 24px; }
     li { padding: 4px 0; }
@@ -36,7 +31,7 @@
 <body>
   <div class="wrap">
     <!-- Use your existing logo asset if you have one; update src as needed -->
-    <img class="logo" src="images/Kueen$BeesPokerPatch.png" alt="K$B Hold Em Hive">
+    <img class="logo" src="images/holdemhive_logo.png" alt="K$B Hold Em Hive">
 
     <!-- Optional: keep your season champ scroll image if desired; update path as needed -->
     <img class="scroll" src="images/season-champion_scroll.gif"
@@ -291,18 +286,27 @@ if (seasonComplete) {
 
   function renderEntry(p) {
     const nameHtml = crownify(p.rawName);
-    const pts = (isFinite(p.points) ? p.points.toFixed(3) : "");
-    const tag = p.qual ? ('<span class="qualTag">[' + escapeHtml(p.qual) + ']</span>') : "";
-    return '<li>' + nameHtml + ' (' + pts + ')' + tag + '</li>';
+
+    const ptsVal = (isFinite(p.points) ? p.points.toFixed(3) : "");
+    // During the season, if a player qualifies via the "win + 4 LIVE games" rule
+    // (i.e., Auto-qualify only), prefix the points with "win+4L".
+    const ptsDisplay = (!seasonComplete && p.qual === "Auto" && ptsVal)
+      ? ("win+4L " + ptsVal)
+      : ptsVal;
+
+    // Per your request: do not show qualification tags like [Points] in the list.
+    return '<li>' + nameHtml + ' (' + ptsDisplay + ')</li>';
   }
 
-if (top.length === 0) {
-  // No qualifiers yet → show nothing (or keep whatever static placeholders you prefer)
-  ol.innerHTML = "";
-} else {
-  // Show only actual qualifiers
-  ol.innerHTML = top.map(renderEntry).join("");
-}
+  if (top.length === 0) {
+    renderEmptyList(listSize);
+  } else {
+    ol.innerHTML = top.map(renderEntry).join("");
+    // If fewer than listSize qualifiers, pad with blanks (keeps your 9-slot look)
+    if (top.length < listSize) {
+      ol.innerHTML += Array.from({ length: (listSize - top.length) }, () => "<li>&nbsp;</li>").join("");
+    }
+  }
 
   let detailsHtml = '';
   detailsHtml += '<div class="note">Computed from <code>' + escapeHtml(srcUrl) + '</code>. Game ' + gameNumber + (seasonComplete ? ' (season complete).' : ' (season in progress).') + '</div>';
