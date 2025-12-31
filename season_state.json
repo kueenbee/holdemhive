@@ -1,11 +1,11 @@
 {
-  "season": "S13",
-  "season_number":13,
-  "game_number": 2,
+  "season": "S12",
+  "season_number":12,
+  "game_number": 8,
   "season_complete": true,
   "championship_spots": 9,
   "points_slots": 8,
-  "total_live_games": 2,
+  "total_live_games": 6,
   "per_game": { "start_col": 2},
   "auto_qualify_rule": {
     "min_live_games": 4,
