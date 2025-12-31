@@ -140,7 +140,7 @@ function countAttendedLiveGames(cells, startCol, totalGames, liveMask) {
   return attendedLive;
 }
 
-function renderEmptyList(n) {(n) {
+function renderEmptyList(n) {
     const ol = document.getElementById("champList");
     if (!ol) return;
     ol.innerHTML = Array.from({ length: n }, () => "<li>&nbsp;</li>").join("");
