@@ -103,12 +103,53 @@ function isBlankCell(s) {
 
 // Count attendance by non-blank entries in the per-game columns
 function countAttendedGames(cells, startCol, totalGames) {
+  // All games attendance (LIVE + ONLINE): count non-blank entries in the per-game columns.
   let attended = 0;
   for (let i = 0; i < totalGames; i++) {
     const idx = startCol + i;
     if (idx >= 0 && idx < cells.length && !isBlankCell(cells[idx])) {
       attended++;
     }
+  }
+  return attended;
+}
+
+// Build a boolean mask for each per-game column: true = LIVE, false = ONLINE.
+// Rule: If the game header contains "L" => LIVE; if it contains "O" => ONLINE. No exceptions.
+function computeLiveMaskFromHeaders(doc, startCol, totalGames) {
+  const headerRow = doc.querySelector("#pColumns");
+  if (!headerRow) {
+    // If headers cannot be read, fail safe by treating all games as ONLINE (prevents false LIVE counts)
+    return Array(totalGames).fill(false);
+  }
+  const headerCells = Array.from(headerRow.querySelectorAll("td,th"));
+  const mask = [];
+  for (let i = 0; i < totalGames; i++) {
+    const idx = startCol + i;
+    const h = (headerCells[idx]?.textContent ?? "").trim();
+
+    if (h.includes("O")) {
+      mask.push(false);
+    } else if (h.includes("L")) {
+      mask.push(true);
+    } else {
+      // Per your "no exceptions" rule, absence of both is invalid; treat as ONLINE to avoid
+      // accidentally granting LIVE credit.
+      mask.push(false);
+    }
+  }
+  return mask;
+}
+
+function countAttendedLiveGames(cells, startCol, totalGames, liveMask) {
+  let attendedLive = 0;
+  for (let i = 0; i < totalGames; i++) {
+    const idx = startCol + i;
+    const played = (idx >= 0 && idx < cells.length && !isBlankCell(cells[idx]));
+    if (played && liveMask[i]) attendedLive++;
+  }
+  return attendedLive;
+}
   }
   return attended;
 }
@@ -183,7 +224,7 @@ const nameCol = state.columns?.name_col ?? 0;
 const pointsCol = state.columns?.points_col ?? 1;
 
 // Attendance is derived from per-game columns (PPG has no Games Played column)
-const totalGames = state.total_games ?? null;        // e.g., 8
+const totalGames = (state.total_games ?? state.total_live_games ?? null);          // e.g., 8
 const perGameStartCol = state.per_game?.start_col ?? (nameCol + 1); // e.g., 1
 
 const pointsSlots = state.points_slots ?? listSize;
@@ -209,6 +250,10 @@ const winners = (state.auto_qualify_rule?.winners ?? []).map(x => String(x).trim
   }
 
   const rows = Array.from(table.querySelectorAll("tr")).filter(r => r.id !== "pColumns");
+    // Determine LIVE vs ONLINE per-game columns from PPG headers using the L/O rule
+    const liveMask = (typeof totalGames === \"number\")
+      ? computeLiveMaskFromHeaders(doc, perGameStartCol, totalGames)
+      : [];
 const players = rows.map(r => Array.from(r.querySelectorAll("td")).map(td => td.textContent.trim()))
   .filter(cells => cells.length > Math.max(nameCol, pointsCol))
   .map(cells => {
@@ -220,7 +265,8 @@ const players = rows.map(r => Array.from(r.querySelectorAll("td")).map(td => td.
       rawName: cells[nameCol],
       baseName: cells[nameCol].replace(/~+/g, "").trim(),
       points: parseNumber(cells[pointsCol]),
-      attendedGames: attended
+      attendedGames: attended,
+      attendedLiveGames: (typeof totalGames === "number") ? countAttendedLiveGames(cells, perGameStartCol, totalGames, liveMask) : 0
     };
   })
   .filter(p => p.baseName.length > 0);
@@ -234,7 +280,7 @@ const byPoints = [...players].sort((a,b) => (b.points - a.points) || (b.attended
   // Auto qualifiers
   const winnersSet = new Set(winners.map(w => w.toLowerCase()));
   const autoQual = players.filter(p =>
-      winnersSet.has(p.baseName.toLowerCase()) && (p.attendedGames >= autoMinGames)
+      winnersSet.has(p.baseName.toLowerCase()) && (p.attendedLiveGames >= autoMinGames)
   );
 
   const autoSet = new Set(autoQual.map(p => p.baseName.toLowerCase()));
