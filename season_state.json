@@ -9,11 +9,10 @@
   "per_game": { "start_col": 2},
   "auto_qualify_rule": {
     "min_live_games": 4,
-    "winners": [Beth W, Dennis E, Dan B, Tammy E, Mary W]
+    "winners": ["Beth W", "Dennis E", "Dan B", "Tammy E", "Mary W"]
   },
   "columns": {
     "name_col": 0,
-    "points_col": 1,
-    "games_col": 3
+    "points_col": 1
   }
 }
