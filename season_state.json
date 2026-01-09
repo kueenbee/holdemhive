@@ -1,9 +1,9 @@
 {
   "_comment": "update this file so the smart page ChampionshipStandings.html will work properly",
 
-  "season": "S12",
-  "season_number":12,
-  "game_number": 8,
+  "season": "S13",
+  "season_number":13,
+  "game_number": 3,
   "season_complete": true,
   "championship_spots": 9,
   "points_slots": 8,
@@ -11,7 +11,7 @@
   "per_game": { "start_col": 2},
   "auto_qualify_rule": {
     "min_live_games": 4,
-    "winners": ["Beth W", "Dennis E", "Dan B", "Tammy E", "Mary W"]
+    "winners": ["Zeke H", "Jim B*"]
   },
   "columns": {
     "name_col": 0,
