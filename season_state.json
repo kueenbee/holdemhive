@@ -4,7 +4,7 @@
   "season": "S13",
   "season_number":13,
   "game_number": 3,
-  "season_complete": true,
+  "season_complete": false,
   "championship_spots": 9,
   "points_slots": 8,
   "total_games": 8,
