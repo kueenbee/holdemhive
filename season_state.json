@@ -11,7 +11,7 @@
   "per_game": { "start_col": 2},
   "auto_qualify_rule": {
     "min_live_games": 4,
-    "winners": ["Zeke H", "Jim B*"m "Jeremy W"]
+    "winners": ["Zeke H", "Jim B*", "Jeremy W"]
   },
   "columns": {
     "name_col": 0,
