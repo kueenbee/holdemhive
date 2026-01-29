@@ -1,271 +1,90 @@
-<!DOCTYPE html>
-	<html lang="en">
-	<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Registered Players – Hold ’Em Hive Tournament Poker League Rochester NY</title>
-	<meta name="description" content="Texas Hold Em Poker League Info, Kueen$Bees">
-	<link rel="stylesheet" href="styles.css">
-	</head>
-	<body>
-	<header>
-	<h1><img width=192px alt="poker table and poker clock" src="images/Kueen$BeesPokerPatch.png"></h1>
-	</header>
-	<main>
-	<div class="container">
-	<div class="grid">
-	<div class="grid-item">
-	<h2>Next Game (S13 G5): January 29th, 2025, LIVE @ the Hive, @6:45 PM </h2>
-	
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registered Players – Hold ’Em Hive Tournament Poker League Rochester NY</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; line-height: 1.35; margin: 24px; }
+    h2, h3 { margin-top: 18px; }
+    ol { margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <!-- Header image (kept as a normal <img>; update src if your site uses a different path) -->
+  <img src="poker-table-and-poker-clock.jpg" alt="poker table and poker clock" style="max-width:100%; height:auto;" />
+
+  <h2>Next Game (S13 G5): January 29th, 2025, LIVE @ the Hive, @6:45 PM</h2>
+
   <h3 id="next-game">Registered Players</h3>
   <ol id="player-list"></ol>
   <p id="open-seats"></p>
 
-	<br>
-	<p align="center"> <a href="LeagueDetails.html">More Details</a> &nbsp &nbsp <a href="Standings.html"> Season Standings</a> &nbsp &nbsp<a href="https://www.holdemhive.com">Home</a></p>
-	</div>
-	</div>
-	</div>
-	</main>
-		<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C1LX3R24E8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-C1LX3R24E8');
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6262689345554860" crossorigin="anonymous"></script>
-	<script>
-(async function () {
-  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRuFIrTfQs7dMy89HTZE4Ua6x29nLhdkFQ1-a38ZTCcjV4SrI783NrpafLrOwo9qi_JcHZ7ITrWxWbj/pub?gid=694109650&single=true&output=csv";
-  const MAX_SEATS = 20;
-
-  const res = await fetch(CSV_URL, { cache: "no-store" });
-  if (!res.ok) {
-    document.getElementById("open-seats").textContent =
-      "Could not load registrations.";
-    return;
-  }
-
-  const text = await res.text();
-
-  // Simple CSV parse (1 column: player name)
-  const lines = text.trim().split(/\r?\n/).slice(1);
-  const names = lines
-    .map(l => l.split(",")[0])
-    .map(s => s.replace(/^"|"$/g, "").trim())
-    .filter(Boolean);
-
-  const ol = document.getElementById("player-list");
-  ol.innerHTML = "";
-
-  for (let i = 0; i < MAX_SEATS; i++) {
-    const li = document.createElement("li");
-    if (i < names.length) li.textContent = names[i];
-    else li.innerHTML = "<br>";
-    ol.appendChild(li);
-  }
-
-  const open = Math.max(0, MAX_SEATS - names.length);
-  document.getElementById("open-seats").textContent =
-    open === 0
-      ? "Game is full (waitlist active)."
-      : `${open} open seat${open === 1 ? "" : "s"}.`;
-})();
-</script>
-
-  </body>
-	</html>
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <!-- Keep your standard bottom links here -->
+  <p>
+    <a href="MoreDetails.html">More Details</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="SeasonStandings.html">Season Standings</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://www.holdemhive.com">Home</a>
+  </p>
+
+  <script>
+  (async function () {
+    // Paste your published Public_Seated CSV URL below (must include output=csv)
+    // Example: https://docs.google.com/spreadsheets/d/e/XXXX/pub?output=csv
+    const CSV_URL = "PASTE_PUBLIC_SEATED_CSV_URL_HERE";
+    const MAX_SEATS = 20;
+
+    // Pin hosts at the top (exact spelling must match the dropdown values)
+    const PINNED = ["Kay C", "Beth W"];
+
+    try {
+      const res = await fetch(CSV_URL, { cache: "no-store" });
+      if (!res.ok) {
+        document.getElementById("open-seats").textContent =
+          "Could not load registrations.";
+        return;
+      }
+
+      const text = await res.text();
+
+      // Simple CSV parse (assumes first column is the player name)
+      const lines = text.trim().split(/\r?\n/).slice(1); // drop header
+      const names = lines
+        .map(l => l.split(",")[0])
+        .map(s => s.replace(/^"|"$/g, "").trim())
+        .filter(Boolean);
+
+      // Pinned first, then everyone else (no duplicates)
+      const pinnedSet = new Set(PINNED);
+      const ordered = [
+        ...PINNED,
+        ...names.filter(n => !pinnedSet.has(n))
+      ];
+
+      const ol = document.getElementById("player-list");
+      ol.innerHTML = "";
+
+      for (let i = 0; i < MAX_SEATS; i++) {
+        const li = document.createElement("li");
+        if (i < ordered.length) li.textContent = ordered[i];
+        else li.innerHTML = "<br>";
+        ol.appendChild(li);
+      }
+
+      const open = Math.max(0, MAX_SEATS - ordered.length);
+      document.getElementById("open-seats").textContent =
+        open === 0
+          ? "Game is full (waitlist active)."
+          : `${open} open seat${open === 1 ? "" : "s"}.`;
+    } catch (e) {
+      document.getElementById("open-seats").textContent =
+        "Could not load registrations.";
+    }
+  })();
+  </script>
+
+</body>
+</html>
