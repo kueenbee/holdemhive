@@ -4,16 +4,26 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Registered Players – Hold ’Em Hive Tournament Poker League Rochester NY</title>
+
   <style>
-    body { font-family: Arial, Helvetica, sans-serif; line-height: 1.35; margin: 24px; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.35;
+      margin: 24px;
+      /* RESTORED background image */
+      background-image: url("poker-table-and-poker-clock.jpg");
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
     h2, h3 { margin-top: 18px; }
     ol { margin-top: 10px; }
   </style>
 </head>
-<body>
 
-  <!-- Header image (kept as a normal <img>; update src if your site uses a different path) -->
-  <img src="poker-table-and-poker-clock.jpg" alt="poker table and poker clock" style="max-width:100%; height:auto;" />
+<body>
 
   <h2>Next Game (S13 G5): January 29th, 2025, LIVE @ the Hive, @6:45 PM</h2>
 
@@ -21,7 +31,7 @@
   <ol id="player-list"></ol>
   <p id="open-seats"></p>
 
-  <!-- Keep your standard bottom links here -->
+  <!-- Standard bottom links (unchanged position) -->
   <p>
     <a href="MoreDetails.html">More Details</a>
     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -32,12 +42,10 @@
 
   <script>
   (async function () {
-    // Paste your published Public_Seated CSV URL below (must include output=csv)
-    // Example: https://docs.google.com/spreadsheets/d/e/XXXX/pub?output=csv
-    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRuFIrTfQs7dMy89HTZE4Ua6x29nLhdkFQ1-a38ZTCcjV4SrI783NrpafLrOwo9qi_JcHZ7ITrWxWbj/pub?gid=694109650&single=true&output=csv";
+    const CSV_URL = "PASTE_PUBLIC_SEATED_CSV_URL_HERE";
     const MAX_SEATS = 20;
 
-    // Pin hosts at the top (exact spelling must match the dropdown values)
+    // Always pinned at top
     const PINNED = ["Kay C", "Beth W"];
 
     try {
@@ -50,14 +58,12 @@
 
       const text = await res.text();
 
-      // Simple CSV parse (assumes first column is the player name)
-      const lines = text.trim().split(/\r?\n/).slice(1); // drop header
+      const lines = text.trim().split(/\r?\n/).slice(1);
       const names = lines
         .map(l => l.split(",")[0])
         .map(s => s.replace(/^"|"$/g, "").trim())
         .filter(Boolean);
 
-      // Pinned first, then everyone else (no duplicates)
       const pinnedSet = new Set(PINNED);
       const ordered = [
         ...PINNED,
