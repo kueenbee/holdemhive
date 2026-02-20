@@ -8,13 +8,13 @@
   "championship_spots": 9,
   "points_slots": 8,
   "total_games": 8,
-  "per_game": { "start_col": 2},
+  "per_game": { "start_col": 3},
   "auto_qualify_rule": {
     "min_live_games": 4,
     "winners": ["Zeke H", "Jim B*", "Jeremy W", "Beth W*", "Dennis E"]
   },
   "columns": {
     "name_col": 0,
-    "points_col": 1
+    "points_col": 2
   }
 }
