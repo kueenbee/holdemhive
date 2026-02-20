@@ -293,7 +293,7 @@ const byPoints = [...players].sort((a,b) => (b.points - a.points) || (b.attended
 
   if (autoExtras.length > 0) {
     const seat9 = autoExtras[0];
-    fieldMap.set(seat9.baseName.toLowerCase(), { ...seat9, qual: "Seat 9 (Win+4L)" });
+    fieldMap.set(seat9.baseName.toLowerCase(), { ...seat9, qual: "Seat 9", seat9Reason: "win + 4 live games" });
   }
 
 
@@ -320,7 +320,8 @@ const byPoints = [...players].sort((a,b) => (b.points - a.points) || (b.attended
       : ptsVal;
 
     // Per your request: do not show qualification tags like [Points] in the list.
-    return '<li>' + nameHtml + ' (' + ptsDisplay + ')</li>';
+    const seat9Suffix = p.seat9Reason ? (' (' + escapeHtml(p.seat9Reason) + ')') : '';
+    return '<li>' + nameHtml + seat9Suffix + ' (' + ptsDisplay + ')</li>';
   }
 
   if (top.length === 0) {
