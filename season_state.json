@@ -14,7 +14,7 @@
     "winners": ["Zeke H", "Jim B*", "Jeremy W", "Beth W*", "Dennis E"]
   },
   "columns": {
-    "name_col": 0,
+    "name_col": 1,
     "points_col": 2
   }
 }
