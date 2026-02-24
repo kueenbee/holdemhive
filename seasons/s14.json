@@ -29,7 +29,7 @@
   ],
   "_CHANGE_EVENTS_NOTE": "<<< UPDATE DATES / LABELS / WINNERS FOR NEW SEASON >>>",
   "events": [
-    {"date":"2026-03-05","type":"hive","label":"G1","winner":"Kay C~~"},
+    {"date":"2026-03-05","type":"hive","label":"G1"},
     {"date":"2026-03-12","type":"hive","label":"G2"},
     {"date":"2026-03-19","type":"hive","label":"G3 Casino Night!"},
     {"date":"2026-03-26","type":"hive","label":"G4"},
