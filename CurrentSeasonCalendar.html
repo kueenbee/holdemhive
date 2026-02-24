@@ -122,6 +122,8 @@
       text-align:left;
       max-width: 100%;
     }
+
+    .toc-crown{ font-size:0.85em; vertical-align:super; margin-left:2px; }
   </style>
 </head>
 
@@ -137,7 +139,7 @@
 
    <div class="pagelinks">
      <a href="index.html">Home</a>
-     <a href="Standings.html">Season Standings</a>
+     <a href="PPG-14.html">Season 14 Standings</a>
    </div>
 
     <div class="legend" id="legend"></div>
@@ -151,6 +153,26 @@
 function qs(name){
   const u = new URL(window.location.href);
   return u.searchParams.get(name);
+}
+
+
+const CROWN = "&#9813;"; // ♕
+
+function escapeHtml(s){
+  return String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function crownify(nameText){
+  const m = String(nameText || "").match(/~+/g);
+  const count = m ? m.join("").length : 0;
+  const clean = String(nameText || "").replace(/~+/g, "").trim();
+  if(!count) return escapeHtml(clean);
+  return escapeHtml(clean) + '<span class="toc-crown">' + CROWN.repeat(count) + "</span>";
 }
 
 function formatLastUpdated(){
@@ -178,6 +200,7 @@ function setTheme(theme){
 
 function renderLinks(links){
   const el = document.getElementById("pageLinks");
+  if(!el) return;
   el.innerHTML = "";
   if(!links || !links.length) return;
   for(const l of links){
@@ -322,7 +345,9 @@ function renderCalendar(events, assets, disclaimerText){
             win.appendChild(ringImg);
           }
 
-          win.appendChild(document.createTextNode(ev.winner));
+          const nameSpan = document.createElement("span");
+          nameSpan.innerHTML = crownify(ev.winner);
+          win.appendChild(nameSpan);
           eDiv.appendChild(win);
 
           // Completed games slightly less opaque
@@ -388,7 +413,7 @@ async function loadSeason(){
   setTheme(data.theme);
 
   // Links + legend
-  // renderLinks(data.links || []); links are hard coded
+  renderLinks(data.links || []);
   renderLegend(data.legend || [
     {key:"hive", label:"Hive"},
     {key:"online", label:"Online"},
