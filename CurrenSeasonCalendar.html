@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>League Schedule Calendar</title>
+
+  <style>
+    :root{
+      --bg:#0b0b0d;
+      --text:#f4f4f6;
+      --muted:#b9b9c2;
+      --hive:#fdf03ff6;
+      --online:#38d36f;
+      --guest:#ff9a3c;
+      --shadow: 0 8px 22px rgba(0,0,0,.35);
+      --radius: 14px;
+      --font: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    body{ margin:0; background: var(--bg); color:var(--text); font-family:var(--font); }
+    .wrap{ max-width: 1100px; margin: 0 auto; padding: 18px 14px 50px; }
+
+    header.topbar{
+      display:flex; align-items:center; justify-content:center; gap:14px;
+      margin-bottom:6px; flex-wrap:wrap; text-align:center;
+    }
+
+    .brand{ display:flex; align-items:center; gap:14px; justify-content:center; }
+    .brand img{ height:70px; width:auto; border-radius:8px; }
+    .brand h1{ margin:0; font-size:1.4rem; color: var(--hive); }
+
+    .pagelinks{ text-align:center; margin: 8px 0 10px 0; }
+    .pagelinks a{ color:#1a5fd0; text-decoration:underline; font-weight:normal; margin:0 12px; }
+
+    .legend{
+      display:flex; gap:18px; align-items:center; justify-content:center;
+      flex-wrap:wrap; margin-bottom: 18px; font-size:.9rem;
+    }
+    .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; margin-right:6px; }
+    .dot.hive{ background: var(--hive); }
+    .dot.online{ background: var(--online); }
+    .dot.guest{ background: var(--guest); }
+
+    .months{ display:grid; gap:16px; margin-top:14px; }
+
+    .month{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .month-head{
+      padding:12px 14px;
+      display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+      background: rgba(255,255,255,.03);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .month-title{ font-weight:650; }
+    .month-note{ color:var(--muted); font-size:.92rem; }
+    .month-meta{ text-align:right; color:var(--muted); font-size:.92rem; }
+
+    .dow, .grid{ display:grid; grid-template-columns:repeat(7,1fr); }
+
+    .dow div{
+      padding:10px 8px;
+      text-align:center;
+      font-size:.85rem;
+      color:var(--muted);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+
+    .day{
+      min-height:92px;
+      border-right:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      padding:8px;
+    }
+    .day:nth-child(7n){ border-right:none; }
+
+    .num{ font-size:.9rem; color:var(--muted); }
+
+    .event{
+      margin-top:4px;
+      border-radius:10px;
+      padding:4px 6px;
+      font-size:.9rem;
+      color:#101014;
+      font-weight:650;
+    }
+
+    .event small{
+      line-height:1.05;
+      display:block;
+      margin-top:2px;
+      font-weight:700;
+      opacity:.92;
+    }
+
+    .event.hive{ background: var(--hive); }
+    .event.online{ background: var(--online); }
+    .event.guest{ background: var(--guest); }
+
+    .status{
+      max-width: 1100px;
+      margin: 8px auto 0;
+      padding: 0 14px;
+      color: var(--muted);
+      text-align:center;
+      font-size:.95rem;
+    }
+
+    .error{
+      background: rgba(255,0,0,.12);
+      border: 1px solid rgba(255,0,0,.25);
+      color: #ffd6d6;
+      padding: 10px 12px;
+      border-radius: 12px;
+      display:inline-block;
+      text-align:left;
+      max-width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header class="topbar">
+      <div class="brand">
+        <img id="logo" src="" alt="League Logo" style="display:none;" />
+        <h1 id="pageTitle">League Schedule</h1>
+      </div>
+    </header>
+
+    <div class="pagelinks" id="pageLinks"></div>
+
+    <div class="legend" id="legend"></div>
+
+    <div class="months" id="months"></div>
+  </div>
+
+  <div class="status" id="status"></div>
+
+<script>
+function qs(name){
+  const u = new URL(window.location.href);
+  return u.searchParams.get(name);
+}
+
+function formatLastUpdated(){
+  const lm = document.lastModified;
+  const d = new Date(lm);
+  if (isNaN(d.getTime())) return lm;
+  return d.toLocaleString(undefined, { year:"numeric", month:"short", day:"2-digit", hour:"numeric", minute:"2-digit" });
+}
+
+function setTheme(theme){
+  if(!theme) return;
+  const root = document.documentElement;
+  const map = {
+    bg: "--bg",
+    text: "--text",
+    muted: "--muted",
+    hive: "--hive",
+    online: "--online",
+    guest: "--guest"
+  };
+  for(const k in map){
+    if(theme[k]) root.style.setProperty(map[k], theme[k]);
+  }
+}
+
+function renderLinks(links){
+  const el = document.getElementById("pageLinks");
+  el.innerHTML = "";
+  if(!links || !links.length) return;
+  for(const l of links){
+    const a = document.createElement("a");
+    a.href = l.href;
+    a.textContent = l.label;
+    el.appendChild(a);
+  }
+}
+
+function renderLegend(legendItems){
+  const el = document.getElementById("legend");
+  el.innerHTML = "";
+  if(!legendItems || !legendItems.length) return;
+  for(const item of legendItems){
+    const span = document.createElement("span");
+    const dot = document.createElement("span");
+    dot.className = "dot " + item.key;
+    span.appendChild(dot);
+    span.appendChild(document.createTextNode(item.label));
+    el.appendChild(span);
+  }
+}
+
+function groupEventsByMonth(events){
+  const byMonth = new Map();
+  for(const e of events){
+    const d = new Date(e.date + "T12:00:00");
+    const key = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0");
+    if(!byMonth.has(key)) byMonth.set(key, []);
+    byMonth.get(key).push(e);
+  }
+  return [...byMonth.entries()].sort((a,b)=>a[0].localeCompare(b[0]));
+}
+
+function renderCalendar(events, assets, disclaimerText){
+  const monthsEl = document.getElementById("months");
+  monthsEl.innerHTML = "";
+
+  const entries = groupEventsByMonth(events || []);
+
+  for(const [key, monthEvents] of entries){
+    const [yy, mm] = key.split("-").map(Number);
+    const first = new Date(yy, mm-1, 1);
+    const last  = new Date(yy, mm, 0);
+    const daysInMonth = last.getDate();
+    const startDow = first.getDay();
+
+    const month = document.createElement("section");
+    month.className = "month";
+
+    const head = document.createElement("div");
+    head.className = "month-head";
+
+    const left = document.createElement("div");
+
+    const title = document.createElement("div");
+    title.className = "month-title";
+    title.textContent = first.toLocaleString(undefined, { month:"long", year:"numeric" });
+
+    if(disclaimerText){
+      const disclaimer = document.createElement("span");
+      disclaimer.textContent = " (" + disclaimerText + ")";
+      disclaimer.style.color = "#e03b3b";
+      disclaimer.style.fontSize = "0.9rem";
+      title.appendChild(disclaimer);
+    }
+
+    const note = document.createElement("div");
+    note.className = "month-note";
+    note.textContent = `${monthEvents.length} event(s) this month`;
+
+    left.appendChild(title);
+    left.appendChild(note);
+
+    const meta = document.createElement("div");
+    meta.className = "month-meta";
+    meta.innerHTML = `<div>Last updated: ${formatLastUpdated()}</div>`;
+
+    head.appendChild(left);
+    head.appendChild(meta);
+
+    month.appendChild(head);
+
+    const dow = document.createElement("div");
+    dow.className = "dow";
+    ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(x=>{
+      const c=document.createElement("div");
+      c.textContent=x;
+      dow.appendChild(c);
+    });
+    month.appendChild(dow);
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+
+    for(let i=0; i<startDow; i++){
+      const cell=document.createElement("div");
+      cell.className="day";
+      grid.appendChild(cell);
+    }
+
+    for(let day=1; day<=daysInMonth; day++){
+      const cell=document.createElement("div");
+      cell.className="day";
+
+      const num=document.createElement("div");
+      num.className="num";
+      num.textContent=day;
+      cell.appendChild(num);
+
+      const iso = `${yy}-${String(mm).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+      const ev = monthEvents.find(e => e.date === iso);
+
+      if(ev){
+        const eDiv=document.createElement("div");
+        eDiv.className=`event ${ev.type || "hive"}`;
+
+        const main = document.createElement("div");
+        main.textContent = ev.label || "";
+        eDiv.appendChild(main);
+
+        if(ev.winner){
+          const win = document.createElement("small");
+
+          // Stack ring above the winner name
+          win.style.display = "flex";
+          win.style.flexDirection = "column";
+          win.style.alignItems = "center";
+          win.style.gap = "1px";
+          win.style.lineHeight = "1.05";
+
+          const ringSrc = assets && assets.winner_ring ? assets.winner_ring : "";
+          if(ringSrc){
+            const ringImg = document.createElement("img");
+            ringImg.src = ringSrc;
+            ringImg.alt = "Game Champion Ring";
+            ringImg.style.height = "54px";
+            ringImg.style.width = "auto";
+            ringImg.style.display = "block";
+            ringImg.style.marginBottom = "2px";
+            win.appendChild(ringImg);
+          }
+
+          win.appendChild(document.createTextNode(ev.winner));
+          eDiv.appendChild(win);
+
+          // Completed games slightly less opaque
+          eDiv.style.opacity = "0.9";
+        }
+
+        cell.appendChild(eDiv);
+      }
+
+      grid.appendChild(cell);
+    }
+
+    month.appendChild(grid);
+    monthsEl.appendChild(month);
+  }
+}
+
+async function loadSeason(){
+  const seasonParam = (qs("season") || "14").replace(/[^0-9]/g, "");
+  const candidates = [
+    `seasons/s${seasonParam}.json`,
+    `seasons/s${seasonParam}.json`.toLowerCase(),
+    `s${seasonParam}.json`,
+    `s${seasonParam}.json`.toLowerCase()
+  ];
+
+  let data = null;
+  let lastErr = null;
+
+  for(const path of candidates){
+    try{
+      const r = await fetch(path, { cache: "no-store" });
+      if(!r.ok) throw new Error(`HTTP ${r.status} for ${path}`);
+      data = await r.json();
+      break;
+    }catch(e){
+      lastErr = e;
+    }
+  }
+
+  const status = document.getElementById("status");
+
+  if(!data){
+    status.innerHTML = `<div class="error"><b>Could not load season data.</b><br/>
+      Tried: ${candidates.join(", ")}<br/>
+      ${lastErr ? String(lastErr) : ""}</div>`;
+    return;
+  }
+
+  // Title + logo
+  document.title = data.title || `Season ${data.season} Schedule`;
+  document.getElementById("pageTitle").textContent = data.title || `Season ${data.season} Schedule`;
+
+  const logo = document.getElementById("logo");
+  if(data.assets && data.assets.logo){
+    logo.src = data.assets.logo;
+    logo.style.display = "";
+  }else{
+    logo.style.display = "none";
+  }
+
+  // Theme vars
+  setTheme(data.theme);
+
+  // Links + legend
+  renderLinks(data.links || []);
+  renderLegend(data.legend || [
+    {key:"hive", label:"Hive"},
+    {key:"online", label:"Online"},
+    {key:"guest", label:"Guest Host"}
+  ]);
+
+  // Calendar
+  renderCalendar(data.events || [], data.assets || {}, data.disclaimer || "");
+
+  status.textContent = "";
+}
+
+loadSeason();
+</script>
+
+</body>
+</html>
