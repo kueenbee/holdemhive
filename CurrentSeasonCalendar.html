@@ -73,7 +73,9 @@
     }
 
     .day{
-      min-height:92px;
+      
+      position:relative;
+min-height:92px;
       border-right:1px solid rgba(255,255,255,.06);
       border-bottom:1px solid rgba(255,255,255,.06);
       padding:8px;
@@ -89,6 +91,8 @@
       font-size:.9rem;
       color:#101014;
       font-weight:650;
+      position: relative;
+      z-index: 1;
     }
 
     .event small{
@@ -124,7 +128,24 @@
     }
 
     .toc-crown{ font-size:0.85em; vertical-align:super; margin-left:2px; }
-  </style>
+
+    .day-badge{
+      position:absolute;
+      top:4px;
+      right:4px;
+      width:90px;
+      height:auto;
+      max-width: calc(100% - 36px);
+      object-fit:contain;
+      pointer-events:none;
+      z-index: 5;
+    }
+
+    /* When a badge is present, push the event bubble down so it doesn't visually overlap */
+    .day.has-badge .event{
+      margin-top: 95px;
+    }
+</style>
 </head>
 
 <body>
@@ -139,7 +160,7 @@
 
    <div class="pagelinks">
      <a href="index.html">Home</a>
-     <a href="PPG-14.html">Season 14 Standings</a>
+     <a id="seasonStandingsLink" href="PPG.html">Season Standings</a>
    </div>
 
     <div class="legend" id="legend"></div>
@@ -155,6 +176,30 @@ function qs(name){
   return u.searchParams.get(name);
 }
 
+
+
+
+// Unified season parameter logic (sanitized digits only)
+function getSeasonDigits(){
+  const raw = qs("season") || "";
+  return String(raw).replace(/[^0-9]/g, "");
+}
+
+// If a season parameter is present, use it; otherwise default season data to 14.
+// Note: Standings defaults to PPG.html when no season param is provided.
+const SEASON_QS   = getSeasonDigits();     // "" if no valid digits provided
+const SEASON_DATA = SEASON_QS || "14";     // used for loading season JSON
+
+
+
+// Update the Season Standings link:
+// - No ?season=XX -> PPG.html (current season standings)
+// - With ?season=XX -> PPG-XX.html
+(function setSeasonStandingsHref(){
+  const link = document.getElementById("seasonStandingsLink");
+  if(!link) return;
+  link.href = SEASON_QS ? `PPG-${SEASON_QS}.html` : "PPG.html";
+})();
 
 const CROWN = "&#9813;"; // ♕
 
@@ -322,7 +367,6 @@ function renderCalendar(events, assets, disclaimerText){
         const main = document.createElement("div");
         main.textContent = ev.label || "";
         eDiv.appendChild(main);
-
         if(ev.winner){
           const win = document.createElement("small");
 
@@ -355,6 +399,16 @@ function renderCalendar(events, assets, disclaimerText){
         }
 
         cell.appendChild(eDiv);
+
+        // Optional badge overlay (e.g., Casino Night)
+        if(!ev.winner && ev.badge){
+           cell.classList.add('has-badge');
+          const badgeImg = document.createElement('img');
+          badgeImg.className = 'day-badge';
+          badgeImg.src = ev.badge;
+          badgeImg.alt = 'Event Badge';
+          cell.appendChild(badgeImg);
+        }
       }
 
       grid.appendChild(cell);
