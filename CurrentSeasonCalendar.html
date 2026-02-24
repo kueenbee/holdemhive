@@ -135,7 +135,10 @@
       </div>
     </header>
 
-    <div class="pagelinks" id="pageLinks"></div>
+   <div class="pagelinks">
+     <a href="index.html">Home</a>
+     <a href="PPG.html">Season Standings</a>
+   </div>
 
     <div class="legend" id="legend"></div>
 
@@ -385,7 +388,7 @@ async function loadSeason(){
   setTheme(data.theme);
 
   // Links + legend
-  renderLinks(data.links || []);
+  // renderLinks(data.links || []); links are hard coded
   renderLegend(data.legend || [
     {key:"hive", label:"Hive"},
     {key:"online", label:"Online"},
