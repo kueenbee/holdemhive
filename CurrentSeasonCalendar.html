@@ -73,32 +73,27 @@
     }
 
     .day{
-      
-      position:relative;
+position:relative;
 min-height:92px;
       border-right:1px solid rgba(255,255,255,.06);
       border-bottom:1px solid rgba(255,255,255,.06);
       padding:8px;
+      --badge-h: 0px;
     }
     .day:nth-child(7n){ border-right:none; }
 
     .num{ font-size:.9rem; color:var(--muted); }
 
     .event{
-  display: inline-flex;      /* shrink to content */
-  flex-direction: column;    /* keep winner ring + name stacked */
-  align-items: center;       /* center contents */
-  width: fit-content;        /* only as wide as content */
-  max-width: 100%;           /* prevent overflow */
-  margin-top:4px;
-  border-radius:10px;
-  padding:4px 8px;
-  font-size:.9rem;
-  color:#101014;
-  font-weight:650;
-  position: relative;
-  z-index: 1;
-}
+      margin-top:4px;
+      border-radius:10px;
+      padding:4px 6px;
+      font-size:.9rem;
+      color:#101014;
+      font-weight:650;
+      position: relative;
+      z-index: 1;
+    }
 
     .event small{
       line-height:1.05;
@@ -138,17 +133,27 @@ min-height:92px;
       position:absolute;
       top:4px;
       right:4px;
-      width:90px;
+
+      /* Responsive sizing:
+         - never smaller than 56px
+         - scales with cell width
+         - caps at 90px on larger screens */
+      width: clamp(56px, 35%, 90px);
       height:auto;
+
       max-width: calc(100% - 36px);
       object-fit:contain;
       pointer-events:none;
       z-index: 5;
     }
 
-    /* When a badge is present, push the event bubble down so it doesn't visually overlap */
+    /* When a badge is present, push the event bubble down by the badge's *actual* rendered height.
+       This avoids cross-browser differences (Firefox vs iOS Safari). */
+    .day.has-badge{
+      --badge-h: 90px; /* fallback until the image loads */
+    }
     .day.has-badge .event{
-      margin-top: 95px;
+      margin-top: calc(var(--badge-h) + 6px);
     }
 </style>
 </head>
@@ -413,6 +418,17 @@ function renderCalendar(events, assets, disclaimerText){
           badgeImg.src = ev.badge;
           badgeImg.alt = 'Event Badge';
           cell.appendChild(badgeImg);
+
+          // Auto-space: set --badge-h to the badge's rendered height (cross-browser safe)
+          const setBadgeH = () => {
+            const h = badgeImg.getBoundingClientRect().height;
+            if(h && h > 0) cell.style.setProperty('--badge-h', Math.ceil(h) + 'px');
+          };
+          if (badgeImg.complete) {
+            requestAnimationFrame(setBadgeH);
+          } else {
+            badgeImg.addEventListener('load', setBadgeH, { once:true });
+          }
         }
       }
 
