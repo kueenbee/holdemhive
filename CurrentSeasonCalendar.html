@@ -85,15 +85,20 @@ min-height:92px;
     .num{ font-size:.9rem; color:var(--muted); }
 
     .event{
-      margin-top:4px;
-      border-radius:10px;
-      padding:4px 6px;
-      font-size:.9rem;
-      color:#101014;
-      font-weight:650;
-      position: relative;
-      z-index: 1;
-    }
+  display: inline-flex;      /* shrink to content */
+  flex-direction: column;    /* keep winner ring + name stacked */
+  align-items: center;       /* center contents */
+  width: fit-content;        /* only as wide as content */
+  max-width: 100%;           /* prevent overflow */
+  margin-top:4px;
+  border-radius:10px;
+  padding:4px 8px;
+  font-size:.9rem;
+  color:#101014;
+  font-weight:650;
+  position: relative;
+  z-index: 1;
+}
 
     .event small{
       line-height:1.05;
