@@ -32,6 +32,7 @@
     {"date":"2026-03-05","type":"hive","label":"G1"},
     {"date":"2026-03-12","type":"hive","label":"G2"},
     {"date":"2026-03-17","type":"hive","label":"G3", "badge":"images/KueensAndBeesKasino.png"},
+    {"date":"2026-03-20","type":"guest","label":"WSOP Ladies @TS!"},
     {"date":"2026-03-26","type":"hive","label":"G4"},
     {"date":"2026-04-02","type":"hive","label":"G5"},
     {"date":"2026-04-09","type":"hive","label":"G6"},
