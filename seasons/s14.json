@@ -30,7 +30,7 @@
   "_CHANGE_EVENTS_NOTE": "<<< UPDATE DATES / LABELS / WINNERS FOR NEW SEASON >>>",
   "events": [
     {"date":"2026-03-05","type":"hive","label":"G1", "winner":"Scott L"},
-    {"date":"2026-03-12","type":"hive","label":"G2"},
+    {"date":"2026-03-12","type":"hive","label":"G2", "winner": "Nolan B"},
     {"date":"2026-03-17","type":"hive","label":"G3", "badge":"images/KueensAndBeesKasino.png"},
     {"date":"2026-03-20","type":"guest","label":"WSOP Ladies @TS!"},
     {"date":"2026-03-26","type":"hive","label":"G4"},

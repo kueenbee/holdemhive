@@ -3,7 +3,7 @@
 
   "season": "S14",
   "season_number":14,
-  "game_number": 1,
+  "game_number": 2,
   "season_complete": false,
   "championship_spots": 9,
   "points_slots": 8,
@@ -11,7 +11,7 @@
   "per_game": { "start_col": 2},
   "auto_qualify_rule": {
     "min_live_games": 4,
-    "winners": ["Scott L"]
+    "winners": ["Scott L", "Nolan B"]
   },
   "columns": {
     "name_col": 0,
