@@ -107,8 +107,8 @@ var TDSort = (function() {
   var mTextKey = document.all ? "innerText" : "textContent";
   var mTableID = "";
   var mHeaderRowID = "";
-  var mData = [{Index: 0, Columns: [{Text: "Alana S", HTML: "Alana S", SortValue: "alana s", Align: "left"}, {Text: "6.366", HTML: "6.366", SortValue: 6.366199999999999, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.739", HTML: "1.739", SortValue: 1.7387, Align: "right"}, {Text: "1.035", HTML: "1.035", SortValue: 1.0347, Align: "right"}, {Text: "1.411", HTML: "1.411", SortValue: 1.4113, Align: "right"}, {Text: "2.182", HTML: "2.182", SortValue: 2.1815, Align: "right"}]}, {Index: 1, Columns: [{Text: "Alex B", HTML: "Alex B", SortValue: "alex b", Align: "left"}, {Text: "6.624", HTML: "6.624", SortValue: 6.6241, Align: "right"}, {Text: "1.031", HTML: "1.031", SortValue: 1.0311, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "5.593", HTML: "5.593", SortValue: 5.593, Align: "right"}]}, {Index: 2, Columns: [{Text: "Alvaro F*", HTML: "Alvaro F*", SortValue: "alvaro f*", Align: "left"}, {Text: "8.769", HTML: "8.769", SortValue: 8.7693, Align: "right"}, {Text: "1.803", HTML: "1.803", SortValue: 1.8033, Align: "right"}, {Text: "1.268", HTML: "1.268", SortValue: 1.2685, Align: "right"}, {Text: "2.412", HTML: "2.412", SortValue: 2.4121, Align: "right"}, {Text: "1.739", HTML: "1.739", SortValue: 1.7387, Align: "right"}, {Text: "1.547", HTML: "1.547", SortValue: 1.5467, Align: "right"}]}, {Index: 3, Columns: [{Text: "Amelia H", HTML: "Amelia H", SortValue: "amelia h", Align: "left"}, {Text: "8.065", HTML: "8.065", SortValue: 8.0647, Align: "right"}, {Text: "3.082", HTML: "3.082", SortValue: 3.0822, Align: "right"}, {Text: "1.159", HTML: "1.159", SortValue: 1.1591, Align: "right"}, {Text: "1.411", HTML: "1.411", SortValue: 1.4113, Align: "right"}, {Text: "2.412", HTML: "2.412", SortValue: 2.4121, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 4, Columns: [{Text: "Beth W*", HTML: "Beth W*", SortValue: "beth w*", Align: "left"}, {Text: "10.065", HTML: "10.065", SortValue: 10.0646, Align: "right"}, {Text: "1.621", HTML: "1.621", SortValue: 1.6209, Align: "right"}, {Text: "1.113", HTML: "1.113", SortValue: 1.1133, Align: "right"}, {Text: "1.903", HTML: "1.903", SortValue: 1.9028, Align: "right"}, {Text: "5.428", HTML: "5.428", SortValue: 5.4276, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 5, Columns: [{Text: "Dan B", HTML: "Dan B", SortValue: "dan b", Align: "left"}, {Text: "8.720", HTML: "8.720", SortValue: 8.7203, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "5.428", HTML: "5.428", SortValue: 5.4276, Align: "right"}, {Text: "1.501", HTML: "1.501", SortValue: 1.501, Align: "right"}, {Text: "1.792", HTML: "1.792", SortValue: 1.7917, Align: "right"}]}, {Index: 6, Columns: [{Text: "Dennis E", HTML: "Dennis E", SortValue: "dennis e", Align: "left"}, {Text: "5.995", HTML: "5.995", SortValue: 5.9954, Align: "right"}, {Text: "2.431", HTML: "2.431", SortValue: 2.4314, Align: "right"}, {Text: "1.210", HTML: "1.210", SortValue: 1.2105, Align: "right"}, {Text: "1.159", HTML: "1.159", SortValue: 1.1591, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.194", HTML: "1.194", SortValue: 1.1944, Align: "right"}]}, {Index: 7, Columns: [{Text: "Doug B", HTML: "Doug B", SortValue: "doug b", Align: "left"}, {Text: "1.657", HTML: "1.657", SortValue: 1.6571, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.657", HTML: "1.657", SortValue: 1.6571, Align: "right"}]}, {Index: 8, Columns: [{Text: "Fred P*", HTML: "Fred P*", SortValue: "fred p*", Align: "left"}, {Text: "1.481", HTML: "1.481", SortValue: 1.4811, Align: "right"}, {Text: "1.481", HTML: "1.481", SortValue: 1.4811, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 9, Columns: [{Text: "Jeff V**", HTML: "Jeff V**", SortValue: "jeff v**", Align: "left"}, {Text: "8.347", HTML: "8.347", SortValue: 8.3472, Align: "right"}, {Text: "1.279", HTML: "1.279", SortValue: 1.2786, Align: "right"}, {Text: "1.072", HTML: "1.072", SortValue: 1.072, Align: "right"}, {Text: "1.608", HTML: "1.608", SortValue: 1.6081, Align: "right"}, {Text: "1.903", HTML: "1.903", SortValue: 1.9028, Align: "right"}, {Text: "2.486", HTML: "2.486", SortValue: 2.4857, Align: "right"}]}, {Index: 10, Columns: [{Text: "Jeremy W", HTML: "Jeremy W", SortValue: "jeremy w", Align: "left"}, {Text: "5.568", HTML: "5.568", SortValue: 5.5679, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.335", HTML: "1.335", SortValue: 1.3347, Align: "right"}, {Text: "1.113", HTML: "1.113", SortValue: 1.1133, Align: "right"}, {Text: "1.159", HTML: "1.159", SortValue: 1.1591, Align: "right"}, {Text: "1.961", HTML: "1.961", SortValue: 1.9608, Align: "right"}]}, {Index: 11, Columns: [{Text: "Kay C~~", HTML: "Kay C~~", SortValue: "kay c~~", Align: "left"}, {Text: "11.257", HTML: "11.257", SortValue: 11.2568, Align: "right"}, {Text: "1.370", HTML: "1.370", SortValue: 1.3698, Align: "right"}, {Text: "2.117", HTML: "2.117", SortValue: 2.117, Align: "right"}, {Text: "1.210", HTML: "1.210", SortValue: 1.2105, Align: "right"}, {Text: "3.618", HTML: "3.618", SortValue: 3.6183, Align: "right"}, {Text: "2.941", HTML: "2.941", SortValue: 2.9412, Align: "right"}]}, {Index: 12, Columns: [{Text: "Kris A", HTML: "Kris A", SortValue: "kris a", Align: "left"}, {Text: "1.072", HTML: "1.072", SortValue: 1.072, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.072", HTML: "1.072", SortValue: 1.072, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 13, Columns: [{Text: "Lori P", HTML: "Lori P", SortValue: "lori p", Align: "left"}, {Text: "1.247", HTML: "1.247", SortValue: 1.2474, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.247", HTML: "1.247", SortValue: 1.2474, Align: "right"}]}, {Index: 14, Columns: [{Text: "Mary W", HTML: "Mary W", SortValue: "mary w", Align: "left"}, {Text: "6.489", HTML: "6.489", SortValue: 6.4887, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "2.412", HTML: "2.412", SortValue: 2.4121, Align: "right"}, {Text: "1.501", HTML: "1.501", SortValue: 1.501, Align: "right"}, {Text: "1.268", HTML: "1.268", SortValue: 1.2685, Align: "right"}, {Text: "1.307", HTML: "1.307", SortValue: 1.3071, Align: "right"}]}, {Index: 15, Columns: [{Text: "Nolan B", HTML: "Nolan B", SortValue: "nolan b", Align: "left"}, {Text: "10.348", HTML: "10.348", SortValue: 10.347700000000001, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "5.428", HTML: "5.428", SortValue: 5.4276, Align: "right"}, {Text: "2.854", HTML: "2.854", SortValue: 2.8543, Align: "right"}, {Text: "1.035", HTML: "1.035", SortValue: 1.0347, Align: "right"}, {Text: "1.031", HTML: "1.031", SortValue: 1.0311, Align: "right"}]}, {Index: 16, Columns: [{Text: "Pete W", HTML: "Pete W", SortValue: "pete w", Align: "left"}, {Text: "1.202", HTML: "1.202", SortValue: 1.2022, Align: "right"}, {Text: "1.202", HTML: "1.202", SortValue: 1.2022, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 17, Columns: [{Text: "Robby S", HTML: "Robby S", SortValue: "robby s", Align: "left"}, {Text: "7.586", HTML: "7.586", SortValue: 7.5859, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "2.854", HTML: "2.854", SortValue: 2.8543, Align: "right"}, {Text: "3.618", HTML: "3.618", SortValue: 3.6183, Align: "right"}, {Text: "1.113", HTML: "1.113", SortValue: 1.1133, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 18, Columns: [{Text: "Ryan D", HTML: "Ryan D", SortValue: "ryan d", Align: "left"}, {Text: "1.210", HTML: "1.210", SortValue: 1.2105, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.210", HTML: "1.210", SortValue: 1.2105, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 19, Columns: [{Text: "Scott L", HTML: "Scott L", SortValue: "scott l", Align: "left"}, {Text: "8.414", HTML: "8.414", SortValue: 8.4135, Align: "right"}, {Text: "4.623", HTML: "4.623", SortValue: 4.6235, Align: "right"}, {Text: "1.035", HTML: "1.035", SortValue: 1.0347, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.608", HTML: "1.608", SortValue: 1.6081, Align: "right"}, {Text: "1.147", HTML: "1.147", SortValue: 1.1472, Align: "right"}]}, {Index: 20, Columns: [{Text: "Sue G", HTML: "Sue G", SortValue: "sue g", Align: "left"}, {Text: "2.836", HTML: "2.836", SortValue: 2.8357, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.501", HTML: "1.501", SortValue: 1.501, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.335", HTML: "1.335", SortValue: 1.3347, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 21, Columns: [{Text: "Tammy D", HTML: "Tammy D", SortValue: "tammy d", Align: "left"}, {Text: "6.668", HTML: "6.668", SortValue: 6.6677, Align: "right"}, {Text: "2.055", HTML: "2.055", SortValue: 2.0548, Align: "right"}, {Text: "1.903", HTML: "1.903", SortValue: 1.9028, Align: "right"}, {Text: "1.335", HTML: "1.335", SortValue: 1.3347, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.375", HTML: "1.375", SortValue: 1.3754, Align: "right"}]}, {Index: 22, Columns: [{Text: "Tammy E", HTML: "Tammy E", SortValue: "tammy e", Align: "left"}, {Text: "10.824", HTML: "10.824", SortValue: 10.8244, Align: "right"}, {Text: "1.137", HTML: "1.137", SortValue: 1.137, Align: "right"}, {Text: "3.618", HTML: "3.618", SortValue: 3.6183, Align: "right"}, {Text: "1.268", HTML: "1.268", SortValue: 1.2685, Align: "right"}, {Text: "1.072", HTML: "1.072", SortValue: 1.072, Align: "right"}, {Text: "3.729", HTML: "3.729", SortValue: 3.7286, Align: "right"}]}, {Index: 23, Columns: [{Text: "Vince A", HTML: "Vince A", SortValue: "vince a", Align: "left"}, {Text: "7.267", HTML: "7.267", SortValue: 7.2673000000000005, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.608", HTML: "1.608", SortValue: 1.6081, Align: "right"}, {Text: "1.739", HTML: "1.739", SortValue: 1.7387, Align: "right"}, {Text: "2.854", HTML: "2.854", SortValue: 2.8543, Align: "right"}, {Text: "1.066", HTML: "1.066", SortValue: 1.0662, Align: "right"}]}, {Index: 24, Columns: [{Text: "Will E", HTML: "Will E", SortValue: "will e", Align: "left"}, {Text: "1.454", HTML: "1.454", SortValue: 1.4543, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.454", HTML: "1.454", SortValue: 1.4543, Align: "right"}]}, {Index: 25, Columns: [{Text: "Zeke H", HTML: "Zeke H", SortValue: "zeke h", Align: "left"}, {Text: "7.831", HTML: "7.831", SortValue: 7.8306000000000004, Align: "right"}, {Text: "1.081", HTML: "1.081", SortValue: 1.0806, Align: "right"}, {Text: "1.411", HTML: "1.411", SortValue: 1.4113, Align: "right"}, {Text: "2.117", HTML: "2.117", SortValue: 2.117, Align: "right"}, {Text: "2.117", HTML: "2.117", SortValue: 2.117, Align: "right"}, {Text: "1.105", HTML: "1.105", SortValue: 1.1047, Align: "right"}]}];
-  var mColumns = [{Key: "Name", Name: "Name"}, {Key: "Score", Name: "Overall Score"}, {Key: "0", Name: "S14G1L"}, {Key: "1", Name: "S14G2L"}, {Key: "2", Name: "S14G3LC"}, {Key: "3", Name: "S14G4L"}, {Key: "4", Name: "S14G5L"}];
+  var mData = [{Index: 0, Columns: [{Text: "Alana S", HTML: "Alana S", SortValue: "alana s", Align: "left"}, {Text: "6.366", HTML: "6.366", SortValue: 6.366199999999999, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.739", HTML: "1.739", SortValue: 1.739, Align: "right"}, {Text: "1.035", HTML: "1.035", SortValue: 1.035, Align: "right"}, {Text: "1.411", HTML: "1.411", SortValue: 1.411, Align: "right"}, {Text: "2.181", HTML: "2.181", SortValue: 2.181, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 1, Columns: [{Text: "Alex B", HTML: "Alex B", SortValue: "alex b", Align: "left"}, {Text: "6.624", HTML: "6.624", SortValue: 6.6241, Align: "right"}, {Text: "1.031", HTML: "1.031", SortValue: 1.031, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "5.593", HTML: "5.593", SortValue: 5.593, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 2, Columns: [{Text: "Alvaro F*", HTML: "Alvaro F*", SortValue: "alvaro f*", Align: "left"}, {Text: "10.735", HTML: "10.735", SortValue: 10.7346, Align: "right"}, {Text: "1.803", HTML: "1.803", SortValue: 1.803, Align: "right"}, {Text: "1.268", HTML: "1.268", SortValue: 1.268, Align: "right"}, {Text: "2.412", HTML: "2.412", SortValue: 2.412, Align: "right"}, {Text: "1.739", HTML: "1.739", SortValue: 1.739, Align: "right"}, {Text: "1.547", HTML: "1.547", SortValue: 1.547, Align: "right"}, {Text: "1.965", HTML: "1.965", SortValue: 1.965, Align: "right"}]}, {Index: 3, Columns: [{Text: "Amelia H", HTML: "Amelia H", SortValue: "amelia h", Align: "left"}, {Text: "8.065", HTML: "8.065", SortValue: 8.0647, Align: "right"}, {Text: "3.082", HTML: "3.082", SortValue: 3.082, Align: "right"}, {Text: "1.159", HTML: "1.159", SortValue: 1.159, Align: "right"}, {Text: "1.411", HTML: "1.411", SortValue: 1.411, Align: "right"}, {Text: "2.412", HTML: "2.412", SortValue: 2.412, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 4, Columns: [{Text: "Beth W*", HTML: "Beth W*", SortValue: "beth w*", Align: "left"}, {Text: "12.304", HTML: "12.304", SortValue: 12.304, Align: "right"}, {Text: "1.621", HTML: "1.621", SortValue: 1.621, Align: "right"}, {Text: "1.113", HTML: "1.113", SortValue: 1.113, Align: "right"}, {Text: "1.903", HTML: "1.903", SortValue: 1.903, Align: "right"}, {Text: "5.428", HTML: "5.428", SortValue: 5.428, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "2.239", HTML: "2.239", SortValue: 2.239, Align: "right"}]}, {Index: 5, Columns: [{Text: "Dan B", HTML: "Dan B", SortValue: "dan b", Align: "left"}, {Text: "10.335", HTML: "10.335", SortValue: 10.3345, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "5.428", HTML: "5.428", SortValue: 5.428, Align: "right"}, {Text: "1.501", HTML: "1.501", SortValue: 1.501, Align: "right"}, {Text: "1.792", HTML: "1.792", SortValue: 1.792, Align: "right"}, {Text: "1.614", HTML: "1.614", SortValue: 1.614, Align: "right"}]}, {Index: 6, Columns: [{Text: "Dennis E", HTML: "Dennis E", SortValue: "dennis e", Align: "left"}, {Text: "11.034", HTML: "11.034", SortValue: 11.0342, Align: "right"}, {Text: "2.431", HTML: "2.431", SortValue: 2.431, Align: "right"}, {Text: "1.210", HTML: "1.210", SortValue: 1.21, Align: "right"}, {Text: "1.159", HTML: "1.159", SortValue: 1.159, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.194", HTML: "1.194", SortValue: 1.194, Align: "right"}, {Text: "5.039", HTML: "5.039", SortValue: 5.039, Align: "right"}]}, {Index: 7, Columns: [{Text: "Doug B", HTML: "Doug B", SortValue: "doug b", Align: "left"}, {Text: "1.657", HTML: "1.657", SortValue: 1.6571, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.657", HTML: "1.657", SortValue: 1.657, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 8, Columns: [{Text: "Fred P*", HTML: "Fred P*", SortValue: "fred p*", Align: "left"}, {Text: "1.481", HTML: "1.481", SortValue: 1.4811, Align: "right"}, {Text: "1.481", HTML: "1.481", SortValue: 1.481, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 9, Columns: [{Text: "Jeff V**", HTML: "Jeff V**", SortValue: "jeff v**", Align: "left"}, {Text: "9.741", HTML: "9.741", SortValue: 9.7407, Align: "right"}, {Text: "1.279", HTML: "1.279", SortValue: 1.279, Align: "right"}, {Text: "1.072", HTML: "1.072", SortValue: 1.072, Align: "right"}, {Text: "1.608", HTML: "1.608", SortValue: 1.608, Align: "right"}, {Text: "1.903", HTML: "1.903", SortValue: 1.903, Align: "right"}, {Text: "2.486", HTML: "2.486", SortValue: 2.486, Align: "right"}, {Text: "1.393", HTML: "1.393", SortValue: 1.393, Align: "right"}]}, {Index: 10, Columns: [{Text: "Jeremy W", HTML: "Jeremy W", SortValue: "jeremy w", Align: "left"}, {Text: "6.807", HTML: "6.807", SortValue: 6.807, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.335", HTML: "1.335", SortValue: 1.335, Align: "right"}, {Text: "1.113", HTML: "1.113", SortValue: 1.113, Align: "right"}, {Text: "1.159", HTML: "1.159", SortValue: 1.159, Align: "right"}, {Text: "1.961", HTML: "1.961", SortValue: 1.961, Align: "right"}, {Text: "1.239", HTML: "1.239", SortValue: 1.239, Align: "right"}]}, {Index: 11, Columns: [{Text: "Kay C~~", HTML: "Kay C~~", SortValue: "kay c~~", Align: "left"}, {Text: "12.434", HTML: "12.434", SortValue: 12.4344, Align: "right"}, {Text: "1.370", HTML: "1.370", SortValue: 1.37, Align: "right"}, {Text: "2.117", HTML: "2.117", SortValue: 2.117, Align: "right"}, {Text: "1.210", HTML: "1.210", SortValue: 1.21, Align: "right"}, {Text: "3.618", HTML: "3.618", SortValue: 3.618, Align: "right"}, {Text: "2.941", HTML: "2.941", SortValue: 2.941, Align: "right"}, {Text: "1.178", HTML: "1.178", SortValue: 1.178, Align: "right"}]}, {Index: 12, Columns: [{Text: "Kris A", HTML: "Kris A", SortValue: "kris a", Align: "left"}, {Text: "1.072", HTML: "1.072", SortValue: 1.072, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.072", HTML: "1.072", SortValue: 1.072, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 13, Columns: [{Text: "Lori P", HTML: "Lori P", SortValue: "lori p", Align: "left"}, {Text: "1.247", HTML: "1.247", SortValue: 1.2474, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.247", HTML: "1.247", SortValue: 1.247, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 14, Columns: [{Text: "Mary W", HTML: "Mary W", SortValue: "mary w", Align: "left"}, {Text: "6.489", HTML: "6.489", SortValue: 6.4887, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "2.412", HTML: "2.412", SortValue: 2.412, Align: "right"}, {Text: "1.501", HTML: "1.501", SortValue: 1.501, Align: "right"}, {Text: "1.268", HTML: "1.268", SortValue: 1.268, Align: "right"}, {Text: "1.307", HTML: "1.307", SortValue: 1.307, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 15, Columns: [{Text: "Nolan B", HTML: "Nolan B", SortValue: "nolan b", Align: "left"}, {Text: "13.707", HTML: "13.707", SortValue: 13.706800000000001, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "5.428", HTML: "5.428", SortValue: 5.428, Align: "right"}, {Text: "2.854", HTML: "2.854", SortValue: 2.854, Align: "right"}, {Text: "1.035", HTML: "1.035", SortValue: 1.035, Align: "right"}, {Text: "1.031", HTML: "1.031", SortValue: 1.031, Align: "right"}, {Text: "3.359", HTML: "3.359", SortValue: 3.359, Align: "right"}]}, {Index: 16, Columns: [{Text: "Pete W", HTML: "Pete W", SortValue: "pete w", Align: "left"}, {Text: "1.202", HTML: "1.202", SortValue: 1.2022, Align: "right"}, {Text: "1.202", HTML: "1.202", SortValue: 1.202, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 17, Columns: [{Text: "Robby S", HTML: "Robby S", SortValue: "robby s", Align: "left"}, {Text: "8.619", HTML: "8.619", SortValue: 8.619399999999999, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "2.854", HTML: "2.854", SortValue: 2.854, Align: "right"}, {Text: "3.618", HTML: "3.618", SortValue: 3.618, Align: "right"}, {Text: "1.113", HTML: "1.113", SortValue: 1.113, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.034", HTML: "1.034", SortValue: 1.034, Align: "right"}]}, {Index: 18, Columns: [{Text: "Ryan D", HTML: "Ryan D", SortValue: "ryan d", Align: "left"}, {Text: "2.703", HTML: "2.703", SortValue: 2.7034, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.210", HTML: "1.210", SortValue: 1.21, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.493", HTML: "1.493", SortValue: 1.493, Align: "right"}]}, {Index: 19, Columns: [{Text: "Scott L", HTML: "Scott L", SortValue: "scott l", Align: "left"}, {Text: "9.537", HTML: "9.537", SortValue: 9.5373, Align: "right"}, {Text: "4.623", HTML: "4.623", SortValue: 4.623, Align: "right"}, {Text: "1.035", HTML: "1.035", SortValue: 1.035, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.608", HTML: "1.608", SortValue: 1.608, Align: "right"}, {Text: "1.147", HTML: "1.147", SortValue: 1.147, Align: "right"}, {Text: "1.124", HTML: "1.124", SortValue: 1.124, Align: "right"}]}, {Index: 20, Columns: [{Text: "Sue G", HTML: "Sue G", SortValue: "sue g", Align: "left"}, {Text: "5.486", HTML: "5.486", SortValue: 5.4855, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.501", HTML: "1.501", SortValue: 1.501, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.335", HTML: "1.335", SortValue: 1.335, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "2.650", HTML: "2.650", SortValue: 2.65, Align: "right"}]}, {Index: 21, Columns: [{Text: "Tammy D", HTML: "Tammy D", SortValue: "tammy d", Align: "left"}, {Text: "6.668", HTML: "6.668", SortValue: 6.6677, Align: "right"}, {Text: "2.055", HTML: "2.055", SortValue: 2.055, Align: "right"}, {Text: "1.903", HTML: "1.903", SortValue: 1.903, Align: "right"}, {Text: "1.335", HTML: "1.335", SortValue: 1.335, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.375", HTML: "1.375", SortValue: 1.375, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 22, Columns: [{Text: "Tammy E", HTML: "Tammy E", SortValue: "tammy e", Align: "left"}, {Text: "12.591", HTML: "12.591", SortValue: 12.590900000000001, Align: "right"}, {Text: "1.137", HTML: "1.137", SortValue: 1.137, Align: "right"}, {Text: "3.618", HTML: "3.618", SortValue: 3.618, Align: "right"}, {Text: "1.268", HTML: "1.268", SortValue: 1.268, Align: "right"}, {Text: "1.072", HTML: "1.072", SortValue: 1.072, Align: "right"}, {Text: "3.729", HTML: "3.729", SortValue: 3.729, Align: "right"}, {Text: "1.766", HTML: "1.766", SortValue: 1.766, Align: "right"}]}, {Index: 23, Columns: [{Text: "Vince A", HTML: "Vince A", SortValue: "vince a", Align: "left"}, {Text: "8.343", HTML: "8.343", SortValue: 8.3434, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.608", HTML: "1.608", SortValue: 1.608, Align: "right"}, {Text: "1.739", HTML: "1.739", SortValue: 1.739, Align: "right"}, {Text: "2.854", HTML: "2.854", SortValue: 2.854, Align: "right"}, {Text: "1.066", HTML: "1.066", SortValue: 1.066, Align: "right"}, {Text: "1.076", HTML: "1.076", SortValue: 1.076, Align: "right"}]}, {Index: 24, Columns: [{Text: "Will E", HTML: "Will E", SortValue: "will e", Align: "left"}, {Text: "1.454", HTML: "1.454", SortValue: 1.4543, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}, {Text: "1.454", HTML: "1.454", SortValue: 1.454, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "right"}]}, {Index: 25, Columns: [{Text: "Zeke H", HTML: "Zeke H", SortValue: "zeke h", Align: "left"}, {Text: "9.141", HTML: "9.141", SortValue: 9.1408, Align: "right"}, {Text: "1.081", HTML: "1.081", SortValue: 1.081, Align: "right"}, {Text: "1.411", HTML: "1.411", SortValue: 1.411, Align: "right"}, {Text: "2.117", HTML: "2.117", SortValue: 2.117, Align: "right"}, {Text: "2.117", HTML: "2.117", SortValue: 2.117, Align: "right"}, {Text: "1.105", HTML: "1.105", SortValue: 1.105, Align: "right"}, {Text: "1.310", HTML: "1.310", SortValue: 1.31, Align: "right"}]}];
+  var mColumns = [{Key: "Name", Name: "Name"}, {Key: "Score", Name: "Overall Score"}, {Key: "0", Name: "S14G1L"}, {Key: "1", Name: "S14G2L"}, {Key: "2", Name: "S14G6LC"}, {Key: "3", Name: "S14G4L"}, {Key: "4", Name: "S14G5O"}, {Key: "5", Name: "S14G6LC"}];
   var mIndexCol = -1;
 
 
@@ -249,7 +249,7 @@ var TDSort = (function() {
 	  <p style="font-size:10px">An Asterisk indicates a season championship victory</p>
           <p style="font-size:10px">A Crown indicates a TOC victory</p>
 
-          <div class="description" align="center">Score</div>
+          <div class="description" align="center">Points</div>
         </div>
 
         <table id="pTable" border="0" cellspacing="0" class="statsTable">
@@ -258,9 +258,10 @@ var TDSort = (function() {
     <td valign="middle" align="right" class="statsColumn statsColumnHeader">Overall Score</td>
     <td valign="middle" align="right" class="statsColumn statsColumnHeader">S14G1L</td>
     <td valign="middle" align="right" class="statsColumn statsColumnHeader">S14G2L</td>
-    <td valign="middle" align="right" class="statsColumn statsColumnHeader">S14G3LC</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">S14G6LC</td>
     <td valign="middle" align="right" class="statsColumn statsColumnHeader">S14G4L</td>
-    <td valign="middle" align="right" class="statsColumn statsColumnHeader">S14G5L</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">S14G5O</td>
+    <td valign="middle" align="right" class="statsColumn statsColumnHeader">S14G6LC</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Alana S</td>
@@ -269,7 +270,8 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">1.739</td>
     <td align="right" class="statsColumn">1.035</td>
     <td align="right" class="statsColumn">1.411</td>
-    <td align="right" class="statsColumn">2.182</td>
+    <td align="right" class="statsColumn">2.181</td>
+    <td align="right" class="statsColumn"></td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Alex B</td>
@@ -279,15 +281,17 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">5.593</td>
+    <td align="right" class="statsColumn"></td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Alvaro F*</td>
-    <td align="right" class="statsColumn">8.769</td>
+    <td align="right" class="statsColumn">10.735</td>
     <td align="right" class="statsColumn">1.803</td>
     <td align="right" class="statsColumn">1.268</td>
     <td align="right" class="statsColumn">2.412</td>
     <td align="right" class="statsColumn">1.739</td>
     <td align="right" class="statsColumn">1.547</td>
+    <td align="right" class="statsColumn">1.965</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Amelia H</td>
@@ -297,33 +301,37 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">1.411</td>
     <td align="right" class="statsColumn">2.412</td>
     <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Beth W*</td>
-    <td align="right" class="statsColumn">10.065</td>
+    <td align="right" class="statsColumn">12.304</td>
     <td align="right" class="statsColumn">1.621</td>
     <td align="right" class="statsColumn">1.113</td>
     <td align="right" class="statsColumn">1.903</td>
     <td align="right" class="statsColumn">5.428</td>
     <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">2.239</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Dan B</td>
-    <td align="right" class="statsColumn">8.720</td>
+    <td align="right" class="statsColumn">10.335</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">5.428</td>
     <td align="right" class="statsColumn">1.501</td>
     <td align="right" class="statsColumn">1.792</td>
+    <td align="right" class="statsColumn">1.614</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Dennis E</td>
-    <td align="right" class="statsColumn">5.995</td>
+    <td align="right" class="statsColumn">11.034</td>
     <td align="right" class="statsColumn">2.431</td>
     <td align="right" class="statsColumn">1.210</td>
     <td align="right" class="statsColumn">1.159</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.194</td>
+    <td align="right" class="statsColumn">5.039</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Doug B</td>
@@ -333,6 +341,7 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.657</td>
+    <td align="right" class="statsColumn"></td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Fred P*</td>
@@ -342,33 +351,37 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Jeff V**</td>
-    <td align="right" class="statsColumn">8.347</td>
+    <td align="right" class="statsColumn">9.741</td>
     <td align="right" class="statsColumn">1.279</td>
     <td align="right" class="statsColumn">1.072</td>
     <td align="right" class="statsColumn">1.608</td>
     <td align="right" class="statsColumn">1.903</td>
     <td align="right" class="statsColumn">2.486</td>
+    <td align="right" class="statsColumn">1.393</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Jeremy W</td>
-    <td align="right" class="statsColumn">5.568</td>
+    <td align="right" class="statsColumn">6.807</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.335</td>
     <td align="right" class="statsColumn">1.113</td>
     <td align="right" class="statsColumn">1.159</td>
     <td align="right" class="statsColumn">1.961</td>
+    <td align="right" class="statsColumn">1.239</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Kay C~~</td>
-    <td align="right" class="statsColumn">11.257</td>
+    <td align="right" class="statsColumn">12.434</td>
     <td align="right" class="statsColumn">1.370</td>
     <td align="right" class="statsColumn">2.117</td>
     <td align="right" class="statsColumn">1.210</td>
     <td align="right" class="statsColumn">3.618</td>
     <td align="right" class="statsColumn">2.941</td>
+    <td align="right" class="statsColumn">1.178</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Kris A</td>
@@ -376,6 +389,7 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.072</td>
+    <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
   </tr>
@@ -387,6 +401,7 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.247</td>
+    <td align="right" class="statsColumn"></td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Mary W</td>
@@ -396,15 +411,17 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">1.501</td>
     <td align="right" class="statsColumn">1.268</td>
     <td align="right" class="statsColumn">1.307</td>
+    <td align="right" class="statsColumn"></td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Nolan B</td>
-    <td align="right" class="statsColumn">10.348</td>
+    <td align="right" class="statsColumn">13.707</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">5.428</td>
     <td align="right" class="statsColumn">2.854</td>
     <td align="right" class="statsColumn">1.035</td>
     <td align="right" class="statsColumn">1.031</td>
+    <td align="right" class="statsColumn">3.359</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Pete W</td>
@@ -414,42 +431,47 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn"></td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Robby S</td>
-    <td align="right" class="statsColumn">7.586</td>
+    <td align="right" class="statsColumn">8.619</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">2.854</td>
     <td align="right" class="statsColumn">3.618</td>
     <td align="right" class="statsColumn">1.113</td>
     <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">1.034</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Ryan D</td>
-    <td align="right" class="statsColumn">1.210</td>
+    <td align="right" class="statsColumn">2.703</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.210</td>
     <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">1.493</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Scott L</td>
-    <td align="right" class="statsColumn">8.414</td>
+    <td align="right" class="statsColumn">9.537</td>
     <td align="right" class="statsColumn">4.623</td>
     <td align="right" class="statsColumn">1.035</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.608</td>
     <td align="right" class="statsColumn">1.147</td>
+    <td align="right" class="statsColumn">1.124</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Sue G</td>
-    <td align="right" class="statsColumn">2.836</td>
+    <td align="right" class="statsColumn">5.486</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.501</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.335</td>
     <td align="right" class="statsColumn"></td>
+    <td align="right" class="statsColumn">2.650</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Tammy D</td>
@@ -459,24 +481,27 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">1.335</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.375</td>
+    <td align="right" class="statsColumn"></td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Tammy E</td>
-    <td align="right" class="statsColumn">10.824</td>
+    <td align="right" class="statsColumn">12.591</td>
     <td align="right" class="statsColumn">1.137</td>
     <td align="right" class="statsColumn">3.618</td>
     <td align="right" class="statsColumn">1.268</td>
     <td align="right" class="statsColumn">1.072</td>
     <td align="right" class="statsColumn">3.729</td>
+    <td align="right" class="statsColumn">1.766</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Vince A</td>
-    <td align="right" class="statsColumn">7.267</td>
+    <td align="right" class="statsColumn">8.343</td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.608</td>
     <td align="right" class="statsColumn">1.739</td>
     <td align="right" class="statsColumn">2.854</td>
     <td align="right" class="statsColumn">1.066</td>
+    <td align="right" class="statsColumn">1.076</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Will E</td>
@@ -486,15 +511,17 @@ var TDSort = (function() {
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn"></td>
     <td align="right" class="statsColumn">1.454</td>
+    <td align="right" class="statsColumn"></td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Zeke H</td>
-    <td align="right" class="statsColumn">7.831</td>
+    <td align="right" class="statsColumn">9.141</td>
     <td align="right" class="statsColumn">1.081</td>
     <td align="right" class="statsColumn">1.411</td>
     <td align="right" class="statsColumn">2.117</td>
     <td align="right" class="statsColumn">2.117</td>
     <td align="right" class="statsColumn">1.105</td>
+    <td align="right" class="statsColumn">1.310</td>
   </tr>
 
         </table>
