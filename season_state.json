@@ -3,8 +3,8 @@
 
   "season": "S14",
   "season_number":14,
-  "game_number": 7,
-  "season_complete": false,
+  "game_number": 8,
+  "season_complete": true,
   "championship_spots": 9,
   "points_slots": 8,
   "total_games": 8,
