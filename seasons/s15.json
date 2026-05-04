@@ -20,27 +20,31 @@
     "muted": "#b9b9c2",
     "hive": "#fdf03ff6",
     "online": "#38d36f",
-    "guest": "#ff9a3c"
+    "guest": "#ff9a3c",
+    "holiday": "#ff3b3b"
   },
   "legend": [
     {"key":"hive","label":"Hive"},
     {"key":"online","label":"Online"},
-    {"key":"guest","label":"Guest Host"}
+    {"key":"guest","label":"Guest Host"},
+    {"key":"holiday","label":"Holiday"}    
   ],
   "_CHANGE_EVENTS_NOTE": "<<< UPDATE DATES / LABELS / WINNERS FOR NEW SEASON >>>",
   "events": [
     
-    {"date":"2026-05-07","type":"hive",  "label":"G1 Casino Night"},
-    {"date":"2026-05-14","type":"hive",  "label":"S14 Championship \ud83d\udc51"},
-    {"date":"2026-05-21","type":"guest", "label":"G2 Hive->Webster"},
-    {"date":"2026-06-04","type":"online","label":"G3 GGHive"},
-    {"date":"2026-06-11","type":"online","label":"G4 GGHive"},
-    {"date":"2026-06-18","type":"guest", "label":"G5 Hive->Webster"},
-    {"date":"2026-06-25","type":"online","label":"G6 GGHive"},
-    {"date":"2026-07-02","type":"hive",  "label":"G7 Casino Night"},
-    {"date":"2026-07-16","type":"online","label":"G8 GGHive"},
-    {"date":"2026-07-23","type":"guest", "label":"S16 G1 Hive->Webster"},    
-    {"date":"2026-07-30","type":"hive",  "label":"S15 Championship \ud83d\udc51"},
-    {"date":"2026-08-06","type":"online","label":" S16 G3 GGHive"}    
+    {"date":"2026-05-07","type":"hive",   "label":"G1 Casino Night"},
+    {"date":"2026-05-14","type":"hive",   "label":"S14 Championship \ud83d\udc51"},
+    {"date":"2026-05-21","type":"guest",  "label":"G2 Hive->Webster"},
+    {"date":"2026-05-28","type":"holiday","label":"Memorial Day "},    
+    {"date":"2026-06-04","type":"online", "label":"G3 GGHive"},
+    {"date":"2026-06-11","type":"online", "label":"G4 GGHive"},
+    {"date":"2026-06-18","type":"guest",  "label":"G5 Hive->Webster"},
+    {"date":"2026-06-25","type":"online", "label":"G6 GGHive"},
+    {"date":"2026-07-02","type":"hive",   "label":"G7 Casino Night"},
+    {"date":"2026-05-28","type":"holiday","label":"4th of July 250!"},
+    {"date":"2026-07-16","type":"online", "label":"G8 GGHive"},
+    {"date":"2026-07-23","type":"guest",  "label":"S16 G1 Hive->Webster"},    
+    {"date":"2026-07-30","type":"hive",   "label":"S15 Championship \ud83d\udc51"},
+    {"date":"2026-08-06","type":"online", "label":" S16 G3 GGHive"}    
      ]
 }
