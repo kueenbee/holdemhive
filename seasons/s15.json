@@ -21,7 +21,7 @@
     "hive": "#fdf03ff6",
     "online": "#38d36f",
     "guest": "#ff9a3c",
-    "holiday": "#ff3b3b"
+    "holiday": "#ff0000"
   },
   "legend": [
     {"key":"hive","label":"Hive"},
