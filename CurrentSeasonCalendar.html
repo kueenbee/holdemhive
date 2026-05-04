@@ -8,7 +8,7 @@
   <style>
     :root{
       --bg:#0b0b0d;
-      --text:#f4f4f6;https://holdemhive.com/CurrentSeasonCalendar.html
+      --text:#f4f4f6;
       --muted:#b9b9c2;
       --hive:#fdf03ff6;
       --online:#38d36f;
@@ -200,10 +200,10 @@ function getSeasonDigits(){
   return String(raw).replace(/[^0-9]/g, "");
 }
 
-// If a season parameter is present, use it; otherwise default season data to 14.
+// If a season parameter is present, use it; otherwise default season data to 15.
 // Note: Standings defaults to PPG.html when no season param is provided.
 const SEASON_QS   = getSeasonDigits();     // "" if no valid digits provided
-const SEASON_DATA = SEASON_QS || "14";     // used for loading season JSON
+const SEASON_DATA = SEASON_QS || "15";     // used for loading season JSON
 
 
 
@@ -446,7 +446,7 @@ function renderCalendar(events, assets, disclaimerText){
 }
 
 async function loadSeason(){
-  const seasonParam = (qs("season") || "14").replace(/[^0-9]/g, "");
+  const seasonParam = (qs("season") || "15").replace(/[^0-9]/g, "");
   const candidates = [
     `seasons/s${seasonParam}.json`,
     `seasons/s${seasonParam}.json`.toLowerCase(),
