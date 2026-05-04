@@ -13,6 +13,7 @@
       --hive:#fdf03ff6;
       --online:#38d36f;
       --guest:#ff9a3c;
+      --holiday:#ff0000;
       --shadow: 0 8px 22px rgba(0,0,0,.35);
       --radius: 14px;
       --font: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -41,6 +42,7 @@
     .dot.hive{ background: var(--hive); }
     .dot.online{ background: var(--online); }
     .dot.guest{ background: var(--guest); }
+    .dot.holiday{ background: var(--holiday); }
 
     .months{ display:grid; gap:16px; margin-top:14px; }
 
@@ -111,6 +113,7 @@ min-height:92px;
     .event.hive{ background: var(--hive); }
     .event.online{ background: var(--online); }
     .event.guest{ background: var(--guest); }
+    .event.holiday{ background: var(--holiday); }
 
     .status{
       max-width: 1100px;
@@ -251,7 +254,8 @@ function setTheme(theme){
     muted: "--muted",
     hive: "--hive",
     online: "--online",
-    guest: "--guest"
+    guest: "--guest",
+    holiday: "--holiday"
   };
   for(const k in map){
     if(theme[k]) root.style.setProperty(map[k], theme[k]);
