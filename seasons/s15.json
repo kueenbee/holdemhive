@@ -32,7 +32,7 @@
   "_CHANGE_EVENTS_NOTE": "<<< UPDATE DATES / LABELS / WINNERS FOR NEW SEASON >>>",
   "events": [
     
-    {"date":"2026-05-07","type":"hive",   "label":"G1", "winner: Ian F"},
+    {"date":"2026-05-07","type":"hive",   "label":"G1", "winner": "Ian F"},
     {"date":"2026-05-14","type":"hive",   "label":"S14 Championship \ud83d\udc51"},
     {"date":"2026-05-21","type":"guest",  "label":"G2 Hive->Webster"},
     {"date":"2026-05-28","type":"holiday","label":"Memorial Day "},    
