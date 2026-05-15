@@ -1,9 +1,9 @@
 {
   "_comment": "update this file so the smart page ChampionshipStandings.html will work properly",
 
-  "season": "S14",
-  "season_number":14,
-  "game_number": 8,
+  "season": "S15",
+  "season_number":15,
+  "game_number": 1,
   "season_complete": true,
   "championship_spots": 9,
   "points_slots": 8,
@@ -11,7 +11,7 @@
   "per_game": { "start_col": 2},
   "auto_qualify_rule": {
     "min_live_games": 4,
-    "winners": ["Scott L", "Nolan B", "Dan B", "Beth W", "Alex B", "Dennis E", "Vince A"]
+    "winners": ["Ian Finn"]
   },
   "columns": {
     "name_col": 0,
