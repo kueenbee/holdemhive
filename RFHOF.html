@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Flush Hall of Fame</title>
+
+<style>
+
+body {
+    background: #1a1a1a;
+    margin: 0;
+    padding: 40px;
+    font-family: Georgia, serif;
+    color: #fdf03ff6;
+} 
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    letter-spacing: 1px;
+}
+
+.royal-gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.royal-card {
+    width: 260px;
+    text-align: center;
+}
+
+.photo-frame {
+    position: relative;
+    background: #111;
+    padding: 12px;
+    border-radius: 14px;
+
+box-shadow:
+    0 0 18px rgba(212,175,55,.65),
+    0 14px 34px rgba(0,0,0,.90);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    object-position: center top;    
+    display: block;
+
+    border: 4px solid #111;
+    outline: 5px solid #fdf03ff6;
+    border-radius: 8px;
+}
+
+
+
+.royal-caption {
+    margin-top: 16px;
+}
+
+.royal-name {
+    font-size: 1.35em;
+    font-weight: bold;
+}
+
+.royal-date {
+    margin-top: 4px;
+    color: #ddd;
+    font-size: 0.95em;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Royal Flush Hall of Fame</h1>
+
+<div class="royal-gallery">
+
+    <! -- this div block is for an instance of a royal flush -->
+    <div class="royal-card">
+
+        <div class="photo-frame">
+
+            <img src="images/RF-ScottLClubs-20260430.jpg", alt="Scott L's Royal Flush">
+
+        </div>
+
+        <div class="royal-caption">
+            <div class="royal-name">Scott L</div>
+            <div class="royal-date">April 30th, 2026</div>
+        </div>
+
+    </div>
+
+    <div class="royal-card">
+
+        <div class="photo-frame">
+
+            <img src="images/RF-SueGDiamonds-20260507.jpg", alt="Sue G's Royal Flush">
+
+        </div>
+
+        <div class="royal-caption">
+            <div class="royal-name">Sue G</div>
+            <div class="royal-date">April 30th, 2026</div>
+        </div>
+
+    </div>    
+
+        
+</div>
+
+</body>
+</html>
