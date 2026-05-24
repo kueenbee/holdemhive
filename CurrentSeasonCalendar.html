@@ -396,11 +396,23 @@ function renderCalendar(events, assets, disclaimerText){
           win.style.gap = "1px";
           win.style.lineHeight = "1.05";
 
-          const ringSrc = assets && assets.winner_ring ? assets.winner_ring : "";
+          const isSeasonChampionship =
+            ev.season_championship === true;
+
+          const ringSrc =
+            isSeasonChampionship && assets && assets.season_champion_ring
+              ? assets.season_champion_ring
+              : assets && assets.winner_ring
+                ? assets.winner_ring
+                : "";
+
           if(ringSrc){
             const ringImg = document.createElement("img");
             ringImg.src = ringSrc;
-            ringImg.alt = "Game Champion Ring";
+            ringImg.alt =
+              isSeasonChampionship
+                ? "Season Champion Ring"
+                : "Game Champion Ring";
             ringImg.style.height = "54px";
             ringImg.style.width = "auto";
             ringImg.style.display = "block";
