@@ -46,7 +46,7 @@
     {"date":"2026-07-16","type":"hive",   "label":"G8"},
     {"date":"2026-07-23","type":"guest",  "label":"S16 G1 Hive->Webster"},    
     {"date":"2026-07-30","type":"online", "label":"S16 G2 Hive->GG"},
-    {"date":"2026-08-11","type":"hive",   "label":" G3"},
+    {"date":"2026-08-11","type":"hive",   "label":"S16 G3"},
     {"date":"2026-08-13","type":"online", "label":"S15 Championship?? \ud83d\udc51"}
      ]
 }
