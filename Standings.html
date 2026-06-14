@@ -107,7 +107,7 @@ var TDSort = (function() {
   var mTextKey = document.all ? "innerText" : "textContent";
   var mTableID = "";
   var mHeaderRowID = "";
-  var mData = [{Index: 0, Columns: [{Text: "Tammy E", HTML: "Tammy E", SortValue: "tammy e", Align: "left"}, {Text: "12.350", HTML: "12.350", SortValue: 12.3503, Align: "right"}, {Text: "$518.10", HTML: "$518.10", SortValue: 518.1, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "mousalina", HTML: "mousalina", SortValue: "mousalina", Align: "left"}]}, {Index: 1, Columns: [{Text: "Ian F", HTML: "Ian F", SortValue: "ian f", Align: "left"}, {Text: "9.945", HTML: "9.945", SortValue: 9.9449, Align: "right"}, {Text: "$386.50", HTML: "$386.50", SortValue: 386.5, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "IsItMyTurn", HTML: "IsItMyTurn", SortValue: "isitmyturn", Align: "left"}]}, {Index: 2, Columns: [{Text: "Dennis E", HTML: "Dennis E", SortValue: "dennis e", Align: "left"}, {Text: "7.864", HTML: "7.864", SortValue: 7.8635, Align: "right"}, {Text: "$182.70", HTML: "$182.70", SortValue: 182.7, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "ArtificialPond", HTML: "ArtificialPond", SortValue: "artificialpond", Align: "left"}]}, {Index: 3, Columns: [{Text: "Alvaro F*", HTML: "Alvaro F*", SortValue: "alvaro f*", Align: "left"}, {Text: "7.346", HTML: "7.346", SortValue: 7.3456, Align: "right"}, {Text: "$182.70", HTML: "$182.70", SortValue: 182.7, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "Flipy79", HTML: "Flipy79", SortValue: "flipy79", Align: "left"}]}, {Index: 4, Columns: [{Text: "Lori P", HTML: "Lori P", SortValue: "lori p", Align: "left"}, {Text: "5.593", HTML: "5.593", SortValue: 5.593, Align: "right"}, {Text: "$246.60", HTML: "$246.60", SortValue: 246.6, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "Residual", HTML: "Residual", SortValue: "residual", Align: "left"}]}, {Index: 5, Columns: [{Text: "Zeke H", HTML: "Zeke H", SortValue: "zeke h", Align: "left"}, {Text: "5.478", HTML: "5.478", SortValue: 5.478400000000001, Align: "right"}, {Text: "$64.60", HTML: "$64.60", SortValue: 64.6, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "humfree23", HTML: "humfree23", SortValue: "humfree23", Align: "left"}]}, {Index: 6, Columns: [{Text: "Tammy D", HTML: "Tammy D", SortValue: "tammy d", Align: "left"}, {Text: "5.075", HTML: "5.075", SortValue: 5.0745000000000005, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "TammyD1965", HTML: "TammyD1965", SortValue: "tammyd1965", Align: "left"}]}, {Index: 7, Columns: [{Text: "Beth W*", HTML: "Beth W*", SortValue: "beth w*", Align: "left"}, {Text: "4.787", HTML: "4.787", SortValue: 4.7873, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "LittleBitBee", HTML: "LittleBitBee", SortValue: "littlebitbee", Align: "left"}]}, {Index: 8, Columns: [{Text: "Alana S", HTML: "Alana S", SortValue: "alana s", Align: "left"}, {Text: "4.534", HTML: "4.534", SortValue: 4.5339, Align: "right"}, {Text: "$117.00", HTML: "$117.00", SortValue: 117, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "AlanaMarie", HTML: "AlanaMarie", SortValue: "alanamarie", Align: "left"}]}, {Index: 9, Columns: [{Text: "Scott L", HTML: "Scott L", SortValue: "scott l", Align: "left"}, {Text: "4.386", HTML: "4.386", SortValue: 4.3863, Align: "right"}, {Text: "$117.00", HTML: "$117.00", SortValue: 117, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "HivePhan", HTML: "HivePhan", SortValue: "hivephan", Align: "left"}]}, {Index: 10, Columns: [{Text: "Nolan B", HTML: "Nolan B", SortValue: "nolan b", Align: "left"}, {Text: "4.298", HTML: "4.298", SortValue: 4.2977, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "Goobie2000", HTML: "Goobie2000", SortValue: "goobie2000", Align: "left"}]}, {Index: 11, Columns: [{Text: "Jeff V**", HTML: "Jeff V**", SortValue: "jeff v**", Align: "left"}, {Text: "4.232", HTML: "4.232", SortValue: 4.2321, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "JeffV", HTML: "JeffV", SortValue: "jeffv", Align: "left"}]}, {Index: 12, Columns: [{Text: "Kay C~~", HTML: "Kay C~~", SortValue: "kay c~~", Align: "left"}, {Text: "4.140", HTML: "4.140", SortValue: 4.1399, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "HiveKueen", HTML: "HiveKueen", SortValue: "hivekueen", Align: "left"}]}, {Index: 13, Columns: [{Text: "Sue G", HTML: "Sue G", SortValue: "sue g", Align: "left"}, {Text: "4.092", HTML: "4.092", SortValue: 4.0923, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "Gr621289", HTML: "Gr621289", SortValue: "gr621289", Align: "left"}]}, {Index: 14, Columns: [{Text: "Vince A*", HTML: "Vince A*", SortValue: "vince a*", Align: "left"}, {Text: "3.832", HTML: "3.832", SortValue: 3.8316, Align: "right"}, {Text: "$74.80", HTML: "$74.80", SortValue: 74.8, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "Uncle Flicks", HTML: "Uncle Flicks", SortValue: "uncle flicks", Align: "left"}]}, {Index: 15, Columns: [{Text: "Jim B*", HTML: "Jim B*", SortValue: "jim b*", Align: "left"}, {Text: "3.013", HTML: "3.013", SortValue: 3.0125, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "Bumble5121", HTML: "Bumble5121", SortValue: "bumble5121", Align: "left"}]}, {Index: 16, Columns: [{Text: "Sarah G", HTML: "Sarah G", SortValue: "sarah g", Align: "left"}, {Text: "2.836", HTML: "2.836", SortValue: 2.8360000000000003, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "sgpars", HTML: "sgpars", SortValue: "sgpars", Align: "left"}]}, {Index: 17, Columns: [{Text: "Brenda B*", HTML: "Brenda B*", SortValue: "brenda b*", Align: "left"}, {Text: "2.743", HTML: "2.743", SortValue: 2.7426, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "BunnyGalore", HTML: "BunnyGalore", SortValue: "bunnygalore", Align: "left"}]}, {Index: 18, Columns: [{Text: "Jeremy W", HTML: "Jeremy W", SortValue: "jeremy w", Align: "left"}, {Text: "2.638", HTML: "2.638", SortValue: 2.6383, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "Jaspyr", HTML: "Jaspyr", SortValue: "jaspyr", Align: "left"}]}, {Index: 19, Columns: [{Text: "Chuck S", HTML: "Chuck S", SortValue: "chuck s", Align: "left"}, {Text: "2.328", HTML: "2.328", SortValue: 2.3281, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "left"}]}, {Index: 20, Columns: [{Text: "Fred P*", HTML: "Fred P*", SortValue: "fred p*", Align: "left"}, {Text: "1.961", HTML: "1.961", SortValue: 1.9608, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "Baddad76", HTML: "Baddad76", SortValue: "baddad76", Align: "left"}]}, {Index: 21, Columns: [{Text: "Alex B", HTML: "Alex B", SortValue: "alex b", Align: "left"}, {Text: "1.552", HTML: "1.552", SortValue: 1.552, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "AB12345B", HTML: "AB12345B", SortValue: "ab12345b", Align: "left"}]}, {Index: 22, Columns: [{Text: "Mary W", HTML: "Mary W", SortValue: "mary w", Align: "left"}, {Text: "1.395", HTML: "1.395", SortValue: 1.395, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "MaryR", HTML: "MaryR", SortValue: "maryr", Align: "left"}]}, {Index: 23, Columns: [{Text: "Ryan D", HTML: "Ryan D", SortValue: "ryan d", Align: "left"}, {Text: "1.331", HTML: "1.331", SortValue: 1.3312, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "left"}]}, {Index: 24, Columns: [{Text: "Rich S", HTML: "Rich S", SortValue: "rich s", Align: "left"}, {Text: "1.275", HTML: "1.275", SortValue: 1.2747, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "left"}]}, {Index: 25, Columns: [{Text: "Emily C", HTML: "Emily C", SortValue: "emily c", Align: "left"}, {Text: "1.138", HTML: "1.138", SortValue: 1.1379, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "left"}]}, {Index: 26, Columns: [{Text: "Ted N", HTML: "Ted N", SortValue: "ted n", Align: "left"}, {Text: "1.066", HTML: "1.066", SortValue: 1.0662, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "KingsEdward", HTML: "KingsEdward", SortValue: "kingsedward", Align: "left"}]}, {Index: 27, Columns: [{Text: "Eric R", HTML: "Eric R", SortValue: "eric r", Align: "left"}, {Text: "1.066", HTML: "1.066", SortValue: 1.0662, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "left"}]}, {Index: 28, Columns: [{Text: "Will E", HTML: "Will E", SortValue: "will e", Align: "left"}, {Text: "1.031", HTML: "1.031", SortValue: 1.0311, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "weastman", HTML: "weastman", SortValue: "weastman", Align: "left"}]}];
+  var mData = [{Index: 0, Columns: [{Text: "Tammy E", HTML: "Tammy E", SortValue: "tammy e", Align: "left"}, {Text: "13.383", HTML: "13.383", SortValue: 13.3826, Align: "right"}, {Text: "$518.10", HTML: "$518.10", SortValue: 518.1, Align: "right"}, {Text: "4", HTML: "4", SortValue: 4, Align: "right"}, {Text: "mousalina", HTML: "mousalina", SortValue: "mousalina", Align: "left"}]}, {Index: 1, Columns: [{Text: "Ian F", HTML: "Ian F", SortValue: "ian f", Align: "left"}, {Text: "12.199", HTML: "12.199", SortValue: 12.199100000000001, Align: "right"}, {Text: "$386.50", HTML: "$386.50", SortValue: 386.5, Align: "right"}, {Text: "4", HTML: "4", SortValue: 4, Align: "right"}, {Text: "IsItMyTurn", HTML: "IsItMyTurn", SortValue: "isitmyturn", Align: "left"}]}, {Index: 2, Columns: [{Text: "Dennis E", HTML: "Dennis E", SortValue: "dennis e", Align: "left"}, {Text: "10.432", HTML: "10.432", SortValue: 10.432, Align: "right"}, {Text: "$250.70", HTML: "$250.70", SortValue: 250.7, Align: "right"}, {Text: "4", HTML: "4", SortValue: 4, Align: "right"}, {Text: "ArtificialPond", HTML: "ArtificialPond", SortValue: "artificialpond", Align: "left"}]}, {Index: 3, Columns: [{Text: "Alvaro F*", HTML: "Alvaro F*", SortValue: "alvaro f*", Align: "left"}, {Text: "9.372", HTML: "9.372", SortValue: 9.3717, Align: "right"}, {Text: "$182.70", HTML: "$182.70", SortValue: 182.7, Align: "right"}, {Text: "4", HTML: "4", SortValue: 4, Align: "right"}, {Text: "Flipy79", HTML: "Flipy79", SortValue: "flipy79", Align: "left"}]}, {Index: 4, Columns: [{Text: "Lori P", HTML: "Lori P", SortValue: "lori p", Align: "left"}, {Text: "7.305", HTML: "7.305", SortValue: 7.3053, Align: "right"}, {Text: "$246.60", HTML: "$246.60", SortValue: 246.6, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "Residual", HTML: "Residual", SortValue: "residual", Align: "left"}]}, {Index: 5, Columns: [{Text: "Kay C~~", HTML: "Kay C~~", SortValue: "kay c~~", Align: "left"}, {Text: "7.179", HTML: "7.179", SortValue: 7.1792, Align: "right"}, {Text: "$106.30", HTML: "$106.30", SortValue: 106.3, Align: "right"}, {Text: "4", HTML: "4", SortValue: 4, Align: "right"}, {Text: "Kay@HEH", HTML: "Kay@HEH", SortValue: "kay@heh", Align: "left"}]}, {Index: 6, Columns: [{Text: "Zeke H", HTML: "Zeke H", SortValue: "zeke h", Align: "left"}, {Text: "6.900", HTML: "6.900", SortValue: 6.899700000000001, Align: "right"}, {Text: "$64.60", HTML: "$64.60", SortValue: 64.6, Align: "right"}, {Text: "4", HTML: "4", SortValue: 4, Align: "right"}, {Text: "humfree23", HTML: "humfree23", SortValue: "humfree23", Align: "left"}]}, {Index: 7, Columns: [{Text: "Tammy D", HTML: "Tammy D", SortValue: "tammy d", Align: "left"}, {Text: "6.176", HTML: "6.176", SortValue: 6.176200000000001, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "4", HTML: "4", SortValue: 4, Align: "right"}, {Text: "TammyD1965", HTML: "TammyD1965", SortValue: "tammyd1965", Align: "left"}]}, {Index: 8, Columns: [{Text: "Jeff V**", HTML: "Jeff V**", SortValue: "jeff v**", Align: "left"}, {Text: "6.083", HTML: "6.083", SortValue: 6.0835, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "4", HTML: "4", SortValue: 4, Align: "right"}, {Text: "JeffV", HTML: "JeffV", SortValue: "jeffv", Align: "left"}]}, {Index: 9, Columns: [{Text: "Fred P*", HTML: "Fred P*", SortValue: "fred p*", Align: "left"}, {Text: "5.814", HTML: "5.814", SortValue: 5.8137, Align: "right"}, {Text: "$166.10", HTML: "$166.10", SortValue: 166.1, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "Baddad76", HTML: "Baddad76", SortValue: "baddad76", Align: "left"}]}, {Index: 10, Columns: [{Text: "Doug B", HTML: "Doug B", SortValue: "doug b", Align: "left"}, {Text: "5.779", HTML: "5.779", SortValue: 5.7795, Align: "right"}, {Text: "$259.60", HTML: "$259.60", SortValue: 259.6, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "P1513-7766", HTML: "P1513-7766", SortValue: "p1513-7766", Align: "left"}]}, {Index: 11, Columns: [{Text: "Nolan B", HTML: "Nolan B", SortValue: "nolan b", Align: "left"}, {Text: "5.648", HTML: "5.648", SortValue: 5.6484, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "4", HTML: "4", SortValue: 4, Align: "right"}, {Text: "Goobie2000", HTML: "Goobie2000", SortValue: "goobie2000", Align: "left"}]}, {Index: 12, Columns: [{Text: "Scott L", HTML: "Scott L", SortValue: "scott l", Align: "left"}, {Text: "5.528", HTML: "5.528", SortValue: 5.5278, Align: "right"}, {Text: "$117.00", HTML: "$117.00", SortValue: 117, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "HivePhan", HTML: "HivePhan", SortValue: "hivephan", Align: "left"}]}, {Index: 13, Columns: [{Text: "Beth W*", HTML: "Beth W*", SortValue: "beth w*", Align: "left"}, {Text: "4.787", HTML: "4.787", SortValue: 4.7873, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "Beth W", HTML: "Beth W", SortValue: "beth w", Align: "left"}]}, {Index: 14, Columns: [{Text: "Alana S", HTML: "Alana S", SortValue: "alana s", Align: "left"}, {Text: "4.534", HTML: "4.534", SortValue: 4.5339, Align: "right"}, {Text: "$117.00", HTML: "$117.00", SortValue: 117, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "AlanaMarie", HTML: "AlanaMarie", SortValue: "alanamarie", Align: "left"}]}, {Index: 15, Columns: [{Text: "Jim B*", HTML: "Jim B*", SortValue: "jim b*", Align: "left"}, {Text: "4.515", HTML: "4.515", SortValue: 4.5153, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "Bumble5121", HTML: "Bumble5121", SortValue: "bumble5121", Align: "left"}]}, {Index: 16, Columns: [{Text: "Brenda B*", HTML: "Brenda B*", SortValue: "brenda b*", Align: "left"}, {Text: "4.341", HTML: "4.341", SortValue: 4.3408999999999995, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "BunnyGalore", HTML: "BunnyGalore", SortValue: "bunnygalore", Align: "left"}]}, {Index: 17, Columns: [{Text: "Sarah G", HTML: "Sarah G", SortValue: "sarah g", Align: "left"}, {Text: "4.125", HTML: "4.125", SortValue: 4.1249, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "sgpars", HTML: "sgpars", SortValue: "sgpars", Align: "left"}]}, {Index: 18, Columns: [{Text: "Sue G", HTML: "Sue G", SortValue: "sue g", Align: "left"}, {Text: "4.092", HTML: "4.092", SortValue: 4.0923, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "Gr621289", HTML: "Gr621289", SortValue: "gr621289", Align: "left"}]}, {Index: 19, Columns: [{Text: "Vince A*", HTML: "Vince A*", SortValue: "vince a*", Align: "left"}, {Text: "3.832", HTML: "3.832", SortValue: 3.8316, Align: "right"}, {Text: "$74.80", HTML: "$74.80", SortValue: 74.8, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "Uncle Flicks", HTML: "Uncle Flicks", SortValue: "uncle flicks", Align: "left"}]}, {Index: 20, Columns: [{Text: "Jeremy W", HTML: "Jeremy W", SortValue: "jeremy w", Align: "left"}, {Text: "3.704", HTML: "3.704", SortValue: 3.7038, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "3", HTML: "3", SortValue: 3, Align: "right"}, {Text: "Jaspyr", HTML: "Jaspyr", SortValue: "jaspyr", Align: "left"}]}, {Index: 21, Columns: [{Text: "Mary W", HTML: "Mary W", SortValue: "mary w", Align: "left"}, {Text: "2.629", HTML: "2.629", SortValue: 2.6292999999999997, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "2", HTML: "2", SortValue: 2, Align: "right"}, {Text: "MaryR", HTML: "MaryR", SortValue: "maryr", Align: "left"}]}, {Index: 22, Columns: [{Text: "Chuck S", HTML: "Chuck S", SortValue: "chuck s", Align: "left"}, {Text: "2.328", HTML: "2.328", SortValue: 2.3281, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "left"}]}, {Index: 23, Columns: [{Text: "Alex B", HTML: "Alex B", SortValue: "alex b", Align: "left"}, {Text: "1.552", HTML: "1.552", SortValue: 1.552, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "AB12345B", HTML: "AB12345B", SortValue: "ab12345b", Align: "left"}]}, {Index: 24, Columns: [{Text: "Ryan D", HTML: "Ryan D", SortValue: "ryan d", Align: "left"}, {Text: "1.331", HTML: "1.331", SortValue: 1.3312, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "left"}]}, {Index: 25, Columns: [{Text: "Rich S", HTML: "Rich S", SortValue: "rich s", Align: "left"}, {Text: "1.275", HTML: "1.275", SortValue: 1.2747, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "left"}]}, {Index: 26, Columns: [{Text: "Dan B", HTML: "Dan B", SortValue: "dan b", Align: "left"}, {Text: "1.185", HTML: "1.185", SortValue: 1.1854, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "BragginRights", HTML: "BragginRights", SortValue: "bragginrights", Align: "left"}]}, {Index: 27, Columns: [{Text: "Emily C", HTML: "Emily C", SortValue: "emily c", Align: "left"}, {Text: "1.138", HTML: "1.138", SortValue: 1.1379, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "left"}]}, {Index: 28, Columns: [{Text: "Ted N", HTML: "Ted N", SortValue: "ted n", Align: "left"}, {Text: "1.066", HTML: "1.066", SortValue: 1.0662, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "KingsEdward", HTML: "KingsEdward", SortValue: "kingsedward", Align: "left"}]}, {Index: 29, Columns: [{Text: "Eric R", HTML: "Eric R", SortValue: "eric r", Align: "left"}, {Text: "1.066", HTML: "1.066", SortValue: 1.0662, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "", HTML: "", SortValue: "", Align: "left"}]}, {Index: 30, Columns: [{Text: "Will E", HTML: "Will E", SortValue: "will e", Align: "left"}, {Text: "1.031", HTML: "1.031", SortValue: 1.0311, Align: "right"}, {Text: "$0.00", HTML: "$0.00", SortValue: 0, Align: "right"}, {Text: "1", HTML: "1", SortValue: 1, Align: "right"}, {Text: "weastman", HTML: "weastman", SortValue: "weastman", Align: "left"}]}];
   var mColumns = [{Key: "Name", Name: "Name"}, {Key: "Score", Name: "Overall Score"}, {Key: "TotalWinnings", Name: "Total Winnings"}, {Key: "Buyins", Name: "#Games"}, {Key: "Lastname", Name: "GG Handle"}];
   var mIndexCol = -1;
 
@@ -250,59 +250,101 @@ var TDSort = (function() {
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Tammy E</td>
-    <td align="right" class="statsColumn">12.350</td>
+    <td align="right" class="statsColumn">13.383</td>
     <td align="right" class="statsColumn">$518.10</td>
-    <td align="right" class="statsColumn">3</td>
+    <td align="right" class="statsColumn">4</td>
     <td align="left" class="statsColumn">mousalina</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Ian F</td>
-    <td align="right" class="statsColumn">9.945</td>
+    <td align="right" class="statsColumn">12.199</td>
     <td align="right" class="statsColumn">$386.50</td>
-    <td align="right" class="statsColumn">3</td>
+    <td align="right" class="statsColumn">4</td>
     <td align="left" class="statsColumn">IsItMyTurn</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Dennis E</td>
-    <td align="right" class="statsColumn">7.864</td>
-    <td align="right" class="statsColumn">$182.70</td>
-    <td align="right" class="statsColumn">3</td>
+    <td align="right" class="statsColumn">10.432</td>
+    <td align="right" class="statsColumn">$250.70</td>
+    <td align="right" class="statsColumn">4</td>
     <td align="left" class="statsColumn">ArtificialPond</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Alvaro F*</td>
-    <td align="right" class="statsColumn">7.346</td>
+    <td align="right" class="statsColumn">9.372</td>
     <td align="right" class="statsColumn">$182.70</td>
-    <td align="right" class="statsColumn">3</td>
+    <td align="right" class="statsColumn">4</td>
     <td align="left" class="statsColumn">Flipy79</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Lori P</td>
-    <td align="right" class="statsColumn">5.593</td>
+    <td align="right" class="statsColumn">7.305</td>
     <td align="right" class="statsColumn">$246.60</td>
-    <td align="right" class="statsColumn">1</td>
+    <td align="right" class="statsColumn">2</td>
     <td align="left" class="statsColumn">Residual</td>
   </tr>
   <tr class="odd">
-    <td align="left" class="statsColumn">Zeke H</td>
-    <td align="right" class="statsColumn">5.478</td>
-    <td align="right" class="statsColumn">$64.60</td>
-    <td align="right" class="statsColumn">3</td>
-    <td align="left" class="statsColumn">humfree23</td>
+    <td align="left" class="statsColumn">Kay C~~</td>
+    <td align="right" class="statsColumn">7.179</td>
+    <td align="right" class="statsColumn">$106.30</td>
+    <td align="right" class="statsColumn">4</td>
+    <td align="left" class="statsColumn">Kay@HEH</td>
   </tr>
   <tr class="even">
+    <td align="left" class="statsColumn">Zeke H</td>
+    <td align="right" class="statsColumn">6.900</td>
+    <td align="right" class="statsColumn">$64.60</td>
+    <td align="right" class="statsColumn">4</td>
+    <td align="left" class="statsColumn">humfree23</td>
+  </tr>
+  <tr class="odd">
     <td align="left" class="statsColumn">Tammy D</td>
-    <td align="right" class="statsColumn">5.075</td>
+    <td align="right" class="statsColumn">6.176</td>
     <td align="right" class="statsColumn">$0.00</td>
-    <td align="right" class="statsColumn">3</td>
+    <td align="right" class="statsColumn">4</td>
     <td align="left" class="statsColumn">TammyD1965</td>
+  </tr>
+  <tr class="even">
+    <td align="left" class="statsColumn">Jeff V**</td>
+    <td align="right" class="statsColumn">6.083</td>
+    <td align="right" class="statsColumn">$0.00</td>
+    <td align="right" class="statsColumn">4</td>
+    <td align="left" class="statsColumn">JeffV</td>
+  </tr>
+  <tr class="odd">
+    <td align="left" class="statsColumn">Fred P*</td>
+    <td align="right" class="statsColumn">5.814</td>
+    <td align="right" class="statsColumn">$166.10</td>
+    <td align="right" class="statsColumn">2</td>
+    <td align="left" class="statsColumn">Baddad76</td>
+  </tr>
+  <tr class="even">
+    <td align="left" class="statsColumn">Doug B</td>
+    <td align="right" class="statsColumn">5.779</td>
+    <td align="right" class="statsColumn">$259.60</td>
+    <td align="right" class="statsColumn">1</td>
+    <td align="left" class="statsColumn">P1513-7766</td>
+  </tr>
+  <tr class="odd">
+    <td align="left" class="statsColumn">Nolan B</td>
+    <td align="right" class="statsColumn">5.648</td>
+    <td align="right" class="statsColumn">$0.00</td>
+    <td align="right" class="statsColumn">4</td>
+    <td align="left" class="statsColumn">Goobie2000</td>
+  </tr>
+  <tr class="even">
+    <td align="left" class="statsColumn">Scott L</td>
+    <td align="right" class="statsColumn">5.528</td>
+    <td align="right" class="statsColumn">$117.00</td>
+    <td align="right" class="statsColumn">3</td>
+    <td align="left" class="statsColumn">HivePhan</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Beth W*</td>
     <td align="right" class="statsColumn">4.787</td>
     <td align="right" class="statsColumn">$0.00</td>
     <td align="right" class="statsColumn">3</td>
-    <td align="left" class="statsColumn">LittleBitBee</td>
+    <td align="left" class="statsColumn">Beth W</td>
   </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Alana S</td>
@@ -312,88 +354,60 @@ var TDSort = (function() {
     <td align="left" class="statsColumn">AlanaMarie</td>
   </tr>
   <tr class="odd">
-    <td align="left" class="statsColumn">Scott L</td>
-    <td align="right" class="statsColumn">4.386</td>
-    <td align="right" class="statsColumn">$117.00</td>
-    <td align="right" class="statsColumn">2</td>
-    <td align="left" class="statsColumn">HivePhan</td>
+    <td align="left" class="statsColumn">Jim B*</td>
+    <td align="right" class="statsColumn">4.515</td>
+    <td align="right" class="statsColumn">$0.00</td>
+    <td align="right" class="statsColumn">3</td>
+    <td align="left" class="statsColumn">Bumble5121</td>
   </tr>
   <tr class="even">
-    <td align="left" class="statsColumn">Nolan B</td>
-    <td align="right" class="statsColumn">4.298</td>
+    <td align="left" class="statsColumn">Brenda B*</td>
+    <td align="right" class="statsColumn">4.341</td>
     <td align="right" class="statsColumn">$0.00</td>
     <td align="right" class="statsColumn">3</td>
-    <td align="left" class="statsColumn">Goobie2000</td>
+    <td align="left" class="statsColumn">BunnyGalore</td>
   </tr>
   <tr class="odd">
-    <td align="left" class="statsColumn">Jeff V**</td>
-    <td align="right" class="statsColumn">4.232</td>
+    <td align="left" class="statsColumn">Sarah G</td>
+    <td align="right" class="statsColumn">4.125</td>
     <td align="right" class="statsColumn">$0.00</td>
     <td align="right" class="statsColumn">3</td>
-    <td align="left" class="statsColumn">JeffV</td>
+    <td align="left" class="statsColumn">sgpars</td>
   </tr>
   <tr class="even">
-    <td align="left" class="statsColumn">Kay C~~</td>
-    <td align="right" class="statsColumn">4.140</td>
-    <td align="right" class="statsColumn">$0.00</td>
-    <td align="right" class="statsColumn">3</td>
-    <td align="left" class="statsColumn">HiveKueen</td>
-  </tr>
-  <tr class="odd">
     <td align="left" class="statsColumn">Sue G</td>
     <td align="right" class="statsColumn">4.092</td>
     <td align="right" class="statsColumn">$0.00</td>
     <td align="right" class="statsColumn">3</td>
     <td align="left" class="statsColumn">Gr621289</td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
     <td align="left" class="statsColumn">Vince A*</td>
     <td align="right" class="statsColumn">3.832</td>
     <td align="right" class="statsColumn">$74.80</td>
     <td align="right" class="statsColumn">2</td>
     <td align="left" class="statsColumn">Uncle Flicks</td>
   </tr>
-  <tr class="odd">
-    <td align="left" class="statsColumn">Jim B*</td>
-    <td align="right" class="statsColumn">3.013</td>
-    <td align="right" class="statsColumn">$0.00</td>
-    <td align="right" class="statsColumn">2</td>
-    <td align="left" class="statsColumn">Bumble5121</td>
-  </tr>
-  <tr class="even">
-    <td align="left" class="statsColumn">Sarah G</td>
-    <td align="right" class="statsColumn">2.836</td>
-    <td align="right" class="statsColumn">$0.00</td>
-    <td align="right" class="statsColumn">2</td>
-    <td align="left" class="statsColumn">sgpars</td>
-  </tr>
-  <tr class="odd">
-    <td align="left" class="statsColumn">Brenda B*</td>
-    <td align="right" class="statsColumn">2.743</td>
-    <td align="right" class="statsColumn">$0.00</td>
-    <td align="right" class="statsColumn">2</td>
-    <td align="left" class="statsColumn">BunnyGalore</td>
-  </tr>
   <tr class="even">
     <td align="left" class="statsColumn">Jeremy W</td>
-    <td align="right" class="statsColumn">2.638</td>
+    <td align="right" class="statsColumn">3.704</td>
     <td align="right" class="statsColumn">$0.00</td>
-    <td align="right" class="statsColumn">2</td>
+    <td align="right" class="statsColumn">3</td>
     <td align="left" class="statsColumn">Jaspyr</td>
   </tr>
   <tr class="odd">
+    <td align="left" class="statsColumn">Mary W</td>
+    <td align="right" class="statsColumn">2.629</td>
+    <td align="right" class="statsColumn">$0.00</td>
+    <td align="right" class="statsColumn">2</td>
+    <td align="left" class="statsColumn">MaryR</td>
+  </tr>
+  <tr class="even">
     <td align="left" class="statsColumn">Chuck S</td>
     <td align="right" class="statsColumn">2.328</td>
     <td align="right" class="statsColumn">$0.00</td>
     <td align="right" class="statsColumn">1</td>
     <td align="left" class="statsColumn"></td>
-  </tr>
-  <tr class="even">
-    <td align="left" class="statsColumn">Fred P*</td>
-    <td align="right" class="statsColumn">1.961</td>
-    <td align="right" class="statsColumn">$0.00</td>
-    <td align="right" class="statsColumn">1</td>
-    <td align="left" class="statsColumn">Baddad76</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Alex B</td>
@@ -403,25 +417,25 @@ var TDSort = (function() {
     <td align="left" class="statsColumn">AB12345B</td>
   </tr>
   <tr class="even">
-    <td align="left" class="statsColumn">Mary W</td>
-    <td align="right" class="statsColumn">1.395</td>
-    <td align="right" class="statsColumn">$0.00</td>
-    <td align="right" class="statsColumn">1</td>
-    <td align="left" class="statsColumn">MaryR</td>
-  </tr>
-  <tr class="odd">
     <td align="left" class="statsColumn">Ryan D</td>
     <td align="right" class="statsColumn">1.331</td>
     <td align="right" class="statsColumn">$0.00</td>
     <td align="right" class="statsColumn">1</td>
     <td align="left" class="statsColumn"></td>
   </tr>
-  <tr class="even">
+  <tr class="odd">
     <td align="left" class="statsColumn">Rich S</td>
     <td align="right" class="statsColumn">1.275</td>
     <td align="right" class="statsColumn">$0.00</td>
     <td align="right" class="statsColumn">1</td>
     <td align="left" class="statsColumn"></td>
+  </tr>
+  <tr class="even">
+    <td align="left" class="statsColumn">Dan B</td>
+    <td align="right" class="statsColumn">1.185</td>
+    <td align="right" class="statsColumn">$0.00</td>
+    <td align="right" class="statsColumn">1</td>
+    <td align="left" class="statsColumn">BragginRights</td>
   </tr>
   <tr class="odd">
     <td align="left" class="statsColumn">Emily C</td>
@@ -450,23 +464,6 @@ var TDSort = (function() {
     <td align="right" class="statsColumn">$0.00</td>
     <td align="right" class="statsColumn">1</td>
     <td align="left" class="statsColumn">weastman</td>
-  </tr>
-  <tr class="odd">
-    <td colspan=100>&nbsp;</td>
-  </tr>
-  <tr class="even">
-    <td align="left" class="statsColumn"></td>
-    <td align="right" class="statsColumn"></td>
-    <td align="right" class="statsColumn">$1,890.00</td>
-    <td align="right" class="statsColumn">58</td>
-    <td align="left" class="statsColumn"></td>
-  </tr>
-  <tr class="odd">
-    <td align="left" class="statsColumn"></td>
-    <td align="right" class="statsColumn">3.908</td>
-    <td align="right" class="statsColumn">$65.17</td>
-    <td align="right" class="statsColumn">2</td>
-    <td align="left" class="statsColumn"></td>
   </tr>
 
         </table>
