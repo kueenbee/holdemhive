@@ -10,6 +10,7 @@
   "total_games": 8,
   "per_game": { "start_col": 2},
   "auto_qualify_rule": {
+    "live_game_number":2,
     "min_live_games": 4,
     "winners": ["Ian F", "Tammy E", "Lori P", "Doug B"]
   },

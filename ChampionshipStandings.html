@@ -169,16 +169,18 @@ function renderEmptyList(n) {
   }
 
   const listSize = state.championship_spots ?? DEFAULT_LIST_SIZE;
-  const gameNumber = state.game_number ?? 0;
+  const gameNumber = state.game_number ?? 0; // total games, LIVE + ONLINE, used only for display
+  const liveGameNumber = state.live_game_number ?? state.total_live_games_played ?? 0;
   const seasonLabel = state.season ?? "";
   const seasonComplete = !!state.season_complete;
 
   setTitle((seasonLabel ? (seasonLabel + " ") : "") + "Championship Standings" + (seasonComplete ? " - FINAL" : ""));
 
-  // PRE–GAME 4: show headings/info + empty 9 spots (your request)
-  if (gameNumber < 4) {
+  // PRE–4th LIVE GAME: show headings/info + empty spots.
+  // Important: this gate must use LIVE games only, not total games.
+  if (liveGameNumber < 4) {
     renderEmptyList(listSize);
-    setDetails('<span class="note">Championship standings will populate after Game 4 (current: Game ' + gameNumber + ').</span>');
+    setDetails('<span class="note">Championship standings will populate after the 4th LIVE game. Current: ' + liveGameNumber + ' LIVE game(s), ' + gameNumber + ' total game(s).</span>');
     return;
   }
 
