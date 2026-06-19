@@ -3,16 +3,16 @@
 
   "season": "S15",
   "season_number":15,
-  "game_number": 4,
+  "game_number": 5,
   "season_complete": false,
   "championship_spots": 9,
   "points_slots": 8,
   "total_games": 8,
   "per_game": { "start_col": 2},
   "auto_qualify_rule": {
-    "live_game_number":2,
+    "live_game_number":3,
     "min_live_games": 4,
-    "winners": ["Ian F", "Tammy E", "Lori P", "Doug B"]
+    "winners": ["Ian F", "Tammy E", "Lori P", "Doug B", "JeffV**"]
   },
   "columns": {
     "name_col": 0,
