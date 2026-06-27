@@ -170,17 +170,24 @@ function renderEmptyList(n) {
 
   const listSize = state.championship_spots ?? DEFAULT_LIST_SIZE;
   const gameNumber = state.game_number ?? 0; // total games, LIVE + ONLINE, used only for display
-  const liveGameNumber = state.live_game_number ?? state.total_live_games_played ?? 0;
+
+  // Current LIVE games played. If the season has only LIVE games, game_number is a safe fallback.
+  // Do NOT use auto_qualify_rule.live_game_number here; that is the rule threshold, not the current count.
+  const liveGameNumber = state.total_live_games_played ?? state.live_game_number ?? state.game_number ?? 0;
+
+  // Rule threshold: before this LIVE game count is reached, the standings page stays empty.
+  const standingsStartLiveGame = state.auto_qualify_rule?.live_game_number ?? 4;
+
   const seasonLabel = state.season ?? "";
   const seasonComplete = !!state.season_complete;
 
   setTitle((seasonLabel ? (seasonLabel + " ") : "") + "Championship Standings" + (seasonComplete ? " - FINAL" : ""));
 
-  // PRE–4th LIVE GAME: show headings/info + empty spots.
+  // PRE-threshold LIVE GAME: show headings/info + empty spots.
   // Important: this gate must use LIVE games only, not total games.
-  if (liveGameNumber < 4) {
+  if (liveGameNumber < standingsStartLiveGame) {
     renderEmptyList(listSize);
-    setDetails('<span class="note">Championship standings will populate after the 4th LIVE game. Current: ' + liveGameNumber + ' LIVE game(s), ' + gameNumber + ' total game(s).</span>');
+    setDetails('<span class="note">Championship standings will populate after the ' + standingsStartLiveGame + 'th LIVE game. Current: ' + liveGameNumber + ' LIVE game(s), ' + gameNumber + ' total game(s).</span>');
     return;
   }
 
