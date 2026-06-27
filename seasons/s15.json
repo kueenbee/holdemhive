@@ -40,7 +40,7 @@
     {"date":"2026-06-04","type":"online", "label":"G3 Hive->GG", "winner": "Lori P"},
     {"date":"2026-06-11","type":"online", "label":"G4 Hive->GG", "winner": "Doug B"},
     {"date":"2026-06-18","type":"guest",  "label":"G5 Hive->Webster", "winner": "Jeff V**"},
-    {"date":"2026-06-25","type":"hive",   "label":"G6 Casino Night"},
+    {"date":"2026-06-25","type":"hive",   "label":"G6 Casino Night", "winner": "Dennis E"},
     {"date":"2026-07-02","type":"holiday","label":"4th of July #250!"},
     {"date":"2026-07-09","type":"online", "label":"G7 Hive-GG"},
     {"date":"2026-07-16","type":"hive",   "label":"G8"},
