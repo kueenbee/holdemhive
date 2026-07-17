@@ -203,7 +203,7 @@ function getSeasonDigits(){
   return String(raw).replace(/[^0-9]/g, "");
 }
 
-// If a season parameter is present, use it; otherwise default season data to 15.
+// If a season parameter is present, use it; otherwise default season data to 16.
 // Note: Standings defaults to PPG.html when no season param is provided.
 const SEASON_QS   = getSeasonDigits();     // "" if no valid digits provided
 const SEASON_DATA = SEASON_QS || "16";     // used for loading season JSON
@@ -462,7 +462,7 @@ function renderCalendar(events, assets, disclaimerText){
 }
 
 async function loadSeason(){
-  const seasonParam = (qs("season") || "15").replace(/[^0-9]/g, "");
+  const seasonParam = (qs("season") || "16").replace(/[^0-9]/g, "");
   const candidates = [
     `seasons/s${seasonParam}.json`,
     `seasons/s${seasonParam}.json`.toLowerCase(),
