@@ -20,7 +20,6 @@
     .note { font-size: 10.5pt; color: #333; }
     .legend { font-size: 10.5pt; color: #333; margin-top: 6px; }
     .toc-crown { font-size: 0.7em; vertical-align: super; margin-left: 2px; }
-    .qualTag { font-size: 0.85em; color: #444; margin-left: 8px; }
     .nav { text-align:center; margin-top: 18px; }
     .nav a { display:inline-block; margin: 0 10px; }
     .warn { background:#fff6d8; border:1px solid #e7d28a; padding:10px 12px; border-radius:6px; }
@@ -30,14 +29,9 @@
 
 <body>
   <div class="wrap">
-    <!-- Use your existing logo asset if you have one; update src as needed -->
     <img class="logo" src="images/Kueen$BeesPokerPatch.png" alt="K$B Hold Em Hive">
+    <img class="scroll" src="images/season-champion_scroll.gif" alt="Season Champion scroll">
 
-    <!-- Optional: keep your season champ scroll image if desired; update path as needed -->
-    <img class="scroll" src="images/season-champion_scroll.gif"
-         alt="Season Champion scroll">
-
-    <!-- Headings + informational text (always shown) -->
     <h2 id="pageTitle">Season Championship Standings</h2>
 
     <p>Championship qualification will be based on points only through the 4th LIVE game of the season.</p>
@@ -47,9 +41,7 @@
 
     <p>League Rule: The Season Championship is an 8MAX tournament. However, a player who wins a game and attends 4 LIVE games but doesn't otherwise qualify will secure a 9th seat at the table (ties broken by points)</p>
 
-    <!-- The list: per your request, before Game 4 this will be 9 empty spots -->
     <ol id="champList"></ol>
-
     <div id="details" class="legend"></div>
 
     <div class="nav">
@@ -60,27 +52,10 @@
   </div>
 
 <script>
-/*
-  ChampionshipStandings.html automation
-  - Reads season_state.json for season metadata & winners list
-  - Reads a TD-exported HTML page (PPG or Standings) for Name / Points / GamesPlayed
-  - Applies crown display for TD ASCII markers: ~, ~~  (no Unicode in TD required)
-
-  You can tune behavior in season_state.json without editing this file.
-*/
 (async function () {
   const STATE_URL = "season_state.json";
   const DEFAULT_LIST_SIZE = 9;
-
-  // Queen crown as HTML entity (encoding-independent)
-  const CROWN = "&#9813;"; // ♕
-  function crownify(nameText) {
-    const m = nameText.match(/~+/g);
-    const count = m ? m.join("").length : 0;
-    const clean = nameText.replace(/~+/g, "").trim();
-    if (!count) return escapeHtml(clean);
-    return escapeHtml(clean) + '<span class="toc-crown">' + CROWN.repeat(count) + '</span>';
-  }
+  const CROWN = "&#9813;";
 
   function escapeHtml(s) {
     return String(s)
@@ -91,56 +66,68 @@
       .replaceAll("'", "&#39;");
   }
 
+  function cleanName(nameText) {
+    return String(nameText ?? "").replace(/~+/g, "").trim();
+  }
+
+  function nameKey(nameText) {
+    return cleanName(nameText).toLocaleLowerCase();
+  }
+
+  function crownify(nameText) {
+    const text = String(nameText ?? "");
+    const m = text.match(/~+/g);
+    const count = m ? m.join("").length : 0;
+    const clean = cleanName(text);
+    if (!count) return escapeHtml(clean);
+    return escapeHtml(clean) + '<span class="toc-crown">' + CROWN.repeat(count) + '</span>';
+  }
+
   function parseNumber(s) {
-  // Handles commas, currency, etc.
-  return parseFloat(String(s).replace(/[^0-9.\-]/g, "")) || 0;
-}
-
-function isBlankCell(s) {
-  const t = String(s ?? "").trim();
-  return t === "" || t === "-" || t.toLowerCase() === "na";
-}
-
-// Count attendance by non-blank entries in the per-game columns (ALL games: LIVE + ONLINE)
-function countAttendedGames(cells, startCol, totalGames) {
-  let attended = 0;
-  for (let i = 0; i < totalGames; i++) {
-    const idx = startCol + i;
-    if (idx >= 0 && idx < cells.length && !isBlankCell(cells[idx])) attended++;
+    return parseFloat(String(s).replace(/[^0-9.\-]/g, "")) || 0;
   }
-  return attended;
-}
 
-// Build a boolean mask for each per-game column: true = LIVE, false = ONLINE.
-// Rule (no exceptions): if header contains "L" => LIVE; if it contains "O" => ONLINE.
-// If it contains neither, treat as ONLINE to avoid accidentally granting LIVE credit.
-function computeLiveMaskFromHeaders(doc, startCol, totalGames) {
-  const headerRow = doc.querySelector("#pColumns");
-  if (!headerRow) return Array(totalGames).fill(false);
-
-  const headerCells = Array.from(headerRow.querySelectorAll("td,th"));
-  const mask = [];
-  for (let i = 0; i < totalGames; i++) {
-    const idx = startCol + i;
-    const h = (headerCells[idx]?.textContent ?? "").trim();
-    if (h.includes("O")) mask.push(false);
-    else if (h.includes("L")) mask.push(true);
-    else mask.push(false);
+  function isBlankCell(s) {
+    const t = String(s ?? "").trim();
+    return t === "" || t === "-" || t.toLowerCase() === "na";
   }
-  return mask;
-}
 
-function countAttendedLiveGames(cells, startCol, totalGames, liveMask) {
-  let attendedLive = 0;
-  for (let i = 0; i < totalGames; i++) {
-    const idx = startCol + i;
-    const played = (idx >= 0 && idx < cells.length && !isBlankCell(cells[idx]));
-    if (played && liveMask[i]) attendedLive++;
+  function countAttendedGames(cells, startCol, totalGames) {
+    let attended = 0;
+    for (let i = 0; i < totalGames; i++) {
+      const idx = startCol + i;
+      if (idx >= 0 && idx < cells.length && !isBlankCell(cells[idx])) attended++;
+    }
+    return attended;
   }
-  return attendedLive;
-}
 
-function renderEmptyList(n) {
+  function computeLiveMaskFromHeaders(doc, startCol, totalGames) {
+    const headerRow = doc.querySelector("#pColumns");
+    if (!headerRow) return Array(totalGames).fill(false);
+
+    const headerCells = Array.from(headerRow.querySelectorAll("td,th"));
+    const mask = [];
+    for (let i = 0; i < totalGames; i++) {
+      const idx = startCol + i;
+      const h = (headerCells[idx]?.textContent ?? "").trim();
+      if (h.includes("O")) mask.push(false);
+      else if (h.includes("L")) mask.push(true);
+      else mask.push(false);
+    }
+    return mask;
+  }
+
+  function countAttendedLiveGames(cells, startCol, totalGames, liveMask) {
+    let attendedLive = 0;
+    for (let i = 0; i < totalGames; i++) {
+      const idx = startCol + i;
+      const played = idx >= 0 && idx < cells.length && !isBlankCell(cells[idx]);
+      if (played && liveMask[i]) attendedLive++;
+    }
+    return attendedLive;
+  }
+
+  function renderEmptyList(n) {
     const ol = document.getElementById("champList");
     if (!ol) return;
     ol.innerHTML = Array.from({ length: n }, () => "<li>&nbsp;</li>").join("");
@@ -156,12 +143,18 @@ function renderEmptyList(n) {
     if (el) el.innerHTML = html || "";
   }
 
-  // Default: empty list (safe, matches your pre-Game4 requirement even if fetch fails)
+  function getPPGUrl(state) {
+    if (!state.season_complete) return "PPG.html";
+    if (typeof state.season_number === "number") return `PPG-${state.season_number}.html`;
+    return "PPG.html";
+  }
+
   renderEmptyList(DEFAULT_LIST_SIZE);
 
   let state;
   try {
     const resp = await fetch(STATE_URL, { cache: "no-store" });
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
     state = await resp.json();
   } catch (e) {
     setDetails('<div class="warn"><b>Note:</b> season_state.json could not be loaded. Showing empty list.</div>');
@@ -169,148 +162,135 @@ function renderEmptyList(n) {
   }
 
   const listSize = state.championship_spots ?? DEFAULT_LIST_SIZE;
-  const gameNumber = state.game_number ?? 0; // total games, LIVE + ONLINE, used only for display
-
-  // Current LIVE games played. If the season has only LIVE games, game_number is a safe fallback.
-  // Do NOT use auto_qualify_rule.live_game_number here; that is the rule threshold, not the current count.
-  const liveGameNumber = state.total_live_games_played ?? state.live_game_number ?? state.game_number ?? 0;
-
-  // Rule threshold: before this LIVE game count is reached, the standings page stays empty.
-  const standingsStartLiveGame = state.auto_qualify_rule?.live_game_number ?? 4;
+  const gameNumber = state.game_number ?? 0;
+  const liveGameNumber =
+    state.live_game_number ??
+    state.total_live_games_played ??
+    state.auto_qualify_rule?.live_game_number ??
+    gameNumber ??
+    0;
 
   const seasonLabel = state.season ?? "";
-  const seasonComplete = !!state.season_complete;
+  const seasonComplete = state.season_complete === true;
+  setTitle((seasonLabel ? seasonLabel + " " : "") + "Championship Standings" + (seasonComplete ? " - FINAL" : ""));
 
-  setTitle((seasonLabel ? (seasonLabel + " ") : "") + "Championship Standings" + (seasonComplete ? " - FINAL" : ""));
-
-  // PRE-threshold LIVE GAME: show headings/info + empty spots.
-  // Important: this gate must use LIVE games only, not total games.
-  if (liveGameNumber < standingsStartLiveGame) {
+  if (liveGameNumber < 4) {
     renderEmptyList(listSize);
-    setDetails('<span class="note">Championship standings will populate after the ' + standingsStartLiveGame + 'th LIVE game. Current: ' + liveGameNumber + ' LIVE game(s), ' + gameNumber + ' total game(s).</span>');
+    setDetails('<span class="note">Championship standings will populate after the 4th LIVE game. Current: ' +
+      liveGameNumber + ' LIVE game(s), ' + gameNumber + ' total game(s).</span>');
     return;
   }
 
-  // After Game 4, we need to compute:
-  // - points qualifiers (top N by points)
-  // - auto qualifiers (winner + min games played)
-  // - field = union(points, auto)
+  const srcUrl = getPPGUrl(state);
+  const nameCol = state.columns?.name_col ?? 0;
+  const pointsCol = state.columns?.points_col ?? 1;
+  const totalGames = state.total_games ?? state.total_live_games ?? null;
+  const perGameStartCol = state.per_game?.start_col ?? (nameCol + 1);
+  const pointsSlots = state.points_slots ?? listSize;
+  const autoMinGames = state.auto_qualify_rule?.min_live_games ?? 4;
+  const winners = (state.auto_qualify_rule?.winners ?? [])
+    .map(x => String(x).trim())
+    .filter(Boolean);
 
-function getPPGUrl(state) {
-  // While the season is in progress, always use the live file
-  if (!state.season_complete) {
-    return "PPG.html";
-  }
-
-  // Once season is complete, build the archived filename
-  if (typeof state.season_number === "number") {
-    return `PPG-${state.season_number}.html`;
-  }
-
-  // Safety fallback
-  return "PPG.html";
-}
-
-const srcUrl = getPPGUrl(state);
-
-
-const nameCol = state.columns?.name_col ?? 0;
-const pointsCol = state.columns?.points_col ?? 1;
-
-// Attendance is derived from per-game columns (PPG has no Games Played column)
-const totalGames = (state.total_games ?? state.total_live_games ?? null);          // e.g., 8
-const perGameStartCol = state.per_game?.start_col ?? (nameCol + 1); // e.g., 1
-
-const pointsSlots = state.points_slots ?? listSize;
-const autoMinGames = state.auto_qualify_rule?.min_live_games ?? 4;
-const winners = (state.auto_qualify_rule?.winners ?? []).map(x => String(x).trim()).filter(Boolean);
+  // Reusable exclusion list. Players remain in PPG and historical winners data,
+  // but they cannot receive either a points seat or the winner-based ninth seat.
+  const ineligibleSet = new Set(
+    (state.ineligible_players ?? [])
+      .map(nameKey)
+      .filter(Boolean)
+  );
 
   let doc;
   try {
     const resp = await fetch(srcUrl, { cache: "no-store" });
-    const html = await resp.text();
-    doc = new DOMParser().parseFromString(html, "text/html");
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    const sourceHtml = await resp.text();
+    doc = new DOMParser().parseFromString(sourceHtml, "text/html");
   } catch (e) {
     renderEmptyList(listSize);
-    setDetails('<div class="warn"><b>Note:</b> Could not load <code>' + escapeHtml(srcUrl) + '</code>. Showing empty list.</div>');
+    setDetails('<div class="warn"><b>Note:</b> Could not load <code>' +
+      escapeHtml(srcUrl) + '</code>. Showing empty list.</div>');
     return;
   }
 
   const table = doc.querySelector("#pTable");
   if (!table) {
     renderEmptyList(listSize);
-    setDetails('<div class="warn"><b>Note:</b> No <code>#pTable</code> found in <code>' + escapeHtml(srcUrl) + '</code>. Showing empty list.</div>');
+    setDetails('<div class="warn"><b>Note:</b> No <code>#pTable</code> found in <code>' +
+      escapeHtml(srcUrl) + '</code>. Showing empty list.</div>');
     return;
   }
 
   const rows = Array.from(table.querySelectorAll("tr")).filter(r => r.id !== "pColumns");
-    // Determine LIVE vs ONLINE per-game columns from PPG headers using the L/O rule
-    const liveMask = (typeof totalGames === "number")
-      ? computeLiveMaskFromHeaders(doc, perGameStartCol, totalGames)
-      : [];
-const players = rows.map(r => Array.from(r.querySelectorAll("td")).map(td => td.textContent.trim()))
-  .filter(cells => cells.length > Math.max(nameCol, pointsCol))
-  .map(cells => {
-    const attended = (typeof totalGames === "number")
-      ? countAttendedGames(cells, perGameStartCol, totalGames)
-      : 0;
+  const liveMask = typeof totalGames === "number"
+    ? computeLiveMaskFromHeaders(doc, perGameStartCol, totalGames)
+    : [];
 
-    return {
-      rawName: cells[nameCol],
-      baseName: cells[nameCol].replace(/~+/g, "").trim(),
-      points: parseNumber(cells[pointsCol]),
-      attendedGames: attended,
-      attendedLiveGames: (typeof totalGames === "number") ? countAttendedLiveGames(cells, perGameStartCol, totalGames, liveMask) : 0
-    };
-  })
-  .filter(p => p.baseName.length > 0);
+  const allPlayers = rows
+    .map(r => Array.from(r.querySelectorAll("td")).map(td => td.textContent.trim()))
+    .filter(cells => cells.length > Math.max(nameCol, pointsCol))
+    .map(cells => {
+      const attended = typeof totalGames === "number"
+        ? countAttendedGames(cells, perGameStartCol, totalGames)
+        : 0;
 
-  // Points qualifiers
-const byPoints = [...players].sort((a,b) => (b.points - a.points) || (b.attendedGames - a.attendedGames) || a.baseName.localeCompare(b.baseName));
-  const pointsQual = byPoints.slice(0, pointsSlots);
+      return {
+        rawName: cells[nameCol],
+        baseName: cleanName(cells[nameCol]),
+        points: parseNumber(cells[pointsCol]),
+        attendedGames: attended,
+        attendedLiveGames: typeof totalGames === "number"
+          ? countAttendedLiveGames(cells, perGameStartCol, totalGames, liveMask)
+          : 0
+      };
+    })
+    .filter(p => p.baseName.length > 0);
 
-  const pointsSet = new Set(pointsQual.map(p => p.baseName.toLowerCase()));
+  // This one filter automatically promotes the next eligible player in points order
+  // and prevents an ineligible winner from taking seat 9.
+  const players = allPlayers.filter(p => !ineligibleSet.has(nameKey(p.baseName)));
 
-  // Auto qualifiers
-  const winnersSet = new Set(winners.map(w => w.toLowerCase()));
-  const autoQual = players.filter(p =>
-      winnersSet.has(p.baseName.toLowerCase()) && (p.attendedLiveGames >= autoMinGames)
+  const byPoints = [...players].sort((a, b) =>
+    (b.points - a.points) ||
+    (b.attendedGames - a.attendedGames) ||
+    a.baseName.localeCompare(b.baseName)
   );
 
-  const autoSet = new Set(autoQual.map(p => p.baseName.toLowerCase()));
-  // Build field:
-  // Seats 1–8: points qualifiers
-  // Seat 9: best (by points) auto-qualifier who is NOT already qualified by points
+  const pointsQual = byPoints.slice(0, pointsSlots);
+  const winnersSet = new Set(winners.map(nameKey));
+
+  const autoQual = players.filter(p =>
+    winnersSet.has(nameKey(p.baseName)) &&
+    p.attendedLiveGames >= autoMinGames
+  );
+
   const fieldMap = new Map();
 
   for (const p of pointsQual) {
-    fieldMap.set(p.baseName.toLowerCase(), { ...p, qual: "Points" });
+    fieldMap.set(nameKey(p.baseName), { ...p, qual: "Points" });
   }
 
-  // If someone in the points qualifiers is also an auto-qualifier, annotate it.
   for (const p of autoQual) {
-    const key = p.baseName.toLowerCase();
-    if (fieldMap.has(key)) {
-      fieldMap.get(key).qual = "Points + Auto";
-    }
+    const key = nameKey(p.baseName);
+    if (fieldMap.has(key)) fieldMap.get(key).qual = "Points + Auto";
   }
 
-  // Seat 9 rule (ONLY rule): win + >= min LIVE games, only if not already qualified by points
   const autoExtras = autoQual
-    .filter(p => !fieldMap.has(p.baseName.toLowerCase()))
+    .filter(p => !fieldMap.has(nameKey(p.baseName)))
     .sort((a, b) => (b.points - a.points) || a.baseName.localeCompare(b.baseName));
 
   if (autoExtras.length > 0) {
     const seat9 = autoExtras[0];
-    fieldMap.set(seat9.baseName.toLowerCase(), { ...seat9, qual: "Seat 9", seat9Reason: "win + 4 live games" });
+    fieldMap.set(nameKey(seat9.baseName), {
+      ...seat9,
+      qual: "Seat 9",
+      seat9Reason: "win + 4 live games"
+    });
   }
 
-
-  // Render list:
-  // - If season complete: show union in points order (full), but keep it readable.
-  // - If season in progress: show union in points order, top 'listSize' as "current field",
-  //   and show overflow below (if any).
-  const field = [...fieldMap.values()].sort((a,b) => (b.points - a.points) || a.baseName.localeCompare(b.baseName));
+  const field = [...fieldMap.values()].sort((a, b) =>
+    (b.points - a.points) || a.baseName.localeCompare(b.baseName)
+  );
 
   const ol = document.getElementById("champList");
   if (!ol) return;
@@ -319,41 +299,41 @@ const byPoints = [...players].sort((a,b) => (b.points - a.points) || (b.attended
   const overflow = field.slice(listSize);
 
   function renderEntry(p) {
-    const nameHtml = crownify(p.rawName);
-
-    const ptsVal = (isFinite(p.points) ? p.points.toFixed(3) : "");
-    // During the season, if a player qualifies via the "win + 4 LIVE games" rule
-    // (i.e., Auto-qualify only), prefix the points with "win+4L".
-    const ptsDisplay = (!seasonComplete && p.qual === "Auto" && ptsVal)
-      ? ("win+4L " + ptsVal)
-      : ptsVal;
-
-    // Per your request: do not show qualification tags like [Points] in the list.
-    const seat9Suffix = p.seat9Reason ? (' (' + escapeHtml(p.seat9Reason) + ')') : '';
-    return '<li>' + nameHtml + ' (' + ptsDisplay + ')' + seat9Suffix + '</li>';
+    const ptsVal = isFinite(p.points) ? p.points.toFixed(3) : "";
+    const seat9Suffix = p.seat9Reason ? ' (' + escapeHtml(p.seat9Reason) + ')' : '';
+    return '<li>' + crownify(p.rawName) + ' (' + ptsVal + ')' + seat9Suffix + '</li>';
   }
 
   if (top.length === 0) {
     renderEmptyList(listSize);
   } else {
     ol.innerHTML = top.map(renderEntry).join("");
-    // If fewer than listSize qualifiers, pad with blanks (keeps your 9-slot look)
     if (top.length < listSize) {
-      ol.innerHTML += Array.from({ length: (listSize - top.length) }, () => "<li>&nbsp;</li>").join("");
+      ol.innerHTML += Array.from(
+        { length: listSize - top.length },
+        () => "<li>&nbsp;</li>"
+      ).join("");
     }
   }
 
   let detailsHtml = '';
-  detailsHtml += '<div class="note">Computed from <code>' + escapeHtml(srcUrl) + '</code>. Game ' + gameNumber + (seasonComplete ? ' (season complete).' : ' (season in progress).') + '</div>';
-  detailsHtml += '<div class="note">Points qualifiers: top ' + pointsSlots + ' by points. Auto-qualify: winner + ' + autoMinGames + '+ LIVE games.</div>';
+  detailsHtml += '<div class="note">Computed from <code>' + escapeHtml(srcUrl) +
+    '</code>. ' + liveGameNumber + ' LIVE game(s), ' + gameNumber +
+    ' total game(s)' + (seasonComplete ? ' (season complete).' : ' (season in progress).') +
+    '</div>';
+  detailsHtml += '<div class="note">Points qualifiers: top ' + pointsSlots +
+    ' eligible players by points. Auto-qualify: eligible winner + ' +
+    autoMinGames + '+ LIVE games.</div>';
 
   if (overflow.length > 0) {
-    detailsHtml += '<div class="warn"><b>More than ' + listSize + ' players currently qualify.</b> Showing first ' + listSize + ' above; additional qualifiers listed here:</div>';
+    detailsHtml += '<div class="warn"><b>More than ' + listSize +
+      ' players currently qualify.</b> Showing first ' + listSize +
+      ' above; additional qualifiers listed here:</div>';
     detailsHtml += '<ol>' + overflow.map(renderEntry).join('') + '</ol>';
   }
 
+  // Keep details hidden on the normal page. Uncomment for troubleshooting:
   // setDetails(detailsHtml);
-
 })();
 </script>
 
