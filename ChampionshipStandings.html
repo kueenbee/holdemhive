@@ -1,5 +1,21 @@
 <!DOCTYPE html>
 <!--
+  MAINTENANCE NOTE:
+  season_state.json uses documentation keys beginning with "_comment" because
+  standard JSON does not allow // or /* */ comments.
+
+  Required live-game logic:
+    auto_qualify_rule.live_game_number = current completed LIVE games
+    auto_qualify_rule.min_live_games    = required threshold
+
+  If live_game_number < min_live_games, this page remains empty.
+  Otherwise, it populates.
+
+  Keep real winners in auto_qualify_rule.winners.
+  Put unavailable/ineligible players in ineligible_players so the next eligible
+  player is promoted automatically.
+-->
+<!--
   Hold 'Em Hive - Championship Standings (auto-generated at runtime)
   Data source: season_state.json + TD-exported PPG/Standings HTML
 -->
@@ -163,21 +179,36 @@
 
   const listSize = state.championship_spots ?? DEFAULT_LIST_SIZE;
   const gameNumber = state.game_number ?? 0;
-  const liveGameNumber =
-    state.live_game_number ??
-    state.total_live_games_played ??
-    state.auto_qualify_rule?.live_game_number ??
-    gameNumber ??
-    0;
+
+  /*
+    IMPORTANT DATA CONTRACT — do not reinterpret these fields:
+
+    auto_qualify_rule.live_game_number
+      = the CURRENT number of completed LIVE games.
+
+    auto_qualify_rule.min_live_games
+      = the required live-game threshold.
+
+    Page-display rule:
+      if live_game_number < min_live_games, leave the page empty;
+      otherwise, calculate and display the Championship standings.
+
+    The same min_live_games value is also the minimum number of live games
+    an individual game winner must have attended to qualify for the extra seat.
+  */
+  const autoRule = state.auto_qualify_rule ?? {};
+  const liveGameNumber = autoRule.live_game_number ?? 0;
+  const minLiveGames = autoRule.min_live_games ?? 4;
 
   const seasonLabel = state.season ?? "";
   const seasonComplete = state.season_complete === true;
   setTitle((seasonLabel ? seasonLabel + " " : "") + "Championship Standings" + (seasonComplete ? " - FINAL" : ""));
 
-  if (liveGameNumber < 4) {
+  if (liveGameNumber < minLiveGames) {
     renderEmptyList(listSize);
-    setDetails('<span class="note">Championship standings will populate after the 4th LIVE game. Current: ' +
-      liveGameNumber + ' LIVE game(s), ' + gameNumber + ' total game(s).</span>');
+    setDetails('<span class="note">Championship standings will populate after ' +
+      minLiveGames + ' LIVE games. Current: ' + liveGameNumber +
+      ' LIVE game(s), ' + gameNumber + ' total game(s).</span>');
     return;
   }
 
@@ -187,7 +218,7 @@
   const totalGames = state.total_games ?? state.total_live_games ?? null;
   const perGameStartCol = state.per_game?.start_col ?? (nameCol + 1);
   const pointsSlots = state.points_slots ?? listSize;
-  const autoMinGames = state.auto_qualify_rule?.min_live_games ?? 4;
+  const autoMinGames = minLiveGames;
   const winners = (state.auto_qualify_rule?.winners ?? [])
     .map(x => String(x).trim())
     .filter(Boolean);

@@ -1,9 +1,10 @@
 {
-  "_comment": "Update this file so ChampionshipStandings.html works properly. Add any player who cannot participate to ineligible_players; keep historical winners in the winners list.",
+  "_comment": "IMPORTANT: JSON does not support true comments, so keys beginning with '_comment' are documentation only. ChampionshipStandings.html ignores them.",
+  "_comment_logic": "auto_qualify_rule.live_game_number is the CURRENT number of live games completed. auto_qualify_rule.min_live_games is the required threshold. If live_game_number is less than min_live_games, the Championship Standings page must remain empty. Otherwise, it may populate.",
+  "_comment_ineligible": "Keep actual game winners in auto_qualify_rule.winners for historical accuracy. List players who cannot participate in ineligible_players. The HTML excludes them from both points qualification and the winner-based extra seat, automatically promoting the next eligible player.",
   "season": "S15",
   "season_number": 15,
   "game_number": 8,
-  "live_game_number": 4,
   "season_complete": false,
   "championship_spots": 9,
   "points_slots": 8,
@@ -15,6 +16,8 @@
     "start_col": 2
   },
   "auto_qualify_rule": {
+    "_comment": "live_game_number = current completed LIVE games; min_live_games = threshold required before standings display and minimum live attendance for a winner's extra-seat eligibility.",
+    "live_game_number": 4,
     "min_live_games": 4,
     "winners": [
       "Ian F",
