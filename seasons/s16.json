@@ -33,12 +33,12 @@
   "_CHANGE_EVENTS_NOTE": "<<< UPDATE DATES / LABELS / WINNERS FOR NEW SEASON >>>",
   "events": [
     
-    {"date":"2026-07-23","type":"guest",  "label":"S16 G1 Hive->Webster"},    
+    {"date":"2026-07-23","type":"guest",  "label":"S16 G1 Hive->Webster", "winner": "Dennis E"},    
     {"date":"2026-07-30","type":"online", "label":"S16 G2 Hive->GG"},
     {"date":"2026-08-11","type":"hive",   "label":"S16 G3"},
-    {"date":"2026-08-13","type":"hive", "label":"S15 Championship?? \ud83d\udc51"},
-    {"date":"2026-08-20","type":"online", "label":"S16 G2 Hive->GG??"},
-    {"date":"2026-08-27","type":"guest", "label":"S16 G2 Hive->Webster??"},
+    {"date":"2026-08-13","type":"hive",   "label":"S15 Championship?? \ud83d\udc51"},
+    {"date":"2026-08-20","type":"online", "label":"S16 G4 Hive->GG??"},
+    {"date":"2026-08-27","type":"guest",  "label":"S16 G5 Hive->Webster??"},
     {"date":"2026-09-03","type":"holiday","label":"Labor Day holiday!"}
      ]
 }
