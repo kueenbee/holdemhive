@@ -34,7 +34,7 @@
   "events": [
     
     {"date":"2026-07-23","type":"guest",  "label":"S16 G1 Hive->Webster", "winner": "Dennis E"},    
-    {"date":"2026-07-30","type":"online", "label":"S16 G2 Hive->GG"},
+    {"date":"2026-07-30","type":"online", "label":"S16 G2 Hive->GG", "winner": "Tammy E"},
     {"date":"2026-08-06","type":"holiday","label":"No Game"},
     {"date":"2026-08-11","type":"hive",   "label":"S16 G3!!!"},
     {"date":"2026-08-13","type":"hive",   "label":"S15 Championship?? \ud83d\udc51"},
