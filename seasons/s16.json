@@ -41,6 +41,10 @@
     {"date":"2026-08-20","type":"online", "label":"S16 G4 Hive->GG"},
     {"date":"2026-08-27","type":"online",  "label":"S16 G5 Hive->GG"},
     {"date":"2026-09-03","type":"holiday","label":"Labor Day holiday!"},
-    {"date":"2026-09-10","type":"hive",   "label":"S16 G6"}
+    {"date":"2026-09-10","type":"hive",   "label":"S16 G6"},
+    {"date":"2026-09-17","type":"hive",   "label":"S16 G7 loc=TBD"},
+    {"date":"2026-09-24","type":"hive",   "label":"S16 G8 loc=TBD"},
+    {"date":"2026-10-01","type":"hive",   "label":"S16 Championship \ud83d\udc51"}
+  ]
      ]
 }
