@@ -4,7 +4,7 @@
   "_comment_ineligible": "Keep actual game winners in auto_qualify_rule.winners for historical accuracy. List players who cannot participate in ineligible_players. The HTML excludes them from both points qualification and the winner-based extra seat, automatically promoting the next eligible player.",
   "season": "S16",
   "season_number": 16,
-  "game_number": 3,
+  "game_number": 4,
   "season_complete": false,
   "championship_spots": 9,
   "points_slots": 8,
@@ -20,7 +20,8 @@
     "winners": [
       "Dennis E",
       "Tammy E",
-      "Zeke H"
+      "Zeke H",
+      "Tammy E"
     ]
   },
   "columns": {
