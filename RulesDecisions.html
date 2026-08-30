@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>HEH Rules Decisions | Hold 'Em Hive</title>
+  <meta
+    name="description"
+    content="Official Hold 'Em Hive House Rules Decisions"
+  />
+
+  <style>
+    :root {
+      --page-bg: #f4f1e8;
+      --surface: #ffffff;
+      --surface-muted: #f8f6f0;
+      --text: #20231f;
+      --muted: #62675f;
+      --border: #d9d4c7;
+      --accent: #8a5a16;
+      --accent-dark: #5f3b0d;
+      --accent-soft: #efe2c9;
+      --success-soft: #e7efe5;
+      --shadow: 0 10px 30px rgba(32, 35, 31, 0.08);
+      --radius: 16px;
+      --content-width: 1040px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--page-bg);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent-dark);
+    }
+
+    a:hover,
+    a:focus {
+      color: var(--accent);
+    }
+
+    .site-header {
+      background:
+        linear-gradient(rgba(23, 30, 22, 0.88), rgba(23, 30, 22, 0.88)),
+        radial-gradient(circle at top right, #7c8b5c 0, #1d251b 60%);
+      color: #ffd84d;
+      padding: 12px 20px 24px;
+    }
+
+    .header-inner,
+    .page-shell {
+      width: min(var(--content-width), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      color: #ffd84d;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .site-nav a {
+      color: #0000EE;
+      text-decoration: none;
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: #f0d9a8;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0 0 14px;
+      font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+      line-height: 1.04;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0;
+      color: #ffd84d;
+      font-size: 1.08rem;
+    }
+
+    .page-shell {
+      margin-top: 24px;
+      padding-bottom: 60px;
+    }
+
+    .notice,
+    .controls,
+    .decision-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .notice {
+      padding: 20px 22px;
+      margin-bottom: 22px;
+      border-left: 6px solid var(--accent);
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .decision-list {
+      display: grid;
+      gap: 22px;
+    }
+
+    .decision-card {
+      overflow: hidden;
+    }
+
+    .decision-header {
+      padding: 24px 24px 18px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #fff, var(--surface-muted));
+    }
+
+    .decision-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 12px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .category {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .decision-header h2 {
+      margin: 0;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.25;
+    }
+
+    .permalink {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-decoration: none;
+    }
+
+    .permalink:hover,
+    .permalink:focus {
+      text-decoration: underline;
+    }
+
+    .decision-body {
+      padding: 24px;
+    }
+
+    .decision-section + .decision-section {
+      margin-top: 20px;
+    }
+
+    .decision-section h3 {
+      margin: 0 0 7px;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+    }
+
+    .decision-section p {
+      margin: 0;
+    }
+
+    .ruling-box {
+      padding: 18px;
+      border-radius: 12px;
+      background: var(--success-soft);
+      border: 1px solid #cfdcc9;
+    }
+
+    .takeaway {
+      padding: 16px 18px;
+      border-left: 5px solid var(--accent);
+      background: var(--surface-muted);
+    }
+
+    .source-line {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .site-footer {
+      padding: 28px 20px 44px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 720px) {
+      .brand-row {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 34px;
+      }
+
+      .decision-header,
+      .decision-body {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<!--
+=========================================================================
+COPY THIS ARTICLE WHEN ADDING A NEW RULES DECISION
+
+Copy everything from <article ...> through </article>, paste it at the
+top of the published decision list, then fill in the blanks.
+
+<article
+    class="decision-card"
+    id="replace-with-unique-id"
+    data-category="dealing">
+
+  <header class="decision-header">
+    <div class="decision-meta">
+      <span class="category">Dealing</span>
+      <span>Decision Date:</span>
+      <span>Game:</span>
+    </div>
+
+    <h2>title here...</h2>
+
+  </header>
+
+  <div class="decision-body">
+
+    <section class="decision-section">
+      <h3>What Happened</h3>
+      <p></p>
+    </section>
+
+    <section class="decision-section ruling-box">
+      <h3>House Ruling</h3>
+      <p></p>
+    </section>
+
+    <section class="decision-section">
+      <h3>Reasoning</h3>
+      <p></p>
+    </section>
+
+    <section class="decision-section takeaway">
+      <h3>What Players Should Remember</h3>
+      <p></p>
+    </section>
+
+    <section class="decision-section source-line">
+      <h3>Related Rule or Source</h3>
+      <p></p>
+    </section>
+
+  </div>
+
+</article>
+
+=========================================================================
+END TEMPLATE
+=========================================================================
+-->
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-row">
+        <div class="brand">Hold 'Em Hive</div>
+
+        <!-- Replace these links with the actual pages on your site. -->
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="https://holdemhive.com/">Home</a>
+          <a href="https://holdemhive.com/TDA%20Rules-2024-V1.pdf">TDA Rules</a>
+          <a href="https://holdemhive.com/LeagueRules.pdf">League Rules</a>
+        </nav>
+      </div>
+
+      <span class="eyebrow">League Reference</span>
+      <h1>Rules Decisions</h1>
+      <p class="intro">
+        These are Hold 'Em Hive House rulings. They supplement the league rules. 
+      </p>
+    </div>
+  </header>
+
+  <main class="page-shell">
+<section class="decision-list" id="decision-list">
+
+      <!-- ==========================================================
+           NEW DECISIONS GO HERE
+
+           Paste each NEW completed <article> immediately BELOW this
+           comment so the newest decision appears first.
+           ========================================================== -->
+
+      <!--
+        HOW TO ADD A NEW DECISION
+
+        1. Copy one complete <article class="decision-card"> block.
+        2. Change the article id to a short, unique value.
+        3. Change data-category to one of:
+           dealing
+           betting
+           showdown
+           player-conduct
+           tournament-procedure
+        4. Replace the title, date, situation, ruling, reasoning, takeaway,
+           and source information.
+        5. Keep the newest decision at the top of this list.
+      -->
+
+      <article
+        class="decision-card"
+        id="exposed-card-overlooked-during-deal"
+        data-category="dealing"
+      >
+        <header class="decision-header">
+          <div class="decision-meta">
+            <span class="category">Dealing</span>
+            <span>Decision date: August 27, 2026</span>
+            <span>Game: Regular League Event</span>
+          </div>
+
+          <h2>Exposed Card Overlooked as Burn Card</h2>
+        </header>
+
+        <div class="decision-body">
+          <section class="decision-section">
+            <h3>What happened</h3>
+            <p>
+              A card was exposed while being dealt to a player and was set aside
+              to serve as the burn card before the flop. The dealer then
+              mistakenly burned another card before dealing the flop. The error
+              was not discovered until after the turn had been dealt. 
+            </p>
+          </section>
+
+          <section class="decision-section ruling-box">
+            <h3>House ruling</h3>
+            <p>
+              The completed flop and turn remained in place. The exposed card
+              remained out of play, and the river card was dealt without burning
+              another card.  In the future, a card should be burned before dealing 
+              the river.
+            </p>
+          </section>
+
+          <section class="decision-section">
+            <h3>Reasoning</h3>
+            <p>
+              TDA rule 35.D is clear that once substantial action has occured 
+              in a hand, the hand must be played out as equitably as possible 
+              (unless the deck is fouled).
+            </p>
+          </section>
+
+          
+        </div>
+      </article>
+</section>
+</main>
+
+  <footer class="site-footer">
+    © <span id="current-year"></span> Hold 'Em Hive. All house rulings are subject
+    to Tournament Director discretion.
+  </footer>
+
+  <script>
+document.getElementById("current-year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
