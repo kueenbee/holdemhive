@@ -41,9 +41,9 @@
     {"date":"2026-08-20","type":"online", "label":"S16 G4 Hive->GG", "winner": "Tammy E"},
     {"date":"2026-08-27","type":"hive",  "label":"S16 G5 Casino Night!", "winner": "Dennis E"},
     {"date":"2026-09-03","type":"holiday","label":"Labor Day holiday!"},
-    {"date":"2026-09-10","type":"hive",   "label":"S16 G6", "winner": "Dennis E"},
+    {"date":"2026-09-10","type":"hive",   "label":"S16 G6 Casino Night", "winner": "Dennis E"},
     {"date":"2026-09-17","type":"online",  "label":"S16 G7 Hive->GG"},
-    {"date":"2026-09-24","type":"guest", "label":"S16 G8 Hive-Webster"},
+    {"date":"2026-09-24","type":"guest", "label":"S16 G8 Hive->Webster"},
     {"date":"2026-10-01","type":"hive",   "label":"S17 G1"},
     {"date":"2026-10-03","type":"hive",   "label":"TOC #3"},
     {"date":"2026-10-29","type":"hive",   "label":"S16 Championship?? \ud83d\udc51"}
