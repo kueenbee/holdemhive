@@ -44,6 +44,8 @@
     {"date":"2026-09-10","type":"hive",   "label":"S16 G6", "winner": "Dennis E"},
     {"date":"2026-09-17","type":"online",  "label":"S16 G7 loc=Hive->GG"},
     {"date":"2026-09-24","type":"guest", "label":"S16 G8 loc=Hive-Webster"},
-    {"date":"2026-10-01","type":"hive",   "label":"S16 Championship?? \ud83d\udc51"}
+    {"date":"2026-10-01","type":"hive",   "label":"S17 G1"},
+    {"date":"2026-10-03","type":"hive",   "label":"TOC #3"},
+    {"date":"2026-10-29","type":"hive",   "label":"S16 Championship?? \ud83d\udc51"}
   ]
 }
