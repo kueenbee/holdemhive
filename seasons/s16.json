@@ -5,6 +5,8 @@
   "title": "Kueen$Bees Hold Em Hive \u2014 Season 16 Schedule",
   "_CHANGE_TITLE": "<<< UPDATE SEASON NUMBER IN TITLE >>>",
   "subtitle": null,
+  "_MONTH_ORDER_NOTE": "Valid values: forward or reverse",
+  "month_order": "reverse",
   "disclaimer": "Schedule subject to change \u2014 refer to this page for updates.",
   "links": [
     {"label":"Home","href":"index.html"},

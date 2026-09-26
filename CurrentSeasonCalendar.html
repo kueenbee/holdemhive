@@ -300,11 +300,18 @@ function groupEventsByMonth(events){
   return [...byMonth.entries()].sort((a,b)=>a[0].localeCompare(b[0]));
 }
 
-function renderCalendar(events, assets, disclaimerText){
+function renderCalendar(events, assets, disclaimerText, monthOrder){
   const monthsEl = document.getElementById("months");
   monthsEl.innerHTML = "";
 
-  const entries = groupEventsByMonth(events || []);
+  let entries = groupEventsByMonth(events || []);
+
+  // Month display order is controlled by the season JSON.
+  // Valid values: "forward" (oldest month first) or "reverse" (newest month first).
+  // If month_order is missing or invalid, default to forward.
+  if (monthOrder === "reverse") {
+    entries.reverse();
+  }
 
   for(const [key, monthEvents] of entries){
     const [yy, mm] = key.split("-").map(Number);
@@ -517,7 +524,12 @@ async function loadSeason(){
   ]);
 
   // Calendar
-  renderCalendar(data.events || [], data.assets || {}, data.disclaimer || "");
+  renderCalendar(
+    data.events || [],
+    data.assets || {},
+    data.disclaimer || "",
+    data.month_order || "forward"
+  );
 
   status.textContent = "";
 }
