@@ -161,7 +161,7 @@
 
   function getPPGUrl(state) {
     if (!state.season_complete) return "PPG.html";
-    if (typeof state.season_number === "number") return `PPG-${state.season_number}.html`;
+    if (typeof state.season_number === "number") return `PPG-S${state.season_number}.html`;
     return "PPG.html";
   }
 
