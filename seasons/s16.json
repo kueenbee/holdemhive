@@ -51,6 +51,6 @@
     {"date":"2026-10-08","type":"online", "label":"S17 G2 ONLINE"},
     {"date":"2026-10-15","type":"guest", "label":"S17 G3 Webster!!"},
     {"date":"2026-10-22","type":"hive",   "label":"S17 G4 Casino Night!!"},
-    {"date":"2026-10-29","type":"hive",   "label":"S16 Championship \ud83d\udc51", "winner": "nobody","season_Championship":true}
+    {"date":"2026-10-29","type":"hive",   "label":"S16 Championship \ud83d\udc51", "winner": "HiveKueen","season_championship":true}
   ]
 }
