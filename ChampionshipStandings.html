@@ -52,6 +52,9 @@
     <h2 id="pageTitle">Season Championship Standings</h2>
     <p id="champDate" class="champ-date" style="display:none;"></p>
 
+    <p>Prior to the 4th live game, view the <a href="PPG.html">Points Per Game page</a>
+      (sorted on the Points column) to see the Championship standings.</p>
+
     <ol id="champList"></ol>
     <div id="details" class="legend"></div>
 
@@ -64,9 +67,6 @@
     <h2>Qualification Rules</h2>
 
     <p>Championship qualification will be based on points only through the 4th LIVE game of the season.</p>
-
-    <p>Prior to the 4th live game, view the <a href="PPG.html">Points Per Game page</a>
-      (sorted on the Points column) to see the Championship standings.</p>
 
     <p>League Rule: The Season Championship is an 8MAX tournament. However, a player who wins a game and attends 4 LIVE games but doesn't otherwise qualify will secure a 9th seat at the table (ties broken by points)</p>
   </div>
@@ -354,10 +354,21 @@
   } else {
     ol.innerHTML = top.map(renderEntry).join("");
     if (top.length < listSize) {
-      ol.innerHTML += Array.from(
-        { length: listSize - top.length },
-        () => "<li>&nbsp;</li>"
-      ).join("");
+      const blanksNeeded = listSize - top.length;
+      const blankEntries = [];
+
+      for (let i = 0; i < blanksNeeded; i++) {
+        // The 9th seat is the winner-based extra seat. If the season is final
+        // and nobody earned it, explicitly mark that seat as unavailable.
+        const seatNumber = top.length + i + 1;
+        if (seasonComplete && seatNumber === 9) {
+          blankEntries.push("<li>NA for this season</li>");
+        } else {
+          blankEntries.push("<li>&nbsp;</li>");
+        }
+      }
+
+      ol.innerHTML += blankEntries.join("");
     }
   }
 
