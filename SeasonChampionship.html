@@ -27,7 +27,7 @@
 
         <p><a href="index.html">Home</a>&nbsp;&nbsp;&nbsp;<a href="Standings.html">Season Standings</a>&nbsp;&nbsp;&nbsp;<a href="CurrentSeasonCalendar.html">Season Calendar</a></p>
 
-        <h1>🏆 About the Season Championships </h1>
+        <h1>🏆 Season Championship</h1>
 
         <h2>💰 Champ's Kicker Prize Pool</h2>
 
@@ -61,13 +61,15 @@ fetch('season_state.json', { cache: 'no-store' })
     return response.json();
   })
   .then(data => {
-    const amount = data.champs_kicker_prize_pool;
-    const seasonNumber = data.season_number;
+    const amount = data.champs_kicker?.prize_pool;
+    const seasonNumber = data.champs_kicker?.season;
 
     document.getElementById('kickerAmount').textContent =
       (amount === null || amount === undefined || amount === '')
         ? 'TBD'
-        : '$' + Number(amount).toLocaleString('en-US');
+        : (typeof amount === 'number'
+            ? '$' + amount.toLocaleString('en-US')
+            : amount);
 
     if (seasonNumber !== null && seasonNumber !== undefined && seasonNumber !== '') {
       document.getElementById('seasonLabel').textContent = 'Season ' + seasonNumber;
