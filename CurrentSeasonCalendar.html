@@ -306,7 +306,7 @@ function groupEventsByMonth(events){
   return [...byMonth.entries()].sort((a,b)=>a[0].localeCompare(b[0]));
 }
 
-function renderCalendar(events, assets, disclaimerText, monthOrder){
+function renderCalendar(events, assets, disclaimerText, monthOrder, legendItems){
   const monthsEl = document.getElementById("months");
   monthsEl.innerHTML = "";
 
@@ -356,6 +356,34 @@ function renderCalendar(events, assets, disclaimerText, monthOrder){
     const meta = document.createElement("div");
     meta.className = "month-meta";
     meta.innerHTML = `<div>Last updated: ${formatLastUpdated()}</div>`;
+
+    // Repeat the Game Location Key in each month header
+    if(legendItems && legendItems.length){
+      const monthLegend = document.createElement("div");
+      monthLegend.style.marginTop = "6px";
+      monthLegend.style.display = "flex";
+      monthLegend.style.justifyContent = "flex-end";
+      monthLegend.style.alignItems = "center";
+      monthLegend.style.gap = "10px";
+      monthLegend.style.flexWrap = "wrap";
+      monthLegend.style.fontSize = ".82rem";
+
+      const legendLabel = document.createElement("span");
+      legendLabel.textContent = "Game Location Key:";
+      legendLabel.style.fontWeight = "700";
+      monthLegend.appendChild(legendLabel);
+
+      for(const item of legendItems){
+        const legendItem = document.createElement("span");
+        const dot = document.createElement("span");
+        dot.className = "dot " + item.key;
+        legendItem.appendChild(dot);
+        legendItem.appendChild(document.createTextNode(item.label));
+        monthLegend.appendChild(legendItem);
+      }
+
+      meta.appendChild(monthLegend);
+    }
 
     head.appendChild(left);
     head.appendChild(meta);
@@ -541,7 +569,12 @@ async function loadSeason(){
     data.events || [],
     data.assets || {},
     data.disclaimer || "",
-    data.month_order || "forward"
+    data.month_order || "forward",
+    data.legend || [
+      {key:"hive", label:"Hive"},
+      {key:"online", label:"Online"},
+      {key:"guest", label:"Guest Host"}
+    ]
   );
 
   status.textContent = "";
