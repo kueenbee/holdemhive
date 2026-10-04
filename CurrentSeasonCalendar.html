@@ -266,6 +266,8 @@ function renderLinks(links){
   const el = document.getElementById("pageLinks");
   if(!el) return;
   el.innerHTML = "";
+  const label = document.createElement("span");label.textContent = "Game Location Key:";label.style.fontWeight = "700";
+el.appendChild(label);
   if(!links || !links.length) return;
   for(const l of links){
     const a = document.createElement("a");
