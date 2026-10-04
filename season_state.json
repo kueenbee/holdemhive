@@ -5,7 +5,10 @@
   "season": "S16",
   "season_number": 16,
   "game_number": 8,
-  "champs_kicker_prize_pool":"Starts in Season 17",
+  "champs_kicker": {
+    "season": 17,
+    "prize_pool": "Starts in Season 17"
+  },
   "season_complete": true,
   "championship_date": "Thursday October 29th, 2026",
   "championship_spots": 9,
