@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Season Championship | Hold ’Em Hive</title>
+  <meta name="description" content="Hold Em Hive Season Championship information and current Champ's Kicker prize pool.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header style="margin:0; padding:0; text-align:center;">
+  <h1 style="margin:0; padding:0;">
+    <a href="index.html" aria-label="Hold Em Hive home page">
+      <img
+        src="images/Kueen$BeesPokerPatch.png"
+        alt="K$B Hold Em Hive"
+        style="height:300px; max-width:100%; width:auto; display:block; margin:0 auto;">
+    </a>
+  </h1>
+</header>
+
+<main>
+  <div class="container">
+    <div class="grid">
+      <div class="grid-item">
+
+        <p><a href="index.html">Home</a>&nbsp;&nbsp;&nbsp;<a href="Standings.html">Season Standings</a>&nbsp;&nbsp;&nbsp;<a href="CurrentSeasonCalendar.html">Season Calendar</a></p>
+
+        <h1>🏆 Season Championship</h1>
+
+        <h2>💰 Champ's Kicker Prize Pool</h2>
+
+        <div style="text-align:center; margin:24px 0;">
+          <div style="font-size:1.05em; margin-bottom:6px;">Current Season Prize Pool</div>
+          <div id="kickerAmount" style="font-size:2.4em; font-weight:bold;">Loading...</div>
+          <div id="seasonLabel" style="margin-top:6px;"></div>
+        </div>
+
+        <p>The Champ's Kicker is an additional prize pool for the Hold ’Em Hive Season Championship. The current season total shown above is updated from the league's season data.</p>
+
+        <p>
+          <a href="SeasonalChampDetails.pdf">🏆 Season Championship Details</a>
+        </p>
+
+        <p>
+          <a href="SCPrizePoolDescription.pdf">💰 Champ's Kicker Prize Pool Description</a>
+        </p>
+
+        <p><a href="index.html">← Back to Hold ’Em Hive Home</a></p>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+fetch('season_state.json', { cache: 'no-store' })
+  .then(response => {
+    if (!response.ok) throw new Error('Could not load season_state.json');
+    return response.json();
+  })
+  .then(data => {
+    const amount = data.champs_kicker_prize_pool;
+    const seasonNumber = data.season_number;
+
+    document.getElementById('kickerAmount').textContent =
+      (amount === null || amount === undefined || amount === '')
+        ? 'TBD'
+        : '$' + Number(amount).toLocaleString('en-US');
+
+    if (seasonNumber !== null && seasonNumber !== undefined && seasonNumber !== '') {
+      document.getElementById('seasonLabel').textContent = 'Season ' + seasonNumber;
+    }
+  })
+  .catch(error => {
+    console.error(error);
+    document.getElementById('kickerAmount').textContent = 'TBD';
+  });
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C1LX3R24E8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-C1LX3R24E8');
+</script>
+
+</body>
+</html>
