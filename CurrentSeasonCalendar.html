@@ -406,20 +406,27 @@ function renderCalendar(events, assets, disclaimerText, monthOrder){
           const isSeasonChampionship =
             ev.season_championship === true;
 
+          const isTOCChampionship =
+            ev.toc_championship === true;
+
           const ringSrc =
-            isSeasonChampionship && assets && assets.season_champion_ring
-              ? assets.season_champion_ring
-              : assets && assets.winner_ring
-                ? assets.winner_ring
-                : "";
+            isTOCChampionship && assets && assets.toc_champion_ring
+              ? assets.toc_champion_ring
+              : isSeasonChampionship && assets && assets.season_champion_ring
+                ? assets.season_champion_ring
+                : assets && assets.winner_ring
+                  ? assets.winner_ring
+                  : "";
 
           if(ringSrc){
             const ringImg = document.createElement("img");
             ringImg.src = ringSrc;
             ringImg.alt =
-              isSeasonChampionship
-                ? "Season Champion Ring"
-                : "Game Champion Ring";
+              isTOCChampionship
+                ? "TOC Champion Ring"
+                : isSeasonChampionship
+                  ? "Season Champion Ring"
+                  : "Game Champion Ring";
             ringImg.style.height = "54px";
             ringImg.style.width = "auto";
             ringImg.style.display = "block";
