@@ -70,7 +70,9 @@ fetch('season_state.json', { cache: 'no-store' })
         : '$' + amount;
 
     if (seasonNumber !== null && seasonNumber !== undefined && seasonNumber !== '') {
-      document.getElementById('seasonLabel').textContent = 'Season ' + seasonNumber;
+      document.getElementById('poolTitle').textContent =
+        'Current Season ' + seasonNumber + ' Prize Pool';
+      document.getElementById('seasonLabel').textContent = '';
     }
   })
   .catch(error => {
