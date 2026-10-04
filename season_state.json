@@ -6,10 +6,11 @@
   "season_number": 16,
   "game_number": 8,
   "season_complete": true,
+  "championship_date": "Saturday, November 21, 2026",
   "championship_spots": 9,
   "points_slots": 8,
   "total_games": 8,
-  "ineligible_players": [  ],
+  "ineligible_players": [],
   "per_game": {
     "start_col": 2
   },

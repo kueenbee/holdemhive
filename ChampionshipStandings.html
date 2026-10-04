@@ -36,6 +36,7 @@
     .note { font-size: 10.5pt; color: #333; }
     .legend { font-size: 10.5pt; color: #333; margin-top: 6px; }
     .toc-crown { font-size: 0.7em; vertical-align: super; margin-left: 2px; }
+    .champ-date { font-size: 12pt; margin: 6px 0 14px 0; }
     .nav { text-align:center; margin-top: 18px; }
     .nav a { display:inline-block; margin: 0 10px; }
     .warn { background:#fff6d8; border:1px solid #e7d28a; padding:10px 12px; border-radius:6px; }
@@ -49,7 +50,7 @@
     <img class="scroll" src="images/season-champion_scroll.gif" alt="Season Champion scroll">
 
     <h2 id="pageTitle">Season Championship Standings</h2>
-    <p class="champ-date"><strong>Season Championship: Saturday, October 29th, 2026 Live @ the Hive!</strong></p>
+    <p id="champDate" class="champ-date" style="display:none;"></p>
 
     <p>Championship qualification will be based on points only through the 4th LIVE game of the season.</p>
 
@@ -203,6 +204,16 @@
 
   const seasonLabel = state.season ?? "";
   const seasonComplete = state.season_complete === true;
+
+  // Optional season-specific Championship date from season_state.json.
+  // Example: "championship_date": "Saturday, November 21, 2026"
+  const championshipDate = String(state.championship_date ?? "").trim();
+  const champDateEl = document.getElementById("champDate");
+  if (champDateEl && championshipDate) {
+    champDateEl.innerHTML = '<strong>Season Championship: ' +
+      escapeHtml(championshipDate) + '</strong>';
+    champDateEl.style.display = "block";
+  }
   setTitle((seasonLabel ? seasonLabel + " " : "") + "Championship Standings" + (seasonComplete ? " - FINAL" : ""));
 
   if (liveGameNumber < minLiveGames) {
