@@ -7,7 +7,7 @@
   "subtitle": null,
   "_MONTH_ORDER_NOTE": "Valid values: forward or reverse",
   "month_order": "forward",
-  "disclaimer": "Schedule subject to change \u2014 refer to this page for updates.",
+  "disclaimer": "Schedule subject to change.",
   "links": [
     {"label":"Home","href":"index.html"},
     {"label":"Season Standings","href":"season-standings.html"}

@@ -76,7 +76,7 @@
 
     .day{
 position:relative;
-min-height:72px;
+min-height:92px;
       border-right:1px solid rgba(255,255,255,.06);
       border-bottom:1px solid rgba(255,255,255,.06);
       padding:8px;
@@ -163,6 +163,29 @@ min-height:72px;
     .day.has-badge .event{
       margin-top: calc(var(--badge-h) + 6px);
     }
+
+
+    /* On phones, keep month title/update on the first row and give the location key a full-width row. */
+    @media (max-width: 600px){
+      .month-head{
+        display:grid;
+        grid-template-columns:minmax(0,1fr) auto;
+        align-items:start;
+      }
+      .month-meta{ display:contents; }
+      .month-last-updated{
+        grid-column:2;
+        grid-row:1;
+        text-align:right;
+      }
+      .month-location-key{
+        grid-column:1 / -1;
+        grid-row:2;
+        justify-content:flex-start !important;
+        width:100%;
+      }
+    }
+
 </style>
 </head>
 
@@ -180,8 +203,6 @@ min-height:72px;
      <a href="index.html">Home</a>
      <a id="seasonStandingsLink" href="PPG.html">Season Standings</a>
    </div>
-
-    <div class="legend" id="legend"></div>
 
     <div class="months" id="months"></div>
   </div>
@@ -276,25 +297,6 @@ function renderLinks(links){
   }
 }
 
-function renderLegend(legendItems){
-  const el = document.getElementById("legend");
-  el.innerHTML = "";
-   const label = document.createElement("span");
-  label.textContent = "Game Location Key:";
-  label.style.fontWeight = "700";
-  el.appendChild(label);
-
-  if(!legendItems || !legendItems.length) return;
-  for(const item of legendItems){
-    const span = document.createElement("span");
-    const dot = document.createElement("span");
-    dot.className = "dot " + item.key;
-    span.appendChild(dot);
-    span.appendChild(document.createTextNode(item.label));
-    el.appendChild(span);
-  }
-}
-
 function groupEventsByMonth(events){
   const byMonth = new Map();
   for(const e of events){
@@ -355,11 +357,12 @@ function renderCalendar(events, assets, disclaimerText, monthOrder, legendItems)
 
     const meta = document.createElement("div");
     meta.className = "month-meta";
-    meta.innerHTML = `<div>Last updated: ${formatLastUpdated()}</div>`;
+    meta.innerHTML = `<div class="month-last-updated">Last updated: ${formatLastUpdated()}</div>`;
 
     // Repeat the Game Location Key in each month header
     if(legendItems && legendItems.length){
       const monthLegend = document.createElement("div");
+      monthLegend.className = "month-location-key";
       monthLegend.style.marginTop = "6px";
       monthLegend.style.display = "flex";
       monthLegend.style.justifyContent = "flex-end";
@@ -558,11 +561,6 @@ async function loadSeason(){
 
   // Links + legend
   renderLinks(data.links || []);
-  renderLegend(data.legend || [
-    {key:"hive", label:"Hive"},
-    {key:"online", label:"Online"},
-    {key:"guest", label:"Guest Host"}
-  ]);
 
   // Calendar
   renderCalendar(
