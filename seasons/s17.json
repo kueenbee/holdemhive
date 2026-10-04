@@ -1,12 +1,12 @@
 {
   "_NEW_SEASON_CHANGE_GUIDE": "There are 5 required update lines for a new season. Update the fields on lines: 2, 3, 4, 5, 29.",
-  "season": 15,
+  "season": 17,
   "_CHANGE_SEASON_NUMBER": "<<< CHANGE THIS FOR NEW SEASON >>>",
   "title": "Kueen$Bees Hold Em Hive \u2014 Season 17 Schedule",
   "_CHANGE_TITLE": "<<< UPDATE SEASON NUMBER IN TITLE >>>",
   "subtitle": null,
   "_MONTH_ORDER_NOTE": "Valid values: forward or reverse",
-  "month_order": "reverse",
+  "month_order": "forward",
   "disclaimer": "Schedule subject to change \u2014 refer to this page for updates.",
   "links": [
     {"label":"Home","href":"index.html"},
@@ -15,7 +15,8 @@
   "assets": {
     "logo": "images/Kueen$BeesPokerPatch.png",
     "winner_ring": "images/GRingEmoji-Hive.png",
-      "season_champion_ring": "images/SRing-Hive.png"
+    "season_champion_ring": "images/SRing-Hive.png",
+    "toc_champion_ring": "images/TOCRing-Hive.png"
   },
   "theme": {
     "bg": "#0b0b0d",
@@ -35,20 +36,16 @@
   "_CHANGE_EVENTS_NOTE": "<<< UPDATE DATES / LABELS / WINNERS FOR NEW SEASON >>>",
   "events": [
     
-    {"date":"2026-07-23","type":"guest",  "label":"S16 G1 Hive->Webster", "winner": "Dennis E"},    
-    {"date":"2026-07-30","type":"online", "label":"S16 G2 Hive->GG", "winner": "Tammy E"},
-    {"date":"2026-08-06","type":"holiday","label":"No Game"},
-    {"date":"2026-08-11","type":"hive",   "label":"S16 G3", "winner": "Zeke H"},
-    {"date":"2026-08-13","type":"hive",   "label":"S15 Championship", "winner": "Nolan B!!!"},
-    {"date":"2026-08-20","type":"online", "label":"S16 G4 Hive->GG", "winner": "Tammy E"},
-    {"date":"2026-08-27","type":"hive",  "label":"S16 G5 Casino Night!", "winner": "Dennis E"},
-    {"date":"2026-09-03","type":"holiday","label":"Labor Day holiday!"},
-    {"date":"2026-09-10","type":"hive",   "label":"S16 G6 Casino Night", "winner": "Dennis E"},
-    {"date":"2026-09-17","type":"online",  "label":"S16 G7 Hive->GG", "winner": "Kay C~~"},
-    {"date":"2026-09-24","type":"guest", "label":"S16 G8 Hive->Webster", "winner": "Zeke H"},
-    {"date":"2026-10-01","type":"hive",   "label":"S17 G1"},
-    {"date":"2026-10-03","type":"hive",   "label":"TOC #3"},
-    {"date":"2026-10-08","type":"online", "label":"S17 G2"},
-    {"date":"2026-10-29","type":"hive",   "label":"S16 Championship?? \ud83d\udc51"}
+    {"date":"2026-10-01","type":"hive",   "label":"S17 G1", "winner": "Kay C~~"},
+    {"date":"2026-10-03","type":"hive",   "label":"TOC #3", "winner": "Nolan B~", "toc_championship":true},
+    {"date":"2026-10-08","type":"online", "label":"S17 G2 Hive->GG"},
+    {"date":"2026-10-15","type":"guest",  "label":"S17 G3 Hive->Webster!!"},
+    {"date":"2026-10-22","type":"hive",   "label":"S17 G4 Casino Night!!"},
+    {"date":"2026-10-29","type":"hive",   "label":"S16 Championship \ud83d\udc51", "season_Championship":true},
+    {"date":"2026-11-05","type":"hive",   "label":"S17 G5"},
+    {"date":"2026-11-12","type":"hive",   "label":"S17 G6 Hive->Webster??"},
+    {"date":"2026-11-19","type":"hive",   "label":"S17 G7 Casino Night"},
+    {"date":"2026-11-26","type":"holiday","label":"Happy Thanksgiving!!"},
+    {"date":"2026-12-03","type":"hive",   "label":"S17 G8"}
   ]
 }
