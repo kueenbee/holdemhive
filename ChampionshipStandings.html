@@ -52,13 +52,6 @@
     <h2 id="pageTitle">Season Championship Standings</h2>
     <p id="champDate" class="champ-date" style="display:none;"></p>
 
-    <p>Championship qualification will be based on points only through the 4th LIVE game of the season.</p>
-
-    <p>Prior to the 4th live game, view the <a href="PPG.html">Points Per Game page</a>
-      (sorted on the Points column) to see the Championship standings.</p>
-
-    <p>League Rule: The Season Championship is an 8MAX tournament. However, a player who wins a game and attends 4 LIVE games but doesn't otherwise qualify will secure a 9th seat at the table (ties broken by points)</p>
-
     <ol id="champList"></ol>
     <div id="details" class="legend"></div>
 
@@ -67,6 +60,15 @@
       <a href="PPG.html">Points/Game</a>
       <a href="Standings.html">Standings</a>
     </div>
+
+    <h2>Qualification Rules</h2>
+
+    <p>Championship qualification will be based on points only through the 4th LIVE game of the season.</p>
+
+    <p>Prior to the 4th live game, view the <a href="PPG.html">Points Per Game page</a>
+      (sorted on the Points column) to see the Championship standings.</p>
+
+    <p>League Rule: The Season Championship is an 8MAX tournament. However, a player who wins a game and attends 4 LIVE games but doesn't otherwise qualify will secure a 9th seat at the table (ties broken by points)</p>
   </div>
 
 <script>
@@ -210,7 +212,7 @@
   const championshipDate = String(state.championship_date ?? "").trim();
   const champDateEl = document.getElementById("champDate");
   if (champDateEl && championshipDate) {
-    champDateEl.innerHTML = '<strong>Season Championship date: ' +
+    champDateEl.innerHTML = '<strong>Season Championship Date: ' +
       escapeHtml(championshipDate) + '</strong>';
     champDateEl.style.display = "block";
   }

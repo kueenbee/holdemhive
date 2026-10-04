@@ -165,21 +165,16 @@ min-height:92px;
     }
 
 
-    /* On phones, keep month title/update on the first row and give the location key a full-width row. */
+    /* On phones, let the month title use the full width and put the location key on its own row. */
     @media (max-width: 600px){
       .month-head{
         display:grid;
-        grid-template-columns:minmax(0,1fr) auto;
+        grid-template-columns:1fr;
         align-items:start;
       }
       .month-meta{ display:contents; }
-      .month-last-updated{
-        grid-column:2;
-        grid-row:1;
-        text-align:right;
-      }
       .month-location-key{
-        grid-column:1 / -1;
+        grid-column:1;
         grid-row:2;
         justify-content:flex-start !important;
         width:100%;
@@ -357,7 +352,6 @@ function renderCalendar(events, assets, disclaimerText, monthOrder, legendItems)
 
     const meta = document.createElement("div");
     meta.className = "month-meta";
-    meta.innerHTML = `<div class="month-last-updated">Last updated: ${formatLastUpdated()}</div>`;
 
     // Repeat the Game Location Key in each month header
     if(legendItems && legendItems.length){
