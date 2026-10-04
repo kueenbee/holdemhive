@@ -210,7 +210,7 @@
   const championshipDate = String(state.championship_date ?? "").trim();
   const champDateEl = document.getElementById("champDate");
   if (champDateEl && championshipDate) {
-    champDateEl.innerHTML = '<strong>Season Championship: ' +
+    champDateEl.innerHTML = '<strong>Season Championship date: ' +
       escapeHtml(championshipDate) + '</strong>';
     champDateEl.style.display = "block";
   }
