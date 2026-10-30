@@ -2,15 +2,15 @@
   "_comment": "IMPORTANT: JSON does not support true comments, so keys beginning with '_comment' are documentation only. ChampionshipStandings.html ignores them.",
   "_comment_logic": "auto_qualify_rule.live_game_number is the CURRENT number of live games completed. auto_qualify_rule.min_live_games is the required threshold. If live_game_number is less than min_live_games, the Championship Standings page must remain empty. Otherwise, it may populate.",
   "_comment_ineligible": "Keep actual game winners in auto_qualify_rule.winners for historical accuracy. List players who cannot participate in ineligible_players. The HTML excludes them from both points qualification and the winner-based extra seat, automatically promoting the next eligible player.",
-  "season": "S16",
-  "season_number": 16,
-  "game_number": 8,
+  "season": "S17",
+  "season_number": 17,
+  "game_number": 4,
   "champs_kicker": {
     "season": 17,
     "prize_pool": "30+$22+$24+$30 = $106"
   },
-  "season_complete": true,
-  "championship_date": "Thursday October 29th, 2026",
+  "season_complete": false,
+  "championship_date": "",
   "championship_spots": 9,
   "points_slots": 8,
   "total_games": 8,
@@ -20,16 +20,12 @@
   },
   "auto_qualify_rule": {
     "_comment": "live_game_number = current completed LIVE games; min_live_games = threshold required before standings display and minimum live attendance for a winner's extra-seat eligibility.",
-    "live_game_number": 5,
+    "live_game_number": 3,
     "min_live_games": 4,
     "winners": [
-      "Dennis E",
-      "Tammy E",
-      "Zeke H",
-      "Tammy E",
-      "Dennis E",
-      "Dennis E",
       "Kay C~~",
+      "Doug B",
+      "Jeff K",
       "Zeke H"
     ]
   },
