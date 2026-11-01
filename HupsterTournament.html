@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   HUPster | Hold ’Em Hive Heads-Up League
+  </title>
+  <style>
+   :root {
+  color-scheme:dark;
+  --bg:#080808;
+  --panel:#151515;
+  --panel2:#222018;
+  --text:#fdf03ff6;
+  --muted:#fdf03ff6;
+  --gold:#fdf03ff6;
+  --line:#615512;
+  --accent:#fdf03ff6
+}
+
+* {
+  box-sizing:border-box
+}
+
+body {
+  margin:0;
+  background:radial-gradient(ellipse at 50% -20%,#332c00 0%,var(--bg) 55%);
+  color:var(--text);
+  font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif
+}
+
+main {
+  max-width:930px;
+  margin:0 auto;
+  padding:38px 20px 70px
+}
+
+header {
+  text-align:center;
+  padding:10px 12px 18px
+}
+
+.eyebrow {
+  font-size:.8rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:800
+}
+
+h1 {
+   color:var(--gold);
+  font-size:clamp(2.6rem,8vw,4.7rem);
+  line-height:1.05;
+  margin:12px 0 12px;
+  letter-spacing:-.045em
+}
+
+header p {
+  color:var(--muted);
+  max-width:650px;
+  margin:0 auto
+}
+
+.pill {
+  display:inline-block;
+  margin-top:18px;
+  border:1px solid #a48e00;
+  border-radius:99px;
+  padding:5px 14px;
+  color:var(--gold);
+  font-size:.82rem
+}
+
+.toolbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin:20px 0 14px
+}
+
+.toolbar span {
+  font-size:.85rem;
+  color:var(--muted)
+}
+
+button {
+  background:transparent;
+  color:var(--gold);
+  border:1px solid #a48e00;
+  border-radius:9px;
+  padding:8px 13px;
+  cursor:pointer;
+  font:inherit;
+  font-size:.85rem
+}
+
+button:hover {
+  background:#2e290a
+}
+
+details {
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:13px;
+  margin:11px 0;
+  overflow:hidden
+}
+
+summary {
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:18px 21px;
+  font-size:1.13rem;
+  font-weight:700
+}
+
+summary::-webkit-details-marker {
+  display:none
+}
+
+summary::after {
+  content:'+';
+  font-size:1.5rem;
+  color:var(--gold);
+  font-weight:400;
+  line-height:1
+}
+
+details[open] > summary {
+  background:var(--panel2);
+  border-bottom:1px solid var(--line)
+}
+
+details[open] > summary::after {
+  content:'−'
+}
+
+.content {
+  padding:15px 23px 24px
+}
+
+.content p:first-child {
+  margin-top:0
+}
+
+.content h3 {
+  color:var(--gold);
+  font-size:1.02rem;
+  margin:24px 0 8px
+}
+
+.content h3:first-child {
+  margin-top:0
+}
+
+li {
+  padding-left:4px;
+  margin:6px 0
+}
+
+ul,ol {
+  padding-left:24px
+}
+
+.note {
+  border-left:3px solid var(--accent);
+  background:#25220e;
+  padding:12px 15px;
+  border-radius:0 8px 8px 0;
+  color:var(--gold)
+}
+
+.table-wrap {
+  overflow-x:auto
+}
+
+table {
+  border-collapse:collapse;
+  width:100%;
+  min-width:520px;
+  margin:14px 0
+}
+
+th,td {
+  padding:11px 13px;
+  border-bottom:1px solid var(--line);
+  text-align:left
+}
+
+th {
+  color:var(--gold);
+  font-size:.88rem;
+  background:#26220e
+}
+
+td {
+  font-variant-numeric:tabular-nums
+}
+
+.subtle {
+  color:var(--muted);
+  font-size:.89rem
+}
+
+footer {
+  text-align:center;
+  color:var(--muted);
+  font-size:.82rem;
+  margin-top:34px
+}
+
+@media(max-width:550px) {
+  main {
+  padding:20px 12px 50px
+}
+
+.content {
+  padding:14px 17px 20px
+}
+
+summary {
+  padding:16px
+}
+
+header {
+  padding-top:8px
+}
+
+
+}
+
+/* Nested expandable examples */
+
+details.example {
+  margin:17px 0 3px;
+  background:#201e12;
+  border:1px solid #8e7b14;
+  border-radius:10px
+}
+
+details.example > summary {
+  font-size:.96rem;
+  padding:12px 16px;
+  color:var(--gold)
+}
+
+details.example[open] > summary {
+  background:#302a0c
+}
+
+details.example > .content {
+  padding:13px 17px 17px;
+  font-size:.94rem
+}
+    .hive-logo { display:block; width:min(185px, 48vw); height:auto; margin:0 auto 5px; }
+
+/* Panel headings remain Hive yellow; all expanded panel text is white. */
+details > summary {
+  color: var(--gold);
+}
+
+details > .content,
+details > .content .note,
+details > .content .subtle,
+details > .content th,
+details > .content h3 {
+  color: #ffffff;
+}
+  </style>
+ </head>
+ <body>
+  <main>
+   <header>
+    <img src="images/Kueen%24BeesPokerPatch.png" alt="Kueen$Bees Hold Em Hive logo" class="hive-logo" />
+
+    <h1>
+     HUPster
+    </h1>
+    <p>
+     The Heads-Up League-Within-A-League (LWAL). Sharpen your heads-up skills, survive the bracket, and challenge the reigning HUPster for the title.
+    </p>
+    <span class="pill">
+     Tournament information &amp; registration rules
+    </span>
+   </header>
+   <div class="toolbar">
+    <span>
+     Choose a heading to view the details
+    </span>
+    <button id="toggle-all" type="button">
+     Expand all
+    </button>
+   </div>
+   <details>
+    <summary>
+     Purpose &amp; Overview
+    </summary>
+    <div class="content">
+     <p>
+      The league currently crowns game winners, Season Champions, and TOCmeisters (winners of the Tournament of Champions). 
+      <p>Heads-up poker is a game within the game that requiring unique skills. Those skills are needed to win regular season games and Championships!</p>
+      <p>The Hive's HUPster League affords League members an opportunity to develop those skills.</p>
+     </p>
+     <p>
+      Beginning with the Winter 2026–27 snow season, the league will offer bracket-style heads-up tournaments in addition to its regular weekly games.
+     </p>
+     <p>
+      The Registration rules give priority to members who have not yet won a Season Championship, while also providing opportunities to compete directly against Season Champions.
+     </p>
+    </div>
+   </details>
+   <details>
+    <summary>
+     League Format &amp; Championship
+    </summary>
+    <div class="content">
+     <ul>
+      <li>
+       Eight players compete in each tournament.
+      </li>
+      <li>
+       Each heads-up match is a
+       <strong>
+        best-of-three series of games
+       </strong>
+       .
+      </li>
+      <li>
+       Bracket play continues until one challenger remains.
+      </li>
+      <li>
+       The bracket winner faces the reigning HUPster for the title. The reigning HUPster for the first season is Kay C.
+       <sup style="font-size: 0.6em; position: relative; top: -5px;">
+        👑👑
+       </sup>
+      </li>
+      <li>
+       The HUPster finale is winner-take-all.
+      </li>
+      <li>
+       The league reserves the right to change the format between seasons.
+      </li>
+     </ul>
+     <p>
+      Bracket games are played online through the Hive's ClubGG club. The two championship finalists may choose to play their title match online or live at the Hive, with a dedicated dealer if available.
+     </p>
+    </div>
+   </details>
+   <details>
+    <summary>
+     Eligibility &amp; Registration Options
+    </summary>
+    <div class="content">
+     <p>
+      Participation is limited to Hold ’Em Hive league members and new players who have played at least one live regular-season league game. The reigning HUPster cannot enter the tournament while holding the title.
+     </p>
+     <ul>
+      <li>
+       <strong>
+        Individual registration:
+       </strong>
+       Available to eligible players who have not won a Season Championship.
+      </li>
+      <li>
+       <strong>
+        Paired registration:
+       </strong>
+       Two eligible players register together and face each other in the opening round.
+      </li>
+     </ul>
+    </div>
+   </details>
+   <details>
+    <summary>
+     Season Champion Challenges
+    </summary>
+    <div class="content">
+     <p>
+      Before player registration opens, the League will run a Season Champion (SC) Challenge. The League will publish a list of Season Champions who have volunteered to accept a heads-up challenge from an eligible non-champion. The League will set a date and time at or after which SC challenges can be submitted.
+     </p>
+     <p>
+      An SC Challenge is an emailed request from an eligible player to the Tournament Director indicating which listed SC the player wishes to play against. A non-champion may challenge only one SC at a time. An SC challenge pairing will be awarded on a first come first served basis after a pre-announced date and time.
+     </p>
+     <p class="note">
+      A successful SC challenge pairing is not guaranteed a spot in the tournament. Rather, all tournament seats will be awarded on a first come first served basis after a pre-announced date and time at which player registration will open. Additionally, only two SC challenge pairings will be allowed per tournament, again, on a first-come, first-served basis.
+     </p>
+     <details class="example">
+      <summary>
+       Example: How an SC challenge works
+      </summary>
+      <div class="content">
+       <p>
+        Three SC champs, SC1, SC2 and SC3, volunteer to participate in the inaugural HUP tournament. After the announced challenge opening time, and in time succession, Player N emails the Tournament Director to challenge SC2. Player Q emails to challenge SC3. Player M emails to challenge SC2 and Player Z emails to challenge SC1.
+       </p>
+       Player N will be paired with SC2, Player Q will be paired with SC3.  Player M will be notified that SC2 was already reserved by someone else and Player Z will be notified that two other challenges have already been accepted.
+       <p class="subtle">
+        <em>
+         Neither successful pairing has reserved tournament seats; both must still register when player registration opens as per the next section.
+        </em>
+       </p>
+      </div>
+     </details>
+    </div>
+   </details>
+   <details>
+    <summary>
+     Registration, Deposits &amp; Waitlist
+    </summary>
+    <div class="content">
+     <p>
+      Venmo will be used for all tournament transactions. Once the SC Challenge stage closes, registration will open at a pre-announced future date and time.
+     </p>
+     <p>
+      Registration is first come, first served. A
+      <strong>
+       $5 deposit per player
+      </strong>
+      secures a seat. For paired registrations, a
+      <strong>
+       $10 deposit
+      </strong>
+      secures both seats, provided both players are identified. Deposits are credited toward each player's round 1 buyin.
+     </p>
+     <p>
+      The final tournament entry fee will be determined by consensus among registered participants.
+     </p>
+     <ul>
+      <li>
+       Each tournament has eight seats.
+      </li>
+      <li>
+       A (see previous section).
+      </li>
+      <li>
+       A paired registration can be accepted only when two seats remain available.
+      </li>
+      <li>
+       Once registration is full, additional registrations go on a waitlist.
+      </li>
+     </ul>
+    </div>
+   </details>
+   <details>
+    <summary>
+     Bracket Formation &amp; First-Round Matchups
+    </summary>
+    <div class="content">
+     <p>
+      Players who register as a pair are guaranteed to face one another in the opening round. Individually registered players are paired by random draw.
+     </p>
+     <p>
+      Once eight players have registered, the bracket is finalized. First-round matchups are randomly assigned positions in the bracket. No byes are awarded.
+     </p>
+    </div>
+   </details>
+   <details>
+    <summary>
+     Match Scheduling &amp; Buy-ins
+    </summary>
+    <div class="content">
+     <p>
+      The two players in each match agree on dates and times for their games within a
+      <strong>
+       21-day window
+      </strong>
+      designated by the League, and report their schedule to the League. The League sets up the games in ClubGG.
+     </p>
+     <p>
+      Each season, the registered players mutually agree on the per match buy-in amount. Players pay their match buy-in through Venmo before the match begins.
+     </p>
+     <p>
+      For example, with a $20 match buy-in, each player pays $20 before the match. The winner's buyin is applied to the next match; the eliminated player's buyin goes into the HUPster finale prize pool.
+     </p>
+    </div>
+   </details>
+   <details>
+    <summary>
+     Game Configurations
+    </summary>
+    <div class="content">
+     <p>
+      Opponents may agree on the target duration of each game in their match: approximately 60, 90, or 120 minutes. All game-duration choices must be agreed upon before Game 1 and reported to the Tournament Director. 
+     </p>
+     <details class="example">
+      <summary>
+       Example: Choosing game durations
+      </summary>
+      <div class="content">
+       <p>
+        Ex. 1: Two players agree before Game 1 to use the 90-minute target for Game 1 and the 60-minute target for Games 2 and 3. They notify the Tournament Director of their choices, and the League sets up the ClubGG games using the corresponding blind levels and starting stacks.
+       </p>
+      <p>
+        Ex. 2: Two players agree before Game 1 to use the 120 minute target for game 1, the 90 minute target for game 2 and the 60 minute target for game 3. They notify the Tournament Director of their choices, and the League sets up the ClubGG games using the corresponding blind levels and starting stacks.
+       </p>
+
+       <p class="subtle">
+        <em>
+         These are target durations, not time limits. Each game continues until one player wins.
+        </em>
+       </p>
+      </div>
+     </details>
+     <p>
+      Every game continues until a winner is determined, so actual durations may be shorter or longer than the target.
+     </p>
+     <div class="table-wrap">
+      <table>
+       <thead>
+        <tr>
+         <th>
+          Target game length
+         </th>
+         <th>
+          Blind level
+         </th>
+         <th>
+          Starting stack
+         </th>
+         <th>
+          Starting BBs
+         </th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+         <td>
+          60 minutes
+         </td>
+         <td>
+          5 minutes
+         </td>
+         <td>
+          9,000
+         </td>
+         <td>
+          180 BB
+         </td>
+        </tr>
+        <tr>
+         <td>
+          90 minutes
+         </td>
+         <td>
+          7 minutes
+         </td>
+         <td>
+          11,000
+         </td>
+         <td>
+          220 BB
+         </td>
+        </tr>
+        <tr>
+         <td>
+          120 minutes
+         </td>
+         <td>
+          10 minutes
+         </td>
+         <td>
+          9,000
+         </td>
+         <td>
+          180 BB
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <p class="subtle">
+      Starting BBs are calculated using an opening big blind of 50 (25/50).
+     </p>
+    </div>
+   </details>
+   <details>
+    <summary>
+     Withdrawals &amp; Special Circumstances
+    </summary>
+    <div class="content">
+     <p>
+      The League recognizes that unexpected circumstances may arise between registration and the start of tournament play. Players who need to withdraw should notify the Tournament Director as soon as possible.
+     </p>
+     <p>
+      The League reserves the right to make reasonable adjustments to registrations, pairings, replacements, and scheduling when circumstances warrant, with the goal of preserving a full, competitive bracket while treating all participants fairly.
+     </p>
+     <p>
+      Registration deposits will ordinarily be nonrefundable once the tournament is filled. However, the League may authorize refunds or other accommodations when circumstances justify an exception.
+     </p>
+     <p>
+      Any adjustments will be guided by the tournament's purpose, the interests of registered players, and the principle of fair competition.
+     </p>
+    </div>
+   </details>
+   <footer>
+    Hold ’Em Hive · HUPster Tournament · Draft information page
+   </footer>
+  </main>
+  <script>
+   const items = [...document.querySelectorAll('main > details')];
+const btn = document.getElementById('toggle-all');
+
+function sync() {
+  btn.textContent = items.every(x => x.open) ? 'Collapse all' : 'Expand all';
+}
+
+btn.addEventListener('click', () => {
+  const open = !items.every(x => x.open);
+  items.forEach(x => x.open = open);
+  sync();
+});
+
+items.forEach(x => x.addEventListener('toggle', sync));
+  </script>
+ </body>
+</html>
